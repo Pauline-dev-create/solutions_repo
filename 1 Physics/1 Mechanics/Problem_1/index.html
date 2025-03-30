@@ -50,6 +50,28 @@
 <ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="#1-theoretical-foundation">1. Theoretical Foundation</a>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#governing-equations">Governing Equations</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#time-of-flight">Time of Flight</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#range">Range</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#family-of-solutions">Family of Solutions</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#2-analysis-of-the-range">2. Analysis of the Range</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#3-practical-applications">3. Practical Applications</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#4-implementation">4. Implementation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#python-code">Python Code</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#graphical-outputs">Graphical Outputs</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#discussion-of-limitations">Discussion of Limitations</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2</a>
@@ -174,22 +196,20 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
-<h3 id="1-theoretical-foundation">1. Theoretical Foundation</h3>
-<h1 id="investigating-the-range-as-a-function-of-the-angle-of-projection">Investigating the Range as a Function of the Angle of Projection</h1>
-<h2 id="1-theoretical-foundation_1">1. Theoretical Foundation</h2>
+<h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
 <p>Projectile motion is governed by Newton’s laws of motion under constant gravitational acceleration. Let’s derive the equations step-by-step.</p>
-<h3 id="governing-equations">Governing Equations</h3>
-<p>Assume a projectile is launched with initial velocity <span class="arithmatex">\( v_0 \)</span> at an angle <span class="arithmatex">\( \theta \)</span> from the horizontal, with no air resistance and constant gravitational acceleration <span class="arithmatex">\( g \)</span>. The initial conditions are:
-- Horizontal velocity: <span class="arithmatex">\( v_{x0} = v_0 \cos\theta \)</span>
-- Vertical velocity: <span class="arithmatex">\( v_{y0} = v_0 \sin\theta \)</span></p>
+<h2 id="governing-equations">Governing Equations</h2>
+<p>Assume a projectile is launched with initial velocity $ v_0 $ at an angle $ \theta $ from the horizontal, with no air resistance and constant gravitational acceleration $ g $. The initial conditions are:
+- Horizontal velocity: $ v_{x0} = v_0 \cos\theta $
+- Vertical velocity: $ v_{y0} = v_0 \sin\theta $</p>
 <p>The acceleration is:
-- <span class="arithmatex">\( a_x = 0 \)</span> (no horizontal acceleration)
-- <span class="arithmatex">\( a_y = -g \)</span> (downward gravitational acceleration)</p>
-<p>The position as a function of time <span class="arithmatex">\( t \)</span> is found by integrating the accelerations:
-- Horizontal: <span class="arithmatex">\( x(t) = v_{x0} t = v_0 \cos\theta \, t \)</span>
-- Vertical: <span class="arithmatex">\( y(t) = v_{y0} t - \frac{1}{2} g t^2 = v_0 \sin\theta \, t - \frac{1}{2} g t^2 \)</span></p>
-<h3 id="time-of-flight">Time of Flight</h3>
-<p>The projectile hits the ground when <span class="arithmatex">\( y(t) = 0 \)</span> (assuming launch height is zero):
+- $ a_x = 0 $ (no horizontal acceleration)
+- $ a_y = -g $ (downward gravitational acceleration)</p>
+<p>The position as a function of time $ t $ is found by integrating the accelerations:
+- Horizontal: $ x(t) = v_{x0} t = v_0 \cos\theta \, t $
+- Vertical: $ y(t) = v_{y0} t - \frac{1}{2} g t^2 = v_0 \sin\theta \, t - \frac{1}{2} g t^2 $</p>
+<h2 id="time-of-flight">Time of Flight</h2>
+<p>The projectile hits the ground when $ y(t) = 0 $ (assuming launch height is zero):
 $$
 v_0 \sin\theta \, t - \frac{1}{2} g t^2 = 0
 $$
@@ -197,40 +217,40 @@ Factorizing:
 $$
 t (v_0 \sin\theta - \frac{1}{2} g t) = 0
 $$
-Solutions: <span class="arithmatex">\( t = 0 \)</span> (start) or <span class="arithmatex">\( t = \frac{2 v_0 \sin\theta}{g} \)</span> (time of flight).</p>
-<h3 id="range">Range</h3>
-<p>The horizontal range <span class="arithmatex">\( R \)</span> is the distance traveled when <span class="arithmatex">\( t = \frac{2 v_0 \sin\theta}{g} \)</span>:
+Solutions: $t = 0 $ (start) or $ t = \frac{2 v_0 \sin\theta}{g} $ (time of flight).</p>
+<h2 id="range">Range</h2>
+<p>The horizontal range $ R $ is the distance traveled when $ t = \frac{2 v_0 \sin\theta}{g} $:
 $$
 R = v_0 \cos\theta \cdot \frac{2 v_0 \sin\theta}{g} = \frac{2 v_0^2 \sin\theta \cos\theta}{g}
 $$
-Using the identity <span class="arithmatex">\( \sin 2\theta = 2 \sin\theta \cos\theta \)</span>:
+Using the identity $ \sin 2\theta = 2 \sin\theta \cos\theta $:
 $$
 R = \frac{v_0^2 \sin 2\theta}{g}
 $$
-This is the general form of the range, showing dependence on <span class="arithmatex">\( \theta \)</span>, <span class="arithmatex">\( v_0 \)</span>, and <span class="arithmatex">\( g \)</span>.</p>
-<h3 id="family-of-solutions">Family of Solutions</h3>
-<p>The equation <span class="arithmatex">\( R = \frac{v_0^2 \sin 2\theta}{g} \)</span> represents a family of solutions parameterized by <span class="arithmatex">\( v_0 \)</span> and <span class="arithmatex">\( g \)</span>. Different initial conditions yield distinct ranges and trajectories.</p>
+This is the general form of the range, showing dependence on $ \theta $, $ v_0 $, and $g $.</p>
+<h2 id="family-of-solutions">Family of Solutions</h2>
+<p>The equation $ R = \frac{v_0^2 \sin 2\theta}{g} $ represents a family of solutions parameterized by $ v_0 $ and $ g $. Different initial conditions yield distinct ranges and trajectories.</p>
 <h2 id="2-analysis-of-the-range">2. Analysis of the Range</h2>
-<p>The range depends on <span class="arithmatex">\( \sin 2\theta \)</span>, which has a maximum value of 1 when <span class="arithmatex">\( 2\theta = 90^\circ \)</span>, or <span class="arithmatex">\( \theta = 45^\circ \)</span>. Thus, the maximum range is:
+<p>The range depends on $ \sin 2\theta $, which has a maximum value of 1 when $ 2\theta = 90^\circ $, or $ \theta = 45^\circ $. Thus, the maximum range is:
 $$
 R_{\text{max}} = \frac{v_0^2}{g} \quad \text{at} \quad \theta = 45^\circ
 $$</p>
 <ul>
-<li><strong>Initial Velocity (<span class="arithmatex">\( v_0 \)</span>)</strong>: Range scales with <span class="arithmatex">\( v_0^2 \)</span>, so doubling <span class="arithmatex">\( v_0 \)</span> quadruples <span class="arithmatex">\( R \)</span>.</li>
-<li><strong>Gravitational Acceleration (<span class="arithmatex">\( g \)</span>)</strong>: Range is inversely proportional to <span class="arithmatex">\( g \)</span>. On the Moon (<span class="arithmatex">\( g \approx 1.62 \, \text{m/s}^2 \)</span>), the range is greater than on Earth (<span class="arithmatex">\( g = 9.81 \, \text{m/s}^2 \)</span>).</li>
-<li><strong>Angle (<span class="arithmatex">\( \theta \)</span>)</strong>: <span class="arithmatex">\( R \)</span> is symmetric about <span class="arithmatex">\( 45^\circ \)</span> (e.g., <span class="arithmatex">\( \theta = 30^\circ \)</span> and <span class="arithmatex">\( 60^\circ \)</span> yield the same range).</li>
+<li><strong>Initial Velocity ($ v_0 $)</strong>: Range scales with $v_0^2 $, so doubling $ v_0 $ quadruples $ R $.</li>
+<li><strong>Gravitational Acceleration ($ g $)</strong>: Range is inversely proportional to $ g <span class="arithmatex">\(. On the Moon (\)</span> g \approx 1.62 \, \text{m/s}^2 <span class="arithmatex">\(), the range is greater than on Earth (\)</span> g = 9.81 \, \text{m/s}^2 $).</li>
+<li><strong>Angle ($ \theta $)</strong>: $ R $ is symmetric about $ 45^\circ $ (e.g., $ \theta = 30^\circ $ and $ 60^\circ $ yield the same range).</li>
 </ul>
 <h2 id="3-practical-applications">3. Practical Applications</h2>
 <ul>
-<li><strong>Sports</strong>: A soccer ball’s trajectory depends on kick angle and speed, optimized near <span class="arithmatex">\( 45^\circ \)</span> for distance.</li>
-<li><strong>Engineering</strong>: Artillery and rocket launches adjust <span class="arithmatex">\( \theta \)</span> and <span class="arithmatex">\( v_0 \)</span> for target range.</li>
-<li><strong>Astrophysics</strong>: Trajectories on other planets (e.g., Mars, <span class="arithmatex">\( g = 3.72 \, \text{m/s}^2 \)</span>) require adjusted models.</li>
+<li><strong>Sports</strong>: A soccer ball’s trajectory depends on kick angle and speed, optimized near $ 45^\circ $ for distance.</li>
+<li><strong>Engineering</strong>: Artillery and rocket launches adjust $ \theta $ and $ v_0 $ for target range.</li>
+<li><strong>Astrophysics</strong>: Trajectories on other planets (e.g., Mars, $  g = 3.72 \, \text{m/s}^2 $) require adjusted models.</li>
 <li><strong>Uneven Terrain</strong>: Non-zero launch height modifies the time of flight and range (requires quadratic solving).</li>
-<li><strong>Air Resistance</strong>: Introduces damping, reducing range and altering optimal <span class="arithmatex">\( \theta \)</span>.</li>
+<li><strong>Air Resistance</strong>: Introduces damping, reducing range and altering optimal $ \theta $.</li>
 </ul>
 <h2 id="4-implementation">4. Implementation</h2>
 <p>Below is a Python script simulating projectile motion, plotting range vs. angle, and animating a trajectory.</p>
-<h3 id="python-code">Python Code</h3>
+<h2 id="python-code">Python Code</h2>
 <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
@@ -263,8 +283,6 @@ plt.legend()
 plt.grid(True)
 plt.show()
 
-![alt text](image-3.png)
-
 # Part 2: Animation of Trajectory (for v0 = 15 m/s, theta = 45°)
 v0_anim = 15
 theta_anim = 45
@@ -285,7 +303,7 @@ point, = ax.plot([], [], 'ro')
 
 def init():
     line.set_data([], [])
-    point.set_data([], [])
+    point.set_data([], [])RR
     return line, point
 
 def animate(i):
@@ -297,37 +315,24 @@ anim = FuncAnimation(fig, animate, init_func=init, frames=len(t), interval=50, b
 plt.close()  # Prevents duplicate static plot
 HTML(anim.to_jshtml())  # Displays animation in Jupyter; save as GIF in VS Code if needed
 </code></pre>
-<p><img alt="alt text" src="../image-4.png"/></p>
-<h3 id="instructions-for-visual-studio-code">Instructions for Visual Studio Code</h3>
-<ol>
-<li>Install dependencies: <code>pip install numpy matplotlib IPython</code>.</li>
-<li>Replace the last line (<code>HTML(anim.to_jshtml())</code>) with <code>anim.save('projectile.gif', writer='pillow', fps=20)</code> to save the animation as a GIF.</li>
-<li>Run the script to generate the range plot and animation.</li>
-</ol>
-<h3 id="graphical-outputs">Graphical Outputs</h3>
+<p><img alt="alt text" src="../image-5.png"/></p>
+<h2 id="graphical-outputs">Graphical Outputs</h2>
 <ul>
-<li><strong>Range vs. Angle</strong>: The plot shows <span class="arithmatex">\( R \)</span> vs. <span class="arithmatex">\( \theta \)</span> for <span class="arithmatex">\( v_0 = 10, 15, 20 \, \text{m/s} \)</span>, peaking at <span class="arithmatex">\( 45^\circ \)</span>.</li>
-<li><strong>Animation</strong>: A trajectory for <span class="arithmatex">\( v_0 = 15 \, \text{m/s} \)</span>, <span class="arithmatex">\( \theta = 45^\circ \)</span>, showing the parabolic path.</li>
+<li><strong>Range vs. Angle</strong>: The plot shows $ R $vs. <span class="arithmatex">\(\theta\)</span> for $ v_0 = 10, 15, 20 \, \text{m/s} $, peaking at $ 45^\circ $.</li>
+<li><strong>Animation</strong>: A trajectory for $ v_0 = 15 \, \text{m/s} $ , $ \theta = 45^\circ $, showing the parabolic path.</li>
 </ul>
 <h2 id="discussion-of-limitations">Discussion of Limitations</h2>
 <ul>
-<li><strong>Idealized Model</strong>: Assumes no air resistance, flat terrain, and constant <span class="arithmatex">\( g \)</span>.</li>
+<li><strong>Idealized Model</strong>: Assumes no air resistance, flat terrain, and constant $ g $.</li>
 <li><strong>Realistic Factors</strong>:</li>
-<li><strong>Drag</strong>: Reduces range; optimal <span class="arithmatex">\( \theta \)</span> shifts below <span class="arithmatex">\( 45^\circ \)</span>.</li>
+<li><strong>Drag</strong>: Reduces range; optimal $ \theta $ shifts below $ 45^\circ $.</li>
 <li><strong>Wind</strong>: Alters trajectory unpredictably.</li>
 <li><strong>Height</strong>: Non-zero launch height requires solving a quadratic for time of flight.</li>
-<li><strong>Suggestions</strong>: Use numerical methods (e.g., Runge-Kutta) to include drag (<span class="arithmatex">\( F_d = -k v^2 \)</span>) or wind forces.</li>
+<li><strong>Suggestions</strong>: Use numerical methods (e.g., Runge-Kutta) to include drag ($ F_d = -k v^2 $) or wind forces.</li>
 </ul>
 <h2 id="conclusion">Conclusion</h2>
-<p>This analysis reveals the elegance of projectile motion’s dependence on <span class="arithmatex">\( \theta \)</span>, <span class="arithmatex">\( v_0 \)</span>, and <span class="arithmatex">\( g \)</span>, while highlighting its adaptability to real-world scenarios. The computational tools provide visual insights, making it a powerful teaching and engineering tool.</p>
-<hr/>
-<h3 id="notes-for-presentation">Notes for Presentation</h3>
-<ul>
-<li>Show the range plot to explain the <span class="arithmatex">\( 45^\circ \)</span> maximum.</li>
-<li>Play the animation (or show the GIF) to visualize motion.</li>
-<li>Discuss how tweaking <span class="arithmatex">\( v_0 \)</span> or <span class="arithmatex">\( g \)</span> changes outcomes, linking to sports or space exploration.</li>
-</ul>
-<p>Let me know if you need adjustments or additional features!</p>
+<p>This analysis reveals the elegance of projectile motion’s dependence on $ \theta $, $ v_0 $, and $ g $, while highlighting its adaptability to real-world scenarios. The computational tools provide visual insights, making it a powerful teaching and engineering tool.</p>
+<p><a href="https://colab.research.google.com/drive/14My5WK9G0rGUs4v7AmNCGgfAoorq97Hx?usp=sharing">Solutions in Colab</a></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
