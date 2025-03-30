@@ -50,6 +50,28 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#1-theoretical-foundation">1. Theoretical Foundation</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#small-angle-approximation">Small-Angle Approximation</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#2-analysis-of-dynamics">2. Analysis of Dynamics</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#influence-of-parameters">Influence of Parameters</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#transition-to-chaos">Transition to Chaos</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#3-practical-applications">3. Practical Applications</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#4-implementation">4. Implementation</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#computational-model">Computational Model</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -172,96 +194,154 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-2">Problem 2</h1>
-<h1 id="investigating-the-dynamics-of-a-forced-damped-pendulum">Investigating the Dynamics of a Forced Damped Pendulum</h1>
-<h2 id="1-theoretical-foundation"><strong>1. Theoretical Foundation</strong></h2>
-<p>The equation of motion for a <strong>forced damped pendulum</strong> is:</p>
-<p>$
-\frac{d^2\theta}{dt^2} + b \frac{d\theta}{dt} + \frac{g}{L} \sin\theta = A \cos(\omega t)
-$</p>
-<p>where:
-- <span class="arithmatex">\( \theta \)</span> is the angular displacement,
-- <span class="arithmatex">\( b \)</span> is the damping coefficient,
-- <span class="arithmatex">\( g \)</span> is gravitational acceleration,
-- <span class="arithmatex">\( L \)</span> is the length of the pendulum,
-- <span class="arithmatex">\( A \)</span> is the amplitude of the external force,
-- <span class="arithmatex">\( \omega \)</span> is the driving frequency.</p>
-<h3 id="11-small-angle-approximation"><strong>1.1 Small-Angle Approximation</strong></h3>
-<p>For small angles ($ \theta \approx 0 $), we can approximate $ \sin\theta \approx \theta $, reducing the equation to:</p>
-<p>$
-\frac{d^2\theta}{dt^2} + b \frac{d\theta}{dt} + \frac{g}{L} \theta = A \cos(\omega t)
-$</p>
-<p>which is a <strong>driven damped harmonic oscillator</strong>, allowing for analytical solutions in simple cases.</p>
-<h3 id="12-resonance-condition"><strong>1.2 Resonance Condition</strong></h3>
-<p>Resonance occurs when the external forcing frequency <span class="arithmatex">\( \omega \)</span> matches the system's <strong>natural frequency</strong>:</p>
-<p>$
-\omega_0 = \sqrt{\frac{g}{L}}
-$</p>
-<p>At resonance, the pendulum exhibits maximum oscillations, which can lead to instability if damping is low.</p>
-<hr/>
-<h2 id="2-analysis-of-dynamics"><strong>2. Analysis of Dynamics</strong></h2>
-<h3 id="21-effects-of-parameters"><strong>2.1 Effects of Parameters</strong></h3>
-<ol>
-<li><strong>Damping coefficient $ b $</strong>: Higher damping suppresses oscillations, preventing chaotic motion.</li>
-<li><strong>Driving amplitude $ A $</strong>: Larger values can lead to more complex behavior.</li>
-<li><strong>Driving frequency $ \omega $</strong>: Controls resonance effects and synchronization.</li>
-</ol>
-<h3 id="22-transition-to-chaos"><strong>2.2 Transition to Chaos</strong></h3>
+<h2 id="1-theoretical-foundation">1. Theoretical Foundation</h2>
+<p>The motion of a forced damped pendulum is governed by the following nonlinear differential equation:</p>
+<div class="arithmatex">\[
+\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \frac{g}{l}\sin(\theta) = F\cos(\omega_d t)
+\]</div>
+<p>Where:
+- <span class="arithmatex">\(\theta\)</span> is the angular displacement,
+- <span class="arithmatex">\(b\)</span> is the damping coefficient,
+- <span class="arithmatex">\(g\)</span> is the gravitational acceleration (9.81 m/s²),
+- <span class="arithmatex">\(l\)</span> is the pendulum length,
+- <span class="arithmatex">\(F\)</span> is the amplitude of the external driving force,
+- <span class="arithmatex">\(\omega_d\)</span> is the driving frequency,
+- <span class="arithmatex">\(t\)</span> is time.</p>
+<h3 id="small-angle-approximation">Small-Angle Approximation</h3>
+<p>For small angles (<span class="arithmatex">\(\theta \ll 1\)</span>), <span class="arithmatex">\(\sin(\theta) \approx \theta\)</span>, simplifying the equation to a linear damped-driven oscillator:</p>
+<div class="arithmatex">\[
+\frac{d^2\theta}{dt^2} + b\frac{d\theta}{dt} + \omega_0^2\theta = F\cos(\omega_d t)
+\]</div>
+<p>Where <span class="arithmatex">\(\omega_0 = \sqrt{\frac{g}{l}}\)</span> is the natural frequency. The general solution consists of a homogeneous solution (transient) and a particular solution (steady-state):</p>
 <ul>
-<li>At low damping, the system can exhibit <strong>period-doubling bifurcations</strong>, leading to chaos.</li>
-<li>Phase portraits and <strong>Poincaré sections</strong> help visualize this transition.</li>
+<li><strong>Homogeneous solution</strong>: <span class="arithmatex">\(\theta_h(t) = A e^{-\frac{b}{2}t} \cos(\omega t + \phi)\)</span>, where <span class="arithmatex">\(\omega = \sqrt{\omega_0^2 - \left(\frac{b}{2}\right)^2}\)</span>.</li>
+<li><strong>Particular solution</strong>: <span class="arithmatex">\(\theta_p(t) = C \cos(\omega_d t) + D \sin(\omega_d t)\)</span>, with coefficients determined by substituting into the equation.</li>
 </ul>
-<hr/>
-<h2 id="3-practical-applications"><strong>3. Practical Applications</strong></h2>
+<p>The steady-state amplitude exhibits resonance when <span class="arithmatex">\(\omega_d \approx \omega_0\)</span>, maximized when <span class="arithmatex">\(\omega_d = \sqrt{\omega_0^2 - \frac{b^2}{2}}\)</span>, amplifying energy input significantly.</p>
+<h2 id="2-analysis-of-dynamics">2. Analysis of Dynamics</h2>
+<h3 id="influence-of-parameters">Influence of Parameters</h3>
 <ul>
-<li><strong>Mechanical Systems</strong>: Bridges, suspension cables, and earthquake-resistant structures.</li>
-<li><strong>Electrical Circuits</strong>: Analogous to driven <strong>RLC circuits</strong>.</li>
-<li><strong>Biomechanics</strong>: Human balance and walking dynamics.</li>
+<li><strong>Damping Coefficient $ b $</strong>: Higher <span class="arithmatex">\(b\)</span> reduces amplitude and prevents chaos by dissipating energy, stabilizing the system.</li>
+<li><strong>Driving Amplitude (<span class="arithmatex">\(F\)</span>)</strong>: Increasing <span class="arithmatex">\(F\)</span>can push the system from periodic to chaotic motion, especially at specific frequencies.</li>
+<li><strong>Driving Frequency (<span class="arithmatex">\(\omega_d\)</span>)</strong>: Near <span class="arithmatex">\(\omega_0\)</span>, resonance occurs; far from <span class="arithmatex">\(\omega_0\)</span>, quasiperiodic or chaotic behavior emerges.</li>
 </ul>
-<hr/>
-<h2 id="4-implementation-python-simulation"><strong>4. Implementation: Python Simulation</strong></h2>
-<p>We use <strong>Runge-Kutta numerical methods</strong> to integrate the equation of motion and plot various behaviors.</p>
-<h3 id="41-python-code-for-visual-studio-code"><strong>4.1 Python Code for Visual Studio Code</strong></h3>
+<h3 id="transition-to-chaos">Transition to Chaos</h3>
+<p>For large amplitudes or specific <span class="arithmatex">\(\omega_d\)</span> , the nonlinear <span class="arithmatex">\(\sin(\theta)\)</span>  term dominates, leading to chaotic motion. This is observable via phase portraits and Poincaré sections, showing a shift from closed orbits (periodic) to scattered points (chaotic).</p>
+<h2 id="3-practical-applications">3. Practical Applications</h2>
+<ul>
+<li><strong>Energy Harvesting</strong>: Piezoelectric devices use forced oscillations to convert mechanical energy to electrical energy.</li>
+<li><strong>Suspension Bridges</strong>: Damping and forcing model wind-induced vibrations, preventing resonance disasters (e.g., Tacoma Narrows).</li>
+<li><strong>Oscillating Circuits</strong>: Driven RLC circuits mirror pendulum dynamics, applicable in signal processing.</li>
+</ul>
+<h2 id="4-implementation">4. Implementation</h2>
+<h3 id="computational-model">Computational Model</h3>
+<p>We use the 4th-order Runge-Kutta (RK4) method to solve the nonlinear equation numerically. Below are Python scripts for simulation, visualization, and animation.</p>
 <pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
-from scipy.integrate import solve_ivp
+from scipy.integrate import odeint
 
 # Parameters
-g = 9.81  # Gravity (m/s^2)
-L = 1.0   # Pendulum length (m)
-b = 0.2   # Damping coefficient
-A = 1.2   # Driving amplitude
-omega = 2.0  # Driving frequency
+g = 9.81  # gravity (m/s^2)
+l = 1.0   # length (m)
+b = 0.5   # damping coefficient
+F = 1.2   # driving amplitude
+omega_d = 2.0  # driving frequency
+omega_0 = np.sqrt(g / l)
 
 # Differential equation
-def forced_damped_pendulum(t, y):
-    theta, omega_t = y
-    dtheta_dt = omega_t
-    domega_dt = - (g / L) * np.sin(theta) - b * omega_t + A * np.cos(omega * t)
-    return [dtheta_dt, domega_dt]
+def pendulum_deriv(state, t, b, omega_0, F, omega_d):
+    theta, theta_dot = state
+    dtheta_dt = theta_dot
+    dtheta_dot_dt = -b * theta_dot - omega_0**2 * np.sin(theta) + F * np.cos(omega_d * t)
+    return [dtheta_dt, dtheta_dot_dt]
+
+# Time array
+t = np.linspace(0, 20, 1000)
 
 # Initial conditions
-t_span = (0, 50)  # Time range
-t_eval = np.linspace(*t_span, 1000)  # Time points
-y0 = [0.5, 0]  # Initial angle and angular velocity
+theta0 = 0.1  # initial angle (rad)
+theta_dot0 = 0.0  # initial angular velocity (rad/s)
+state0 = [theta0, theta_dot0]
 
-# Solve using Runge-Kutta
-sol = solve_ivp(forced_damped_pendulum, t_span, y0, t_eval=t_eval, method='RK45')
+# Solve ODE
+solution = odeint(pendulum_deriv, state0, t, args=(b, omega_0, F, omega_d))
 
-# Extract solutions
-t = sol.t
-theta = sol.y[0]
+# Extract results
+theta = solution[:, 0]
+theta_dot = solution[:, 1]
 
-# Plot results
-plt.figure(figsize=(8, 5))
-plt.plot(t, theta, label='Angular Displacement (theta)')
+# Plotting
+plt.figure(figsize=(10, 6))
+plt.plot(t, theta, label='Angular Displacement')
 plt.xlabel('Time (s)')
-plt.ylabel('Theta (radians)')
+plt.ylabel('Theta (rad)')
 plt.title('Forced Damped Pendulum Motion')
 plt.legend()
-plt.grid(True)
-plt.savefig("forced_damped_pendulum.png", dpi=300)
+plt.grid()
+plt.show()
+
+# Phase portrait
+plt.figure(figsize=(10, 6))
+plt.plot(theta, theta_dot, label='Phase Trajectory')
+plt.xlabel('Theta (rad)')
+plt.ylabel('Theta_dot (rad/s)')
+plt.title('Phase Portrait')
+plt.legend()
+plt.grid()
 plt.show()
 </code></pre>
+<h4 id="animation-script">Animation Script</h4>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+from scipy.integrate import odeint
+
+# Parameters
+g = 9.81
+l = 1.0
+b = 0.5
+F = 1.2
+omega_d = 2.0
+omega_0 = np.sqrt(g / l)
+
+# Differential equation
+def pendulum_deriv(state, t, b, omega_0, F, omega_d):
+    theta, theta_dot = state
+    dtheta_dt = theta_dot
+    dtheta_dot_dt = -b * theta_dot - omega_0**2 * np.sin(theta) + F * np.cos(omega_d * t)
+    return [dtheta_dt, dtheta_dot_dt]
+
+# Time array
+t = np.linspace(0, 20, 1000)
+state0 = [0.1, 0.0]
+solution = odeint(pendulum_deriv, state0, t, args=(b, omega_0, F, omega_d))
+theta = solution[:, 0]
+
+# Animation setup
+fig, ax = plt.subplots(figsize=(6, 6))
+ax.set_xlim(-1.5, 1.5)
+ax.set_ylim(-1.5, 1.5)
+line, = ax.plot([], [], 'o-', lw=2)
+
+def init():
+    line.set_data([], [])
+    return line,
+
+def animate(i):
+    x = l * np.sin(theta[i])
+    y = -l * np.cos(theta[i])
+    line.set_data([0, x], [0, y])
+    return line,
+
+ani = FuncAnimation(fig, animate, init_func=init, frames=len(t), interval=20, blit=True)
+plt.title('Forced Damped Pendulum Animation')
+plt.grid()
+ani.save('pendulum_animation.mp4', writer='ffmpeg')
+plt.show()
+</code></pre>
+<p><img alt="alt text" src="../image-6.png"/></p>
+<p><img alt="alt text" src="../image-7.png"/></p>
+<p><a href="https://colab.research.google.com/drive/1yM2VomaDAisU21e8RodixBdpF1yTNmOz?usp=sharing">Solutions in colab</a></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
