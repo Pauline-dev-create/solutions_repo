@@ -1,4 +1,4 @@
-# Problem 1 Pauline
+# Problem 1 
 
 ## Kepler's Third Law: Orbital Period and Orbital Radius
 
@@ -167,12 +167,11 @@ plt.show()
 ```
 
 ![alt text](image.png)
+
 [Solutions in colab](https://colab.research.google.com/drive/1rzqqf7mQm6rs90wYXe2KkqchLrJnAOKo?usp=sharing)
 
 
 ## Conclusion
 
 Kepler's Third Law is a cornerstone of celestial mechanics, linking orbital periods and radii through gravity. Its applications range from understanding the Moon's orbit to designing satellite trajectories. The computational models confirm the $T^2 \propto r^3$ relationship across different scales, and the extension to elliptical orbits broadens its utility. These tools and insights deepen our understanding of the universe's gravitational dance.
-
---- 
 
