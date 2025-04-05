@@ -90,7 +90,6 @@ plt.show()
 ```
 
 ![alt text](image.png)
----
 
 
 ## Observations
