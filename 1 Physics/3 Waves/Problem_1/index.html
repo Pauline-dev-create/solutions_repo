@@ -66,6 +66,56 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#fundamentals-of-waves">Fundamentals of Waves</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#step-by-step-task">Step-by-Step Task</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#step-1-choose-a-regular-polygon">Step 1: Choose a Regular Polygon</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#step-2-position-the-sources">Step 2: Position the Sources</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#step-3-define-the-wave-equation">Step 3: Define the Wave Equation</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#step-4-superposition-of-waves">Step 4: Superposition of Waves</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#step-5-visualize-the-interference-pattern">Step 5: Visualize the Interference Pattern</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#numerical-parameters-and-calculations">Numerical Parameters and Calculations</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#python-code">Python Code</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#_1"></a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#observations">Observations</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#numerical-parameters-and-calculations_1">Numerical Parameters and Calculations</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#step-by-step-example">Step-by-Step Example</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#all-5-vertices-and-sum">all 5 vertices, and sum:</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#step-by-step-calculation-at-point-0-0-time-t-0">Step-by-Step Calculation at Point (0, 0), Time $t = 0 $</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#vertex-coordinates-of-pentagon">Vertex Coordinates of Pentagon</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#distance-to-0-0-from-each-vertex">Distance to (0, 0) from Each Vertex:</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#r_1-r_2-r_3-r_4-r_5-3">\(r_1 = r_2 = r_3 = r_4 = r_5 = 3\)</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#wave-contribution-from-each-source">Wave Contribution from Each Source</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#final-total-displacement-at-0-0-t-0">Final Total Displacement at (0, 0), \( t = 0 \):</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#summary-table">Summary Table</a>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -172,6 +222,247 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<p><strong>Interference Patterns on a Water Surface</strong></p>
+<h2 id="fundamentals-of-waves"><strong>Fundamentals of Waves</strong></h2>
+<ul>
+<li><strong>Amplitude (A)</strong>: The maximum displacement from equilibrium.</li>
+<li><strong>Wavelength ($$ \lambda $$)</strong>: The distance between successive crests.</li>
+<li><strong>Wave number ($$ k $$)</strong>: $$ k = \frac{2\pi}{\lambda} $$</li>
+<li><strong>Frequency (f)</strong>: The number of oscillations per unit time.</li>
+<li><strong>Angular frequency ($$ \omega $$)</strong>: $$ \omega = 2\pi f $$</li>
+<li><strong>Phase ($$ \phi $$)</strong>: Describes the wave's shift at a point.</li>
+</ul>
+<p>A single disturbance from a point source is modeled as:</p>
+<div class="arithmatex">\[ u_i(x, y, t) = A \cos(k r_i - \omega t + \phi) \]</div>
+<p>where $$ r_i = \sqrt{(x - x_i)^2 + (y - y_i)^2} $$ is the distance from the $$ i $$-th source to point $$ (x, y) $$.</p>
+<p>The total displacement at point $$ (x, y) $$ is:</p>
+<div class="arithmatex">\[ U(x, y, t) = \sum_{i=1}^{N} A \cos(k r_i - \omega t + \phi) \]</div>
+<hr/>
+<h2 id="step-by-step-task"><strong>Step-by-Step Task</strong></h2>
+<h3 id="step-1-choose-a-regular-polygon"><strong>Step 1: Choose a Regular Polygon</strong></h3>
+<p>We'll use a <strong>regular pentagon</strong> for this simulation.</p>
+<h3 id="step-2-position-the-sources"><strong>Step 2: Position the Sources</strong></h3>
+<p>We place point sources at the vertices of the pentagon.</p>
+<h3 id="step-3-define-the-wave-equation"><strong>Step 3: Define the Wave Equation</strong></h3>
+<p>Each source emits a wave described above.</p>
+<h3 id="step-4-superposition-of-waves"><strong>Step 4: Superposition of Waves</strong></h3>
+<p>We sum all wave contributions at each point.</p>
+<h3 id="step-5-visualize-the-interference-pattern"><strong>Step 5: Visualize the Interference Pattern</strong></h3>
+<hr/>
+<h2 id="numerical-parameters-and-calculations"><strong>Numerical Parameters and Calculations</strong></h2>
+<p>Let's assume the following values:
+- Amplitude: $$ A = 1.0 $$
+- Wavelength: $$ \lambda = 1.0 \Rightarrow k = \frac{2\pi}{1} = 6.2832 $$
+- Frequency: $$ f = 1.0 \Rightarrow \omega = 2\pi f = 6.2832 $$
+- Initial Phase: $$ \phi = 0 $$
+- Radius of the polygon: 3 units</p>
+<p>Each wave source is described by:</p>
+<div class="arithmatex">\[ u_i(x, y, t) = \cos(6.2832 \cdot r_i - 6.2832 \cdot t) \]</div>
+<p>where $$ r_i $$ is the distance from each source at the vertex of the pentagon.</p>
+<p>The resulting wave field is the sum of all five such terms.</p>
+<hr/>
+<h2 id="python-code">Python Code</h2>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+
+# Wave parameters
+A = 1.0                 # Amplitude
+wavelength = 1.0        # Wavelength
+k = 2 * np.pi / wavelength  # Wave number
+f = 1.0                 # Frequency
+omega = 2 * np.pi * f   # Angular frequency
+phi = 0                 # Initial phase
+
+# Define the regular polygon (pentagon)
+def regular_polygon(n_sides, radius=3):
+    return [(radius * np.cos(2 * np.pi * i / n_sides),
+             radius * np.sin(2 * np.pi * i / n_sides)) for i in range(n_sides)]
+
+sources = regular_polygon(5)  # 5 for pentagon
+
+# Define the grid
+x = np.linspace(-6, 6, 500)
+y = np.linspace(-6, 6, 500)
+X, Y = np.meshgrid(x, y)
+
+# Superposition function
+def wave_interference(x, y, sources, t):
+    result = np.zeros_like(x)
+    for (x0, y0) in sources:
+        r = np.sqrt((x - x0)**2 + (y - y0)**2)
+        result += A * np.cos(k * r - omega * t + phi)
+    return result
+
+# Static Plot at t = 0
+Z = wave_interference(X, Y, sources, 0)
+
+plt.figure(figsize=(8, 8))
+plt.contourf(X, Y, Z, levels=100, cmap='coolwarm')
+plt.colorbar(label='Displacement')
+plt.scatter(*zip(*sources), color='black', label='Wave Sources')
+plt.legend()
+plt.title('Water Surface Interference Pattern - Regular Pentagon')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.axis('equal')
+plt.show()
+</code></pre>
+<h2 id="_1"><img alt="alt text" src="image.png"/></h2>
+<h2 id="observations">Observations</h2>
+<ul>
+<li><strong>Constructive Interference</strong>: Bright/red regions where waves reinforce.</li>
+<li><strong>Destructive Interference</strong>: Dark/blue regions where waves cancel.</li>
+</ul>
+<h2 id="numerical-parameters-and-calculations_1">Numerical Parameters and Calculations</h2>
+<ul>
+<li><strong>Amplitude</strong>: $$ A = 1.0 $$</li>
+<li><strong>Wavelength</strong>: $$ \lambda = 1.0 \Rightarrow k = \frac{2\pi}{\lambda} = \frac{2\pi}{1.0} = 6.2832 $$</li>
+<li><strong>Frequency</strong>: $$ f = 1.0 \Rightarrow \omega = 2\pi f = 6.2832 $$</li>
+<li><strong>Initial Phase</strong>: $$ \phi = 0 $$</li>
+<li><strong>Polygon Radius</strong>: $$ R = 3 $$ units (distance from center to each vertex)</li>
+</ul>
+<hr/>
+<h3 id="step-by-step-example"><strong>Step-by-Step Example</strong></h3>
+<p>Let’s compute the displacement at point $$ (x, y) = (0, 0) $$ at time $$ t = 0 $$ from one source located at $$ (x_1, y_1) = (3, 0) $$ (one vertex of the pentagon):</p>
+<ol>
+<li><strong>Distance from source</strong>:</li>
+</ol>
+<p>$$
+   r_1 = \sqrt{(x - x_1)^2 + (y - y_1)^2} = \sqrt{(0 - 3)^2 + (0 - 0)^2} = 3
+   $$</p>
+<ol>
+<li><strong>Wave contribution from that source</strong>:</li>
+</ol>
+<p>$$
+   u_1 = A \cos(k r_1 - \omega t + \phi) = \cos(6.2832 \cdot 3 - 6.2832 \cdot 0 + 0) = \cos(18.8496) \approx -1
+   $$</p>
+<ol>
+<li>
+<h2 id="all-5-vertices-and-sum">all 5 vertices, and sum:</h2>
+</li>
+</ol>
+<p>$$
+   U(0, 0, 0) = \sum_{i=1}^{5} \cos(6.2832 \cdot r_i)
+   $$</p>
+<p><strong>wave contributions from each of the 5 pentagon vertices</strong> to the point at the center of the polygon, i.e., $ (x, y) = (0, 0) $, at time $ t = 0 $.</p>
+<hr/>
+<h3 id="step-by-step-calculation-at-point-0-0-time-t-0">Step-by-Step Calculation at Point (0, 0), Time $t = 0 $</h3>
+<ul>
+<li>Amplitude $ A = 1.0 $</li>
+<li>Wavelength $ \lambda = 1.0 \Rightarrow k = \frac{2\pi}{\lambda} = 6.2832 $</li>
+<li>Frequency $ f = 1.0 \Rightarrow \omega = 2\pi f = 6.2832 $</li>
+<li>Phase $ \phi = 0 $</li>
+<li>Radius of pentagon: $ R = 3 $</li>
+</ul>
+<hr/>
+<h2 id="vertex-coordinates-of-pentagon">Vertex Coordinates of Pentagon</h2>
+<p>The 5 vertices of a regular pentagon centered at the origin, with radius 3 units:</p>
+<table>
+<thead>
+<tr>
+<th>Vertex</th>
+<th>$ x_i $</th>
+<th>$ y_i $</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>$ 3.0000 $</td>
+<td>$ 0.0000 $</td>
+</tr>
+<tr>
+<td>2</td>
+<td>$ 0.9270 $</td>
+<td>$ 2.8532 $</td>
+</tr>
+<tr>
+<td>3</td>
+<td>$ -2.4271 $</td>
+<td>$ 1.7634 $</td>
+</tr>
+<tr>
+<td>4</td>
+<td>$ -2.4271 $</td>
+<td>$ -1.7634 $</td>
+</tr>
+<tr>
+<td>5</td>
+<td>$ 0.9270 $</td>
+<td>$ -2.8532 $</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="distance-to-0-0-from-each-vertex">Distance to (0, 0) from Each Vertex:</h2>
+<p>We compute:</p>
+<p>$ r_i = \sqrt{x_i^2 + y_i^2} $</p>
+<p>Since all points are exactly 3 units from the center, we have:</p>
+<h2 id="r_1-r_2-r_3-r_4-r_5-3"><span class="arithmatex">\(r_1 = r_2 = r_3 = r_4 = r_5 = 3\)</span></h2>
+<h2 id="wave-contribution-from-each-source">Wave Contribution from Each Source</h2>
+<p>Using:</p>
+<p>$
+u_i = \cos(k r_i - \omega t + \phi) = \cos(6.2832 \cdot 3 - 0 + 0) = \cos(18.8496)$</p>
+<p>$
+\cos(18.8496) \approx \cos(6\pi) = 1.0 $</p>
+<p>So each of the <strong>five wave contributions is 1.0</strong> at that moment.</p>
+<hr/>
+<h3 id="final-total-displacement-at-0-0-t-0">Final Total Displacement at (0, 0), <span class="arithmatex">\( t = 0 \)</span>:</h3>
+<p>$
+U(0, 0, 0) = \sum_{i=1}^{5} u_i = 5 \cdot 1.0 = \boxed{5.0}
+$</p>
+<hr/>
+<h3 id="summary-table">Summary Table</h3>
+<table>
+<thead>
+<tr>
+<th>Vertex</th>
+<th>Coordinates (x, y)</th>
+<th>Distance 4 r_i $</th>
+<th>$u_i = \cos(k r_i) $</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>(3.0000, 0.0000)</td>
+<td>3.0000</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>(0.9270, 2.8532)</td>
+<td>3.0000</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>3</td>
+<td>(-2.4271, 1.7634)</td>
+<td>3.0000</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>4</td>
+<td>(-2.4271, -1.7634)</td>
+<td>3.0000</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>5</td>
+<td>(0.9270, -2.8532)</td>
+<td>3.0000</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Total Displacement</strong></td>
+<td></td>
+<td><strong>5.0</strong></td>
+</tr>
+</tbody>
+</table>
+<hr/>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
