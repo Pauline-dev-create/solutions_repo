@@ -91,7 +91,6 @@ plt.show()
 
 ![alt text](image.png)
 
-
 ## Observations
 - **Constructive Interference**: Bright/red regions where waves reinforce.
 - **Destructive Interference**: Dark/blue regions where waves cancel.
