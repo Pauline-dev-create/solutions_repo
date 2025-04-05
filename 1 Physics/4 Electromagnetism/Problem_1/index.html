@@ -72,6 +72,14 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#simulating-the-effects-of-the-lorentz-force">Simulating the Effects of the Lorentz Force</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#fundamentals-of-the-lorentz-force">Fundamentals of the Lorentz Force</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#applications">Applications</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#simulation-code">Simulation Code</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -172,6 +180,160 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h2 id="simulating-the-effects-of-the-lorentz-force">Simulating the Effects of the Lorentz Force</h2>
+<h2 id="fundamentals-of-the-lorentz-force">Fundamentals of the Lorentz Force</h2>
+<ul>
+<li><strong>Equation</strong>: $ \mathbf{F} = q\mathbf{E} + q(\mathbf{v} \times \mathbf{B}) $</li>
+<li>$ q\mathbf{E} $: Force due to electric field (linear acceleration).</li>
+<li>
+<p>$ q(\mathbf{v} \times \mathbf{B}) $: Force due to magnetic field (perpendicular to velocity and field, causing circular/helix motion).</p>
+</li>
+<li>
+<p><strong>Motion</strong>:</p>
+</li>
+<li>Uniform $ \mathbf{B} : $ Circular or helical path (Larmor radius  $ r_L = \frac{mv_\perp}{|q|B} $).</li>
+<li>Uniform  $\mathbf{E} $: Linear acceleration.</li>
+<li>
+<p>Crossed $ \mathbf{E} $ and $ \mathbf{B} <span class="arithmatex">\(: Drift motion (\)</span> v_d = \frac{E}{B} $).</p>
+</li>
+<li>
+<p><strong>Numerical Solution</strong>: Use Euler method to update position and velocity:</p>
+</li>
+<li>$ \mathbf{a} = \frac{\mathbf{F}}{m} $</li>
+<li>$ \mathbf{v}_{n+1} = \mathbf{v}_n + \mathbf{a} \Delta t $</li>
+<li>$ \mathbf{r}_{n+1} = \mathbf{r}_n + \mathbf{v}_n \Delta t $</li>
+</ul>
+<h2 id="applications">Applications</h2>
+<ol>
+<li><strong>Particle Accelerators</strong>: $ \mathbf{B} $ bends particle paths (e.g., cyclotrons), $ \mathbf{E} $ accelerates them.</li>
+<li><strong>Mass Spectrometers</strong>: $ \mathbf{B} $ separates ions by mass-to-charge ratio via circular paths.</li>
+<li><strong>Plasma Confinement</strong>: $ \mathbf{B} $ traps charged particles in fusion devices (e.g., tokamaks).</li>
+</ol>
+<hr/>
+<h2 id="simulation-code">Simulation Code</h2>
+<ol>
+<li>Uniform magnetic field ($ \mathbf{B} = B\hat{z} $).</li>
+<li>Combined electric and magnetic fields ($ \mathbf{E} = E\hat{x}, \mathbf{B} = B\hat{z} $).</li>
+<li>Crossed fields ($ \mathbf{E} = E\hat{y}, \mathbf{B} = B\hat{z} $).</li>
+</ol>
+<p>import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D</p>
+<h1 id="constants">Constants</h1>
+<p>q = 1.6e-19  # Charge (Coulombs, e.g., electron)
+m = 9.1e-31  # Mass (kg, e.g., electron)
+dt = 1e-9    # Time step (seconds)
+steps = 1000 # Number of steps</p>
+<h1 id="lorentz-force-function">Lorentz force function</h1>
+<p>def lorentz_force(v, E, B):
+    return q * (E + np.cross(v, B)) / m</p>
+<h1 id="simulation-function">Simulation function</h1>
+<p>def simulate_trajectory(v0, E, B, steps=steps, dt=dt):
+    r = np.zeros((steps, 3))  # Position array
+    v = np.zeros((steps, 3))  # Velocity array
+    v[0] = v0  # Initial velocity</p>
+<pre><code>for i in range(steps-1):
+    a = lorentz_force(v[i], E, B)
+    v[i+1] = v[i] + a * dt
+    r[i+1] = r[i] + v[i] * dt
+
+return r, v
+</code></pre>
+<h1 id="field-configurations">Field configurations</h1>
+<p>B_z = 0.1  # Magnetic field strength (Tesla)
+E_x = 1e5  # Electric field strength (V/m)</p>
+<h1 id="scenario-1-uniform-magnetic-field-b-along-z">Scenario 1: Uniform magnetic field (B along z)</h1>
+<p>v0_1 = np.array([1e6, 0, 0])  # Initial velocity in x-direction
+E_1 = np.array([0, 0, 0])     # No electric field
+B_1 = np.array([0, 0, B_z])   # B in z-direction
+r_1, v_1 = simulate_trajectory(v0_1, E_1, B_1)</p>
+<h1 id="scenario-2-combined-e-and-b-fields">Scenario 2: Combined E and B fields</h1>
+<p>v0_2 = np.array([1e6, 0, 1e6])  # Velocity in x and z
+E_2 = np.array([E_x, 0, 0])     # E in x-direction
+B_2 = np.array([0, 0, B_z])     # B in z-direction
+r_2, v_2 = simulate_trajectory(v0_2, E_2, B_2)</p>
+<h1 id="scenario-3-crossed-e-and-b-fields">Scenario 3: Crossed E and B fields</h1>
+<p>v0_3 = np.array([0, 0, 0])      # No initial velocity
+E_3 = np.array([0, E_x, 0])     # E in y-direction
+B_3 = np.array([0, 0, B_z])     # B in z-direction
+r_3, v_3 = simulate_trajectory(v0_3, E_3, B_3)</p>
+<h1 id="visualization">Visualization</h1>
+<p>fig = plt.figure(figsize=(18, 5))</p>
+<h1 id="scenario-1-2d-plot-xy-plane-circular-motion">Scenario 1: 2D Plot (xy-plane, circular motion)</h1>
+<p>ax1 = fig.add_subplot(131)
+ax1.plot(r_1[:, 0], r_1[:, 1], 'b-', label='Trajectory')
+ax1.set_xlabel('x (m)')
+ax1.set_ylabel('y (m)')
+ax1.set_title('Uniform B Field (Circular Motion)')
+ax1.grid(True)
+ax1.legend()
+ax1.set_aspect('equal')</p>
+<h1 id="scenario-2-3d-plot-helical-motion-with-e-field">Scenario 2: 3D Plot (helical motion with E-field)</h1>
+<p>ax2 = fig.add_subplot(132, projection='3d')
+ax2.plot(r_2[:, 0], r_2[:, 1], r_2[:, 2], 'g-', label='Trajectory')
+ax2.set_xlabel('x (m)')
+ax2.set_ylabel('y (m)')
+ax2.set_zlabel('z (m)')
+ax2.set_title('Combined E and B Fields (Helical)')
+ax2.legend()</p>
+<h1 id="scenario-3-2d-plot-xy-plane-drift-motion">Scenario 3: 2D Plot (xy-plane, drift motion)</h1>
+<p>ax3 = fig.add_subplot(133)
+ax3.plot(r_3[:, 0], r_3[:, 1], 'r-', label='Trajectory')
+ax3.set_xlabel('x (m)')
+ax3.set_ylabel('y (m)')
+ax3.set_title('Crossed E and B Fields (Drift)')
+ax3.grid(True)
+ax3.legend()
+ax3.set_aspect('equal')</p>
+<p>plt.tight_layout()
+plt.show()</p>
+<h1 id="calculate-larmor-radius-and-drift-velocity">Calculate Larmor radius and drift velocity</h1>
+<p>v_perp = np.sqrt(v0_1[0]<strong>2 + v0_1[1]</strong>2)
+r_larmor = m * v_perp / (abs(q) * B_z)
+v_drift = E_x / B_z</p>
+<p>print(f"Larmor Radius (Scenario 1): {r_larmor:.2e} m")
+print(f"Drift Velocity (Scenario 3): {v_drift:.2e} m/s")</p>
+<p><img alt="alt text" src="../image.png"/></p>
+<p><a href="https://colab.research.google.com/drive/1wAqPN3cKLa-XC7hSP1EzEbI3Ms_BOJNe?usp=sharing">Visuals in colab</a></p>
+<h2 id="results-and-visualizations">Results and Visualizations</h2>
+<p>The script above simulates three scenarios:
+1. <strong>Uniform Magnetic Field</strong>:
+   - $ \mathbf{B} = (0, 0, 0.1) $ T, $ \mathbf{v}_0 = (10^6, 0, 0) $ m/s.
+   - Result: Circular motion in the xy-plane (Larmor radius observed).
+2. <strong>Combined E and B Fields</strong>:
+   - $ \mathbf{E} = (10^5, 0, 0) $ V/m, $ \mathbf{B} = (0, 0, 0.1) $ T, $ \mathbf{v}_0 = (10^6, 0, 10^6) $ m/s.
+   - Result: Helical motion with linear acceleration along x.
+3. <strong>Crossed E and B Fields</strong>:
+   - $ \mathbf{E} = (0, 10^5, 0) $ V/m, $ \mathbf{B} = (0, 0, 0.1) $ T, $ \mathbf{v}_0 = (0, 0, 0) $ m/s.
+   - Result: Drift motion in x-direction ($ v_d = \frac{E}{B} $).</p>
+<h3 id="key-phenomena">Key Phenomena</h3>
+<ul>
+<li><strong>Larmor Radius</strong>: $ r_L = \frac{m v_\perp}{|q| B} $, visible in Scenario 1 as the radius of the circular path.</li>
+<li><strong>Drift Velocity</strong>: $ v_d = \frac{E}{B} $, observed in Scenario 3 as motion perpendicular to both fields.</li>
+</ul>
+<h2 id="discussion">Discussion</h2>
+<ul>
+<li><strong>Cyclotrons</strong>: Scenario 1 mimics cyclotron motion, where $ \mathbf{B} $ keeps particles in circular orbits, and frequency depends on $ q/m $.</li>
+<li><strong>Magnetic Traps</strong>: Scenario 2’s helical path relates to confinement in magnetic bottles, where $ \mathbf{B} $ traps particles, and $ \mathbf{E} $ adjusts their energy.</li>
+<li>
+<p><strong>Mass Spectrometers</strong>: Scenario 3’s drift and curvature help separate particles by mass-to-charge ratio.</p>
+</li>
+<li>
+<p><strong>Parameter Effects</strong>:</p>
+</li>
+<li>Increasing $ B $: Smaller $ r_L $, tighter orbits.</li>
+<li>Increasing $ E $: Greater drift or acceleration.</li>
+<li>Higher$ v_0 $: Larger helix radius or faster drift.</li>
+</ul>
+<h2 id="suggestions-for-extension">Suggestions for Extension</h2>
+<ul>
+<li><strong>Non-Uniform Fields</strong>: Add  $ \mathbf{B} = B_0 + kx $ for magnetic mirrors.</li>
+<li><strong>Multiple Particles</strong>: Simulate interactions in plasmas.</li>
+<li><strong>Runge-Kutta Method</strong>: Replace Euler for higher accuracy.</li>
+</ul>
+<hr/>
+<h2 id="conclusion">Conclusion</h2>
+<p>These simulations illustrate the Lorentz force’s role in controlling charged particle motion, bridging theory to applications like accelerators and plasma confinement.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
