@@ -22,23 +22,6 @@ $$ U(x, y, t) = \sum_{i=1}^{N} A \cos(k r_i - \omega t + \phi) $$
 
 ---
 
-## **Step-by-Step Task**
-### **Step 1: Choose a Regular Polygon**
-We'll use a **regular pentagon** for this simulation.
-
-### **Step 2: Position the Sources**
-We place point sources at the vertices of the pentagon.
-
-### **Step 3: Define the Wave Equation**
-Each source emits a wave described above.
-
-### **Step 4: Superposition of Waves**
-We sum all wave contributions at each point.
-
-### **Step 5: Visualize the Interference Pattern**
-
----
-
 ## **Numerical Parameters and Calculations**
 Let's assume the following values:
 - Amplitude: $$ A = 1.0 $$
