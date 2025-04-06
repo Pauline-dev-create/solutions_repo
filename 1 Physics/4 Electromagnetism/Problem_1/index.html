@@ -80,6 +80,42 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#simulation-code">Simulation Code</a>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#constants">Constants</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#lorentz-force-function">Lorentz force function</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#simulation-function">Simulation function</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#field-configurations">Field configurations</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scenario-1-uniform-magnetic-field-b-along-z">Scenario 1: Uniform magnetic field (B along z)</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scenario-2-combined-e-and-b-fields">Scenario 2: Combined E and B fields</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scenario-3-crossed-e-and-b-fields">Scenario 3: Crossed E and B fields</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#visualization">Visualization</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scenario-1-2d-plot-xy-plane-circular-motion">Scenario 1: 2D Plot (xy-plane, circular motion)</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scenario-2-3d-plot-helical-motion-with-e-field">Scenario 2: 3D Plot (helical motion with E-field)</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#scenario-3-2d-plot-xy-plane-drift-motion">Scenario 3: 2D Plot (xy-plane, drift motion)</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#calculate-larmor-radius-and-drift-velocity">Calculate Larmor radius and drift velocity</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#results-and-visualizations">Results and Visualizations</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#key-phenomena">Key Phenomena</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#discussion">Discussion</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#suggestions-for-extension">Suggestions for Extension</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -183,51 +219,73 @@
 <h2 id="simulating-the-effects-of-the-lorentz-force">Simulating the Effects of the Lorentz Force</h2>
 <h2 id="fundamentals-of-the-lorentz-force">Fundamentals of the Lorentz Force</h2>
 <ul>
-<li><strong>Equation</strong>: $ \mathbf{F} = q\mathbf{E} + q(\mathbf{v} \times \mathbf{B}) $</li>
-<li>$ q\mathbf{E} $: Force due to electric field (linear acceleration).</li>
+<li>
+<p><strong>Equation</strong>: $ \mathbf{F} = q\mathbf{E} + q(\mathbf{v} \times \mathbf{B}) $</p>
+</li>
+<li>
+<p>$ q\mathbf{E} $: Force due to electric field (linear acceleration).</p>
+</li>
 <li>
 <p>$ q(\mathbf{v} \times \mathbf{B}) $: Force due to magnetic field (perpendicular to velocity and field, causing circular/helix motion).</p>
 </li>
 <li>
 <p><strong>Motion</strong>:</p>
 </li>
-<li>Uniform $ \mathbf{B} : $ Circular or helical path (Larmor radius  $ r_L = \frac{mv_\perp}{|q|B} $).</li>
-<li>Uniform  $\mathbf{E} $: Linear acceleration.</li>
+<li>
+<p>Uniform $ \mathbf{B} : $ Circular or helical path (Larmor radius  $ r_L = \frac{mv_\perp}{|q|B} $).</p>
+</li>
+<li>
+<p>Uniform  $\mathbf{E} $: Linear acceleration.</p>
+</li>
 <li>
 <p>Crossed $ \mathbf{E} $ and $ \mathbf{B} <span class="arithmatex">\(: Drift motion (\)</span> v_d = \frac{E}{B} $).</p>
 </li>
 <li>
 <p><strong>Numerical Solution</strong>: Use Euler method to update position and velocity:</p>
 </li>
-<li>$ \mathbf{a} = \frac{\mathbf{F}}{m} $</li>
+<li>
+<p>$ \mathbf{a} = \frac{\mathbf{F}}{m} $</p>
+</li>
 <li>$ \mathbf{v}_{n+1} = \mathbf{v}_n + \mathbf{a} \Delta t $</li>
 <li>$ \mathbf{r}_{n+1} = \mathbf{r}_n + \mathbf{v}_n \Delta t $</li>
 </ul>
 <h2 id="applications">Applications</h2>
 <ol>
-<li><strong>Particle Accelerators</strong>: $ \mathbf{B} $ bends particle paths (e.g., cyclotrons), $ \mathbf{E} $ accelerates them.</li>
-<li><strong>Mass Spectrometers</strong>: $ \mathbf{B} $ separates ions by mass-to-charge ratio via circular paths.</li>
-<li><strong>Plasma Confinement</strong>: $ \mathbf{B} $ traps charged particles in fusion devices (e.g., tokamaks).</li>
+<li>
+<p><strong>Particle Accelerators</strong>: $ \mathbf{B} $ bends particle paths (e.g., cyclotrons), $ \mathbf{E} $ accelerates them.</p>
+</li>
+<li>
+<p><strong>Mass Spectrometers</strong>: $ \mathbf{B} $ separates ions by mass-to-charge ratio via circular paths.</p>
+</li>
+<li>
+<p><strong>Plasma Confinement</strong>: $ \mathbf{B} $ traps charged particles in fusion devices (e.g., tokamaks).</p>
+</li>
 </ol>
 <hr/>
 <h2 id="simulation-code">Simulation Code</h2>
 <ol>
-<li>Uniform magnetic field ($ \mathbf{B} = B\hat{z} $).</li>
-<li>Combined electric and magnetic fields ($ \mathbf{E} = E\hat{x}, \mathbf{B} = B\hat{z} $).</li>
-<li>Crossed fields ($ \mathbf{E} = E\hat{y}, \mathbf{B} = B\hat{z} $).</li>
+<li>
+<p>Uniform magnetic field ($ \mathbf{B} = B\hat{z} $).</p>
+</li>
+<li>
+<p>Combined electric and magnetic fields ($ \mathbf{E} = E\hat{x}, \mathbf{B} = B\hat{z} $).</p>
+</li>
+<li>
+<p>Crossed fields ($ \mathbf{E} = E\hat{y}, \mathbf{B} = B\hat{z} $).</p>
+</li>
 </ol>
 <p>import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D</p>
-<h1 id="constants">Constants</h1>
+<h2 id="constants">Constants</h2>
 <p>q = 1.6e-19  # Charge (Coulombs, e.g., electron)
 m = 9.1e-31  # Mass (kg, e.g., electron)
 dt = 1e-9    # Time step (seconds)
 steps = 1000 # Number of steps</p>
-<h1 id="lorentz-force-function">Lorentz force function</h1>
+<h2 id="lorentz-force-function">Lorentz force function</h2>
 <p>def lorentz_force(v, E, B):
     return q * (E + np.cross(v, B)) / m</p>
-<h1 id="simulation-function">Simulation function</h1>
+<h2 id="simulation-function">Simulation function</h2>
 <p>def simulate_trajectory(v0, E, B, steps=steps, dt=dt):
     r = np.zeros((steps, 3))  # Position array
     v = np.zeros((steps, 3))  # Velocity array
@@ -239,27 +297,27 @@ steps = 1000 # Number of steps</p>
 
 return r, v
 </code></pre>
-<h1 id="field-configurations">Field configurations</h1>
+<h2 id="field-configurations">Field configurations</h2>
 <p>B_z = 0.1  # Magnetic field strength (Tesla)
 E_x = 1e5  # Electric field strength (V/m)</p>
-<h1 id="scenario-1-uniform-magnetic-field-b-along-z">Scenario 1: Uniform magnetic field (B along z)</h1>
+<h2 id="scenario-1-uniform-magnetic-field-b-along-z">Scenario 1: Uniform magnetic field (B along z)</h2>
 <p>v0_1 = np.array([1e6, 0, 0])  # Initial velocity in x-direction
 E_1 = np.array([0, 0, 0])     # No electric field
 B_1 = np.array([0, 0, B_z])   # B in z-direction
 r_1, v_1 = simulate_trajectory(v0_1, E_1, B_1)</p>
-<h1 id="scenario-2-combined-e-and-b-fields">Scenario 2: Combined E and B fields</h1>
+<h2 id="scenario-2-combined-e-and-b-fields">Scenario 2: Combined E and B fields</h2>
 <p>v0_2 = np.array([1e6, 0, 1e6])  # Velocity in x and z
 E_2 = np.array([E_x, 0, 0])     # E in x-direction
 B_2 = np.array([0, 0, B_z])     # B in z-direction
 r_2, v_2 = simulate_trajectory(v0_2, E_2, B_2)</p>
-<h1 id="scenario-3-crossed-e-and-b-fields">Scenario 3: Crossed E and B fields</h1>
+<h2 id="scenario-3-crossed-e-and-b-fields">Scenario 3: Crossed E and B fields</h2>
 <p>v0_3 = np.array([0, 0, 0])      # No initial velocity
 E_3 = np.array([0, E_x, 0])     # E in y-direction
 B_3 = np.array([0, 0, B_z])     # B in z-direction
 r_3, v_3 = simulate_trajectory(v0_3, E_3, B_3)</p>
-<h1 id="visualization">Visualization</h1>
+<h2 id="visualization">Visualization</h2>
 <p>fig = plt.figure(figsize=(18, 5))</p>
-<h1 id="scenario-1-2d-plot-xy-plane-circular-motion">Scenario 1: 2D Plot (xy-plane, circular motion)</h1>
+<h2 id="scenario-1-2d-plot-xy-plane-circular-motion">Scenario 1: 2D Plot (xy-plane, circular motion)</h2>
 <p>ax1 = fig.add_subplot(131)
 ax1.plot(r_1[:, 0], r_1[:, 1], 'b-', label='Trajectory')
 ax1.set_xlabel('x (m)')
@@ -268,7 +326,7 @@ ax1.set_title('Uniform B Field (Circular Motion)')
 ax1.grid(True)
 ax1.legend()
 ax1.set_aspect('equal')</p>
-<h1 id="scenario-2-3d-plot-helical-motion-with-e-field">Scenario 2: 3D Plot (helical motion with E-field)</h1>
+<h2 id="scenario-2-3d-plot-helical-motion-with-e-field">Scenario 2: 3D Plot (helical motion with E-field)</h2>
 <p>ax2 = fig.add_subplot(132, projection='3d')
 ax2.plot(r_2[:, 0], r_2[:, 1], r_2[:, 2], 'g-', label='Trajectory')
 ax2.set_xlabel('x (m)')
@@ -276,7 +334,7 @@ ax2.set_ylabel('y (m)')
 ax2.set_zlabel('z (m)')
 ax2.set_title('Combined E and B Fields (Helical)')
 ax2.legend()</p>
-<h1 id="scenario-3-2d-plot-xy-plane-drift-motion">Scenario 3: 2D Plot (xy-plane, drift motion)</h1>
+<h2 id="scenario-3-2d-plot-xy-plane-drift-motion">Scenario 3: 2D Plot (xy-plane, drift motion)</h2>
 <p>ax3 = fig.add_subplot(133)
 ax3.plot(r_3[:, 0], r_3[:, 1], 'r-', label='Trajectory')
 ax3.set_xlabel('x (m)')
@@ -287,7 +345,7 @@ ax3.legend()
 ax3.set_aspect('equal')</p>
 <p>plt.tight_layout()
 plt.show()</p>
-<h1 id="calculate-larmor-radius-and-drift-velocity">Calculate Larmor radius and drift velocity</h1>
+<h2 id="calculate-larmor-radius-and-drift-velocity">Calculate Larmor radius and drift velocity</h2>
 <p>v_perp = np.sqrt(v0_1[0]<strong>2 + v0_1[1]</strong>2)
 r_larmor = m * v_perp / (abs(q) * B_z)
 v_drift = E_x / B_z</p>
