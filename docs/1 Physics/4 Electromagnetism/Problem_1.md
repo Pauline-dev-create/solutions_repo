@@ -5,46 +5,56 @@
 ## Fundamentals of the Lorentz Force
 
 - **Equation**: $ \mathbf{F} = q\mathbf{E} + q(\mathbf{v} \times \mathbf{B}) $
+
   - $ q\mathbf{E} $: Force due to electric field (linear acceleration).
+
   - $ q(\mathbf{v} \times \mathbf{B}) $: Force due to magnetic field (perpendicular to velocity and field, causing circular/helix motion).
 
 - **Motion**:
   - Uniform $ \mathbf{B} : $ Circular or helical path (Larmor radius  $ r_L = \frac{mv_\perp}{|q|B} $).
+
   - Uniform  $\mathbf{E} $: Linear acceleration.
+
   - Crossed $ \mathbf{E} $ and $ \mathbf{B} $: Drift motion ($ v_d = \frac{E}{B} $).
 
 - **Numerical Solution**: Use Euler method to update position and velocity:
+
   - $ \mathbf{a} = \frac{\mathbf{F}}{m} $
   - $ \mathbf{v}_{n+1} = \mathbf{v}_n + \mathbf{a} \Delta t $
   - $ \mathbf{r}_{n+1} = \mathbf{r}_n + \mathbf{v}_n \Delta t $
 
 ## Applications
+
 1. **Particle Accelerators**: $ \mathbf{B} $ bends particle paths (e.g., cyclotrons), $ \mathbf{E} $ accelerates them.
+
 2. **Mass Spectrometers**: $ \mathbf{B} $ separates ions by mass-to-charge ratio via circular paths.
+
 3. **Plasma Confinement**: $ \mathbf{B} $ traps charged particles in fusion devices (e.g., tokamaks).
 
 ---
 
 ## Simulation Code
 1. Uniform magnetic field ($ \mathbf{B} = B\hat{z} $).
+
 2. Combined electric and magnetic fields ($ \mathbf{E} = E\hat{x}, \mathbf{B} = B\hat{z} $).
+
 3. Crossed fields ($ \mathbf{E} = E\hat{y}, \mathbf{B} = B\hat{z} $).
 
 import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-# Constants
+## Constants
 q = 1.6e-19  # Charge (Coulombs, e.g., electron)
 m = 9.1e-31  # Mass (kg, e.g., electron)
 dt = 1e-9    # Time step (seconds)
 steps = 1000 # Number of steps
 
-# Lorentz force function
+## Lorentz force function
 def lorentz_force(v, E, B):
     return q * (E + np.cross(v, B)) / m
 
-# Simulation function
+## Simulation function
 def simulate_trajectory(v0, E, B, steps=steps, dt=dt):
     r = np.zeros((steps, 3))  # Position array
     v = np.zeros((steps, 3))  # Velocity array
@@ -57,32 +67,32 @@ def simulate_trajectory(v0, E, B, steps=steps, dt=dt):
     
     return r, v
 
-# Field configurations
+## Field configurations
 B_z = 0.1  # Magnetic field strength (Tesla)
 E_x = 1e5  # Electric field strength (V/m)
 
-# Scenario 1: Uniform magnetic field (B along z)
+## Scenario 1: Uniform magnetic field (B along z)
 v0_1 = np.array([1e6, 0, 0])  # Initial velocity in x-direction
 E_1 = np.array([0, 0, 0])     # No electric field
 B_1 = np.array([0, 0, B_z])   # B in z-direction
 r_1, v_1 = simulate_trajectory(v0_1, E_1, B_1)
 
-# Scenario 2: Combined E and B fields
+## Scenario 2: Combined E and B fields
 v0_2 = np.array([1e6, 0, 1e6])  # Velocity in x and z
 E_2 = np.array([E_x, 0, 0])     # E in x-direction
 B_2 = np.array([0, 0, B_z])     # B in z-direction
 r_2, v_2 = simulate_trajectory(v0_2, E_2, B_2)
 
-# Scenario 3: Crossed E and B fields
+## Scenario 3: Crossed E and B fields
 v0_3 = np.array([0, 0, 0])      # No initial velocity
 E_3 = np.array([0, E_x, 0])     # E in y-direction
 B_3 = np.array([0, 0, B_z])     # B in z-direction
 r_3, v_3 = simulate_trajectory(v0_3, E_3, B_3)
 
-# Visualization
+## Visualization
 fig = plt.figure(figsize=(18, 5))
 
-# Scenario 1: 2D Plot (xy-plane, circular motion)
+## Scenario 1: 2D Plot (xy-plane, circular motion)
 ax1 = fig.add_subplot(131)
 ax1.plot(r_1[:, 0], r_1[:, 1], 'b-', label='Trajectory')
 ax1.set_xlabel('x (m)')
@@ -92,7 +102,7 @@ ax1.grid(True)
 ax1.legend()
 ax1.set_aspect('equal')
 
-# Scenario 2: 3D Plot (helical motion with E-field)
+## Scenario 2: 3D Plot (helical motion with E-field)
 ax2 = fig.add_subplot(132, projection='3d')
 ax2.plot(r_2[:, 0], r_2[:, 1], r_2[:, 2], 'g-', label='Trajectory')
 ax2.set_xlabel('x (m)')
@@ -101,7 +111,7 @@ ax2.set_zlabel('z (m)')
 ax2.set_title('Combined E and B Fields (Helical)')
 ax2.legend()
 
-# Scenario 3: 2D Plot (xy-plane, drift motion)
+## Scenario 3: 2D Plot (xy-plane, drift motion)
 ax3 = fig.add_subplot(133)
 ax3.plot(r_3[:, 0], r_3[:, 1], 'r-', label='Trajectory')
 ax3.set_xlabel('x (m)')
@@ -114,7 +124,7 @@ ax3.set_aspect('equal')
 plt.tight_layout()
 plt.show()
 
-# Calculate Larmor radius and drift velocity
+## Calculate Larmor radius and drift velocity
 v_perp = np.sqrt(v0_1[0]**2 + v0_1[1]**2)
 r_larmor = m * v_perp / (abs(q) * B_z)
 v_drift = E_x / B_z
