@@ -49,6 +49,10 @@ For large amplitudes or specific $\omega_d$ , the nonlinear $\sin(\theta)$  term
 
 ## 4. Implementation
 
+### Different Scenarios 
+
+![alt text](image-8.png)
+
 ### Computational Model
 We use the 4th-order Runge-Kutta (RK4) method to solve the nonlinear equation numerically. Below are Python scripts for simulation, visualization, and animation.
 
@@ -163,3 +167,5 @@ plt.show()
 ![alt text](image-7.png)
 
 [Solutions in colab](https://colab.research.google.com/drive/1yM2VomaDAisU21e8RodixBdpF1yTNmOz?usp=sharing)
+
+
