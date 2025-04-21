@@ -1,127 +1,227 @@
 # # Problem 1
 
-## : Projectile Motion and Kepler’s Laws
 
-### Motivation
-Projectile motion and orbital mechanics are foundational in physics, illustrating Newton’s and Kepler’s laws. While projectile motion demonstrates motion under constant gravity, Kepler’s laws describe planetary orbits, connecting period $T$ and semi-major axis $r$ to gravitational forces.
+## Theoretical Foundation
 
-## 1. Theoretical Foundation
+### Derivation from Differential Equations
+Projectile motion can be described using Newton’s second law. Assuming no air resistance initially, the only force is gravity acting downward. Define the coordinate system with $ x $-axis horizontal and $ y $-axis vertical.
 
-### Governing Equations
-A projectile launched with velocity $v_0$ at angle $\theta$, under gravity $g$, has:
+#### Horizontal Motion (x-direction)
+- No acceleration in the $ x $-direction:
+  $$ \frac{d^2 x}{dt^2} = 0 $$
+- Initial velocity in $ x $-direction: $ v_{0x} = v_0 \cos \theta $.
+- Integrate:
+  $$ \frac{dx}{dt} = v_0 \cos \theta $$
+  $$ x(t) = (v_0 \cos \theta) t $$
 
-- Horizontal velocity: $v_{x0} = v_0 \cos\theta$
-- Vertical velocity: $v_{y0} = v_0 \sin\theta$
-- Accelerations: $a_x = 0$, $a_y = -g$
+#### Vertical Motion (y-direction)
+- Acceleration due to gravity $ g = 9.8 \, \text{m/s}^2 $ downward:
+  $$ \frac{d^2 y}{dt^2} = -g $$
+- Initial velocity in $ y $-direction: $ v_{0y} = v_0 \sin \theta $.
+- Integrate:
+  $$ \frac{dy}{dt} = v_0 \sin \theta - g t $$
+  $$ y(t) = (v_0 \sin \theta) t - \frac{1}{2} g t^2 $$
 
-- Positions:
-  - $x(t) = v_0 \cos\theta \cdot t$
-  - $y(t) = v_0 \sin\theta \cdot t - \frac{1}{2} g t^2$
+#### Range Calculation
+The projectile hits the ground when \( y(t) = 0 \):
+$$ (v_0 \sin \theta) t - \frac{1}{2} g t^2 = 0 $$
+$$ t (v_0 \sin \theta - \frac{1}{2} g t) = 0 $$
+- \( t = 0 \) (start).
+- \( t = \frac{2 v_0 \sin \theta}{g} \) (time of flight).
 
-### Time of Flight
-Set $y(t) = 0$:
+Substitute \( t \) into \( x(t) \):
+$$ R = x\left(\frac{2 v_0 \sin \theta}{g}\right) = (v_0 \cos \theta) \left(\frac{2 v_0 \sin \theta}{g}\right) = \frac{2 v_0^2 \sin \theta \cos \theta}{g} $$
+Using the identity \( \sin 2\theta = 2 \sin \theta \cos \theta \):
+$$ R = \frac{v_0^2 \sin 2\theta}{g} $$
 
-$$
-v_0 \sin\theta \cdot t - \frac{1}{2} g t^2 = 0 \Rightarrow t \left( v_0 \sin\theta - \frac{1}{2} g t \right) = 0
-$$
+### Family of Solutions
+- **Parameters**: \( v_0 \), \( \theta \), \( g \).
+- **Variations**:
+  - \( v_0 \): Range scales with \( v_0^2 \).
+  - \( \theta \): Range is maximized at \( \theta = 45^\circ \) (\( \sin 2\theta = 1 \)).
+  - \( g \): Inverse relationship; higher \( g \) reduces range.
 
-Solutions: $t = 0$ or $t = \frac{2 v_0 \sin\theta}{g}$
+---
 
-### Range
-Range $R$ at $t = \frac{2 v_0 \sin\theta}{g}$:
+## Analysis of the Range
 
-$$
-R = v_0 \cos\theta \cdot \frac{2 v_0 \sin\theta}{g} = \frac{v_0^2 \sin 2\theta}{g}
-$$
+### Range vs. Angle of Projection
+- The range $ R = \frac{v_0^2 \sin 2\theta}{g} $ peaks at $ \theta = 45^\circ $.
+- From the image (part a):
+  - $ v_0 = 50 \, \text{m/s} $, $ \theta = 45^\circ $, $ R = 255 \, \text{m} $.
+  - Verify: $ R = \frac{50^2 \sin 90^\circ}{9.8} = \frac{2500 \cdot 1}{9.8} \approx 255 \, \text{m} $, which matches.
+- Other angles:
+  - $ \theta = 15^\circ $: $ R = 91.8 \, \text{m} $.
+  - $ \theta = 75^\circ $: $ R = 163 \, \text{m} $.
 
-## 2. Kepler’s Laws and Orbital Mechanics
+### Effect of Initial Velocity
+- From part (b):
+  - $ v_0 = 30 \, \text{m/s} $, $ \theta = 45^\circ $, $ R = 91.8 \, \text{m} $.
+  - $ v_0 = 40 \, \text{m/s} $, $  \theta = 45^\circ $, $ R = 163 \, \text{m} $.
+  - $ v_0 = 50 \, \text{m/s} $, $ \theta = 45^\circ $, $ R = 255 \, \text{m} $.
+- Range scales with $ v_0^2 $.
 
-### 1) Derivation of $T^2$ Formula (Kepler’s Third Law)
-Kepler’s Third Law states: The square of the orbital period $T$ is proportional to the cube of the semi-major axis $r$:
+### Effect of Gravitational Acceleration
+- If $ g $ increases, range decreases (e.g., on a planet with higher gravity).
 
-$$
-T^2 \propto r^3
-$$
+---
 
-For a planet orbiting a central mass $M$, assume a circular orbit:
+## Practical Applications
+- **Sports**: Optimizing the launch angle in sports like golf or javelin throw.
+- **Engineering**: Designing artillery or launch systems.
+- **Astrophysics**: Modeling satellite launches, though air resistance and orbital mechanics are needed.
+- **Limitations**:
+  - Air resistance reduces range and alters the trajectory.
+  - Uneven terrain or wind affects the path.
 
-- Centripetal force: $F_c = \frac{m v^2}{r}$, where $v = \frac{2\pi r}{T}$
-- Gravitational force: $F_g = \frac{G M m}{r^2}$
+---
 
-Equating the forces:
+## Implementation: Projectile Motion Simulation
 
-$$
-\frac{m v^2}{r} = \frac{G M m}{r^2}
-$$
+### Plot 1: Trajectories for Different Angles (15°, 45°, 75°) at 50 m/s
+Below is the Python code to generate a plot similar to part (a) of the image.
 
-Substitute $v$ and cancel $m$:
+```python
+import numpy as np
+import matplotlib.pyplot as plt
 
-$$
-\frac{4\pi^2 r}{T^2} = \frac{G M}{r^2}
-$$
+# Constants
+g = 9.8  # m/s^2
+v0 = 50  # m/s
+angles = [15, 45, 75]  # degrees
+colors = ['red', 'purple', 'green']
 
-Solve for $T^2$:
+# Time array for simulation
+t_max = 2 * v0 * np.sin(np.radians(max(angles))) / g
+t = np.linspace(0, t_max, 1000)
 
-$$
-T^2 = \frac{4\pi^2}{G M} r^3
-$$
+plt.figure(figsize=(10, 6))
+for angle, color in zip(angles, colors):
+    theta = np.radians(angle)
+    # Positions
+    x = v0 * np.cos(theta) * t
+    y = v0 * np.sin(theta) * t - 0.5 * g * t**2
+    # Stop when y <= 0 (ground)
+    mask = y >= 0
+    plt.plot(x[mask], y[mask], label=f'Angle = {angle}°', color=color)
 
-Thus:
+plt.title('Projectile Motion for Different Angles (v0 = 50 m/s)')
+plt.xlabel('Horizontal Distance (m)')
+plt.ylabel('Height (m)')
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+![alt text](image-13.png)
 
-$$
-T^2 = k r^3, \quad \text{where} \quad k = \frac{4\pi^2}{G M}
-$$
+### Plot 2: Trajectories for Different Velocities (30, 40, 50 m/s) at 45°
+```python
+# Constants
+g = 9.8  # m/s^2
+v0s = [30, 40, 50]  # m/s
+angle = 45  # degrees
+colors = ['red', 'purple', 'green']
 
-### 2) $T^2$ vs $r^3$ Plot
-We’ll plot $T^2$ vs $r^3$ for planets, expecting a straight line since $T^2 = k r^3$.
+# Time array
+t_max = 2 * max(v0s) * np.sin(np.radians(angle)) / g
+t = np.linspace(0, t_max, 1000)
 
-### 3) Planetary Data
-Using data for Mercury, Earth, and Jupiter:
+plt.figure(figsize=(10, 6))
+for v0, color in zip(v0s, colors):
+    theta = np.radians(angle)
+    x = v0 * np.cos(theta) * t
+    y = v0 * np.sin(theta) * t - 0.5 * g * t**2
+    mask = y >= 0
+    plt.plot(x[mask], y[mask], label=f'v0 = {v0} m/s', color=color)
 
-- **Mercury**: $r = 5.79 \times 10^{10} \, \text{m}$, $T = 88 \, \text{days}$
-- **Earth**: $r = 1.496 \times 10^{11} \, \text{m}$, $T = 365.25 \, \text{days}$
-- **Jupiter**: $r = 7.785 \times 10^{11} \, \text{m}$, $T = 4333 \, \text{days}$
+plt.title('Projectile Motion for Different Velocities (Angle = 45°)')
+plt.xlabel('Horizontal Distance (m)')
+plt.ylabel('Height (m)')
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+![alt text](image-14.png)
 
-### 4) Mass Calculations Using Kepler’s Law
+### Plot 3: Projectile Motion With and Without Air Resistance
+Now, let’s simulate projectile motion with air resistance. Air resistance introduces a drag force proportional to velocity: \( F_{\text{drag}} = -k v \).
 
-#### Mass of Earth (Using Moon’s Orbit)
+#### Differential Equations with Air Resistance
+- \( x \)-direction: \( m \frac{d^2 x}{dt^2} = -k \frac{dx}{dt} \)
+- \( y \)-direction: \( m \frac{d^2 y}{dt^2} = -mg - k \frac{dy}{dt} \)
 
-- Moon’s orbit: $r = 3.844 \times 10^8 \, \text{m}$, $T = 27.32 \, \text{days}$
-- Gravitational constant: $G = 6.6743 \times 10^{-11} \, \text{m}^3 \text{kg}^{-1} \text{s}^{-2}$
+We’ll solve these numerically using the Euler method.
 
-Using:
+```python
+# Constants
+g = 9.8
+v0 = 50
+angle = 45
+theta = np.radians(angle)
+k = 0.1  # drag coefficient
+m = 1  # mass in kg
+dt = 0.01  # time step
+t_max = 10
 
-$$
-M_E = \frac{4\pi^2 r^3}{G T^2}
-$$
+# Initial conditions
+vx = v0 * np.cos(theta)
+vy = v0 * np.sin(theta)
+x, y = 0, 0
+x_no_air, y_no_air = 0, 0
+t = 0
 
-#### Mass of Sun (Using Earth’s Orbit)
+# Lists to store trajectories
+x_traj, y_traj = [x], [y]
+x_no_air_traj, y_no_air_traj = [x_no_air], [y_no_air]
 
-- Earth’s orbit: $r = 1.496 \times 10^{11} \, \text{m}$, $T = 365.25 \, \text{days}$
+# Euler method simulation
+while y >= 0 or y_no_air >= 0:
+    # With air resistance
+    ax = -k * vx / m
+    ay = -g - k * vy / m
+    vx += ax * dt
+    vy += ay * dt
+    x += vx * dt
+    y += vy * dt
 
-Using:
+    # Without air resistance
+    x_no_air = v0 * np.cos(theta) * t
+    y_no_air = v0 * np.sin(theta) * t - 0.5 * g * t**2
 
-$$
-M_S = \frac{4\pi^2 r^3}{G T^2}
-$$
+    # Append to trajectories
+    if y >= 0:
+        x_traj.append(x)
+        y_traj.append(y)
+    if y_no_air >= 0:
+        x_no_air_traj.append(x_no_air)
+        y_no_air_traj.append(y_no_air)
 
-## 3. Practical Applications
+    t += dt
 
-- **Astronomy**: Kepler’s laws help determine masses of celestial bodies.
-- **Space Missions**: Trajectory planning (e.g., Mars missions must adjust for $g$)
-- **Physics Education**: Visualizing $T^2$-vs-$r^3$ relationships makes orbital mechanics more intuitive.
+# Plot
+plt.figure(figsize=(10, 6))
+plt.plot(x_no_air_traj, y_no_air_traj, label='No Air Resistance', color='blue')
+plt.plot(x_traj, y_traj, label='With Air Resistance (k = 0.1)', color='orange')
+plt.title('Projectile Motion: With vs. Without Air Resistance')
+plt.xlabel('Horizontal Distance (m)')
+plt.ylabel('Height (m)')
+plt.legend()
+plt.grid(True)
+plt.show()
+```
 
-## 4. Implementation
+---
 
-Below is the Python code for:
+![alt text](image-15.png)
 
-- Plotting $T^2$ vs $r^3$
-- Calculating celestial masses
-- Creating a projectile trajectory GIF
+## Discussion on Limitations
+- **Idealized Model**: Assumes no air resistance, flat terrain, and constant gravity.
+- **Air Resistance**: Reduces range and height, as shown in the plot.
+---
 
+## Conclusion
+This analysis demonstrates the dependence of a projectile’s range on the angle of projection, with a maximum at 45°. Variations in initial velocity and air resistance significantly affect the trajectory, as visualized in the plots. These principles apply to diverse fields, from sports to engineering, though real-world factors like drag must be considered for accurate modeling. Kepler’s Laws and Orbital Mechanics
 
 ![alt text](image-9.png)
 
-![alt text](image-12.png)
-
-[Solutions in Colab](https://colab.research.google.com/drive/14My5WK9G0rGUs4v7AmNCGgfAoorq97Hx?usp=sharing)
+[Solutions in Colab](https://colab.research.google.com/drive/1tWmtdXOvZAsDkjqHjQtRI2Ya-a7wjvpl?usp=sharing)
