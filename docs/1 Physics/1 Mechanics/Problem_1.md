@@ -1,78 +1,109 @@
 # # Problem 1
 
 
-## Theoretical Foundation
+## # Theoretical Foundation
 
-### Derivation from Differential Equations
-Projectile motion can be described using Newton’s second law. Assuming no air resistance initially, the only force is gravity acting downward. Define the coordinate system with $ x $-axis horizontal and $ y $-axis vertical.
+## Derivation from Differential Equations
 
-#### Horizontal Motion (x-direction)
-- No acceleration in the $ x $-direction:
-  $$ \frac{d^2 x}{dt^2} = 0 $$
-- Initial velocity in $ x $-direction: $ v_{0x} = v_0 \cos \theta $.
-- Integrate:
-  $$ \frac{dx}{dt} = v_0 \cos \theta $$
-  $$ x(t) = (v_0 \cos \theta) t $$
+Projectile motion can be described using Newton’s second law. Assuming no air resistance initially, the only force is gravity acting downward. Define the coordinate system with x-axis horizontal and y-axis vertical.
 
-#### Vertical Motion (y-direction)
-- Acceleration due to gravity $ g = 9.8 \, \text{m/s}^2 $ downward:
-  $$ \frac{d^2 y}{dt^2} = -g $$
-- Initial velocity in $ y $-direction: $ v_{0y} = v_0 \sin \theta $.
-- Integrate:
-  $$ \frac{dy}{dt} = v_0 \sin \theta - g t $$
-  $$ y(t) = (v_0 \sin \theta) t - \frac{1}{2} g t^2 $$
+### Horizontal Motion (x-direction)
 
-#### Range Calculation
-The projectile hits the ground when \( y(t) = 0 \):
-$$ (v_0 \sin \theta) t - \frac{1}{2} g t^2 = 0 $$
-$$ t (v_0 \sin \theta - \frac{1}{2} g t) = 0 $$
-- \( t = 0 \) (start).
-- \( t = \frac{2 v_0 \sin \theta}{g} \) (time of flight).
+- No acceleration in the x-direction:  
+  d²x/dt² = 0
 
-Substitute \( t \) into \( x(t) \):
-$$ R = x\left(\frac{2 v_0 \sin \theta}{g}\right) = (v_0 \cos \theta) \left(\frac{2 v_0 \sin \theta}{g}\right) = \frac{2 v_0^2 \sin \theta \cos \theta}{g} $$
-Using the identity \( \sin 2\theta = 2 \sin \theta \cos \theta \):
-$$ R = \frac{v_0^2 \sin 2\theta}{g} $$
+- Initial velocity in x-direction:  
+  v₀ₓ = v₀ * cos(θ)
 
-### Family of Solutions
-- **Parameters**: \( v_0 \), \( \theta \), \( g \).
-- **Variations**:
-  - \( v_0 \): Range scales with \( v_0^2 \).
-  - \( \theta \): Range is maximized at \( \theta = 45^\circ \) (\( \sin 2\theta = 1 \)).
-  - \( g \): Inverse relationship; higher \( g \) reduces range.
+- Integrate:  
+  dx/dt = v₀ * cos(θ)  
+  x(t) = (v₀ * cos(θ)) * t
+
+### Vertical Motion (y-direction)
+
+- Acceleration due to gravity g = 9.8 m/s² downward:  
+  d²y/dt² = -g
+
+- Initial velocity in y-direction:  
+  v₀ᵧ = v₀ * sin(θ)
+
+- Integrate:  
+  dy/dt = v₀ * sin(θ) - g * t  
+  y(t) = (v₀ * sin(θ)) * t - (1/2) * g * t²
+
+### Range Calculation
+
+The projectile hits the ground when y(t) = 0:
+
+    (v₀ * sin(θ)) * t - (1/2) * g * t² = 0  
+    t * (v₀ * sin(θ) - (1/2) * g * t) = 0
+
+Solutions:  
+- t = 0 (start)  
+- t = (2 * v₀ * sin(θ)) / g (time of flight)
+
+Substitute t into x(t):
+
+    R = (v₀ * cos(θ)) * (2 * v₀ * sin(θ)) / g  
+      = (2 * v₀² * sin(θ) * cos(θ)) / g  
+      = (v₀² * sin(2θ)) / g
+
+---
+
+## Family of Solutions
+
+**Parameters**: v₀, θ, g
+
+**Variations**:
+- v₀: Range scales with v₀²
+- θ: Range is maximized at θ = 45° (since sin(2θ) = 1)
+- g: Inverse relationship; higher g reduces range
 
 ---
 
 ## Analysis of the Range
 
-### Range vs. Angle of Projection
-- The range $ R = \frac{v_0^2 \sin 2\theta}{g} $ peaks at $ \theta = 45^\circ $.
-- From the image (part a):
-  - $ v_0 = 50 \, \text{m/s} $, $ \theta = 45^\circ $, $ R = 255 \, \text{m} $.
-  - Verify: $ R = \frac{50^2 \sin 90^\circ}{9.8} = \frac{2500 \cdot 1}{9.8} \approx 255 \, \text{m} $, which matches.
-- Other angles:
-  - $ \theta = 15^\circ $: $ R = 91.8 \, \text{m} $.
-  - $ \theta = 75^\circ $: $ R = 163 \, \text{m} $.
+## Range vs. Angle of Projection
 
-### Effect of Initial Velocity
-- From part (b):
-  - $ v_0 = 30 \, \text{m/s} $, $ \theta = 45^\circ $, $ R = 91.8 \, \text{m} $.
-  - $ v_0 = 40 \, \text{m/s} $, $  \theta = 45^\circ $, $ R = 163 \, \text{m} $.
-  - $ v_0 = 50 \, \text{m/s} $, $ \theta = 45^\circ $, $ R = 255 \, \text{m} $.
-- Range scales with $ v_0^2 $.
+The range formula:  
+R = (v₀² * sin(2θ)) / g
 
-### Effect of Gravitational Acceleration
-- If $ g $ increases, range decreases (e.g., on a planet with higher gravity).
+Maximum range occurs at θ = 45°.
+
+**Example**:  
+v₀ = 50 m/s, θ = 45°  
+R = (2500 * sin(90°)) / 9.8 ≈ 255 m ✅
+
+**Other Angles**:  
+- θ = 15° → R ≈ 91.8 m  
+- θ = 75° → R ≈ 163 m
+
+## Effect of Initial Velocity
+
+| v₀ (m/s) | θ (°) | Range (m) |
+|----------|-------|-----------|
+| 30       | 45    | 91.8      |
+| 40       | 45    | 163       |
+| 50       | 45    | 255       |
+
+Range increases with square of v₀.
+
+## Effect of Gravitational Acceleration
+
+If g increases, range decreases  
+(e.g., on a planet with stronger gravity).
 
 ---
 
-## Practical Applications
-- **Sports**: Optimizing the launch angle in sports like golf or javelin throw.
-- **Engineering**: Designing artillery or launch systems.
-- **Astrophysics**: Modeling satellite launches, though air resistance and orbital mechanics are needed.
-- **Limitations**:
-  - Air resistance reduces range and alters the trajectory.
-  - Uneven terrain or wind affects the path.
+# Practical Applications
+
+- **Sports**: Optimizing the launch angle in golf, javelin, etc.
+- **Engineering**: Designing projectile systems and launchers.
+- **Astrophysics**: Modeling satellite launches 
+
+**Limitations**:
+- Air resistance reduces range and alters trajectory
+- Uneven terrain or wind affects the projectile's path
 
 ---
 
