@@ -50,17 +50,6 @@ Substitute t into x(t):
 
 ---
 
-## Family of Solutions
-
-**Parameters**: v₀, θ, g
-
-**Variations**:
-- v₀: Range scales with v₀²
-- θ: Range is maximized at θ = 45° (since sin(2θ) = 1)
-- g: Inverse relationship; higher g reduces range
-
----
-
 ## Analysis of the Range
 
 ## Range vs. Angle of Projection
@@ -72,7 +61,7 @@ Maximum range occurs at θ = 45°.
 
 **Example**:  
 v₀ = 50 m/s, θ = 45°  
-R = (2500 * sin(90°)) / 9.8 ≈ 255 m ✅
+R = (2500 * sin(90°)) / 9.8 ≈ 255 m 
 
 **Other Angles**:  
 - θ = 15° → R ≈ 91.8 m  
