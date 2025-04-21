@@ -10,28 +10,28 @@ Projectile motion can be described using Newton’s second law. Assuming no air 
 ### Horizontal Motion (x-direction)
 
 - No acceleration in the x-direction:  
-$$\frac{d^2x}{dt^2} = 0$$
+$\frac{d^2x}{dt^2} = 0$
 
 Initial velocity in x-direction:  
-$$v_{0x} = v_0 \cos(\theta)$$
+$v_{0x} = v_0 \cos(\theta)$
 
 Integrate:  
-$$\frac{dx}{dt} = v_0 \cos(\theta)$$  
-$$x(t) = v_0 \cos(\theta) \cdot t$$
+$\frac{dx}{dt} = v_0 \cos(\theta)$ 
+$x(t) = v_0 \cos(\theta) \cdot t$
 
 ---
 
 ## Vertical Motion (y-direction)
 
 Acceleration due to gravity \( g = 9.8 \, \text{m/s}^2 \) downward:  
-$$\frac{d^2y}{dt^2} = -g$$
+$\frac{d^2y}{dt^2} = -g$
 
 Initial velocity in y-direction:  
-$$v_{0y} = v_0 \sin(\theta)$$
+$v_{0y} = v_0 \sin(\theta)$
 
 Integrate:  
-$$\frac{dy}{dt} = v_0 \sin(\theta) - g t$$  
-$$y(t) = v_0 \sin(\theta) \cdot t - \frac{1}{2} g t^2$$
+$\frac{dy}{dt} = v_0 \sin(\theta) - g t$ 
+$y(t) = v_0 \sin(\theta) \cdot t - \frac{1}{2} g t^2$
 
 ---
 
