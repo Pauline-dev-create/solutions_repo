@@ -48,39 +48,27 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#"># Problem 1</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#theoretical-foundation">Theoretical Foundation</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#derivation-from-differential-equations">Derivation from Differential Equations</a>
+<li class="toctree-l3"><a class="reference internal" href="#theoretical-foundation"># Theoretical Foundation</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#family-of-solutions">Family of Solutions</a>
+<li class="toctree-l3"><a class="reference internal" href="#derivation-from-differential-equations">Derivation from Differential Equations</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#horizontal-motion-x-direction">Horizontal Motion (x-direction)</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#vertical-motion-y-direction">Vertical Motion (y-direction)</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#range-calculation">Range Calculation</a>
 </li>
 </ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#family-of-solutions">Family of Solutions</a>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#analysis-of-the-range">Analysis of the Range</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#range-vs-angle-of-projection">Range vs. Angle of Projection</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#effect-of-initial-velocity">Effect of Initial Velocity</a>
+<li class="toctree-l3"><a class="reference internal" href="#range-vs-angle-of-projection">Range vs. Angle of Projection</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#effect-of-gravitational-acceleration">Effect of Gravitational Acceleration</a>
+<li class="toctree-l3"><a class="reference internal" href="#effect-of-initial-velocity">Effect of Initial Velocity</a>
 </li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#practical-applications">Practical Applications</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#implementation-projectile-motion-simulation">Implementation: Projectile Motion Simulation</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#plot-1-trajectories-for-different-angles-15-45-75-at-50-ms">Plot 1: Trajectories for Different Angles (15°, 45°, 75°) at 50 m/s</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#plot-2-trajectories-for-different-velocities-30-40-50-ms-at-45">Plot 2: Trajectories for Different Velocities (30, 40, 50 m/s) at 45°</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#plot-3-projectile-motion-with-and-without-air-resistance">Plot 3: Projectile Motion With and Without Air Resistance</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#discussion-on-limitations">Discussion on Limitations</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
+<li class="toctree-l3"><a class="reference internal" href="#effect-of-gravitational-acceleration">Effect of Gravitational Acceleration</a>
 </li>
 </ul>
 </li>
@@ -206,79 +194,114 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1"># Problem 1</h1>
-<h2 id="theoretical-foundation">Theoretical Foundation</h2>
-<h3 id="derivation-from-differential-equations">Derivation from Differential Equations</h3>
-<p>Projectile motion can be described using Newton’s second law. Assuming no air resistance initially, the only force is gravity acting downward. Define the coordinate system with $ x $-axis horizontal and $ y $-axis vertical.</p>
-<h4 id="horizontal-motion-x-direction">Horizontal Motion (x-direction)</h4>
+<h2 id="theoretical-foundation"># Theoretical Foundation</h2>
+<h2 id="derivation-from-differential-equations">Derivation from Differential Equations</h2>
+<p>Projectile motion can be described using Newton’s second law. Assuming no air resistance initially, the only force is gravity acting downward. Define the coordinate system with x-axis horizontal and y-axis vertical.</p>
+<h3 id="horizontal-motion-x-direction">Horizontal Motion (x-direction)</h3>
 <ul>
-<li>No acceleration in the $ x $-direction:
-  $$ \frac{d^2 x}{dt^2} = 0 $$</li>
-<li>Initial velocity in $ x $-direction: $ v_{0x} = v_0 \cos \theta $.</li>
-<li>Integrate:
-  $$ \frac{dx}{dt} = v_0 \cos \theta $$
-  $$ x(t) = (v_0 \cos \theta) t $$</li>
+<li>
+<p>No acceleration in the x-direction:<br/>
+  d²x/dt² = 0</p>
+</li>
+<li>
+<p>Initial velocity in x-direction:<br/>
+  v₀ₓ = v₀ * cos(θ)</p>
+</li>
+<li>
+<p>Integrate:<br/>
+  dx/dt = v₀ * cos(θ)<br/>
+  x(t) = (v₀ * cos(θ)) * t</p>
+</li>
 </ul>
-<h4 id="vertical-motion-y-direction">Vertical Motion (y-direction)</h4>
+<h3 id="vertical-motion-y-direction">Vertical Motion (y-direction)</h3>
 <ul>
-<li>Acceleration due to gravity $ g = 9.8 \, \text{m/s}^2 $ downward:
-  $$ \frac{d^2 y}{dt^2} = -g $$</li>
-<li>Initial velocity in $ y $-direction: $ v_{0y} = v_0 \sin \theta $.</li>
-<li>Integrate:
-  $$ \frac{dy}{dt} = v_0 \sin \theta - g t $$
-  $$ y(t) = (v_0 \sin \theta) t - \frac{1}{2} g t^2 $$</li>
+<li>
+<p>Acceleration due to gravity g = 9.8 m/s² downward:<br/>
+  d²y/dt² = -g</p>
+</li>
+<li>
+<p>Initial velocity in y-direction:<br/>
+  v₀ᵧ = v₀ * sin(θ)</p>
+</li>
+<li>
+<p>Integrate:<br/>
+  dy/dt = v₀ * sin(θ) - g * t<br/>
+  y(t) = (v₀ * sin(θ)) * t - (1/2) * g * t²</p>
+</li>
 </ul>
-<h4 id="range-calculation">Range Calculation</h4>
-<p>The projectile hits the ground when <span class="arithmatex">\( y(t) = 0 \)</span>:
-$$ (v_0 \sin \theta) t - \frac{1}{2} g t^2 = 0 $$
-$$ t (v_0 \sin \theta - \frac{1}{2} g t) = 0 $$
-- <span class="arithmatex">\( t = 0 \)</span> (start).
-- <span class="arithmatex">\( t = \frac{2 v_0 \sin \theta}{g} \)</span> (time of flight).</p>
-<p>Substitute <span class="arithmatex">\( t \)</span> into <span class="arithmatex">\( x(t) \)</span>:
-$$ R = x\left(\frac{2 v_0 \sin \theta}{g}\right) = (v_0 \cos \theta) \left(\frac{2 v_0 \sin \theta}{g}\right) = \frac{2 v_0^2 \sin \theta \cos \theta}{g} $$
-Using the identity <span class="arithmatex">\( \sin 2\theta = 2 \sin \theta \cos \theta \)</span>:
-$$ R = \frac{v_0^2 \sin 2\theta}{g} $$</p>
-<h3 id="family-of-solutions">Family of Solutions</h3>
-<ul>
-<li><strong>Parameters</strong>: <span class="arithmatex">\( v_0 \)</span>, <span class="arithmatex">\( \theta \)</span>, <span class="arithmatex">\( g \)</span>.</li>
-<li><strong>Variations</strong>:</li>
-<li><span class="arithmatex">\( v_0 \)</span>: Range scales with <span class="arithmatex">\( v_0^2 \)</span>.</li>
-<li><span class="arithmatex">\( \theta \)</span>: Range is maximized at <span class="arithmatex">\( \theta = 45^\circ \)</span> (<span class="arithmatex">\( \sin 2\theta = 1 \)</span>).</li>
-<li><span class="arithmatex">\( g \)</span>: Inverse relationship; higher <span class="arithmatex">\( g \)</span> reduces range.</li>
-</ul>
+<h3 id="range-calculation">Range Calculation</h3>
+<p>The projectile hits the ground when y(t) = 0:</p>
+<pre><code>(v₀ * sin(θ)) * t - (1/2) * g * t² = 0  
+t * (v₀ * sin(θ) - (1/2) * g * t) = 0
+</code></pre>
+<p>Solutions:<br/>
+- t = 0 (start)<br/>
+- t = (2 * v₀ * sin(θ)) / g (time of flight)</p>
+<p>Substitute t into x(t):</p>
+<pre><code>R = (v₀ * cos(θ)) * (2 * v₀ * sin(θ)) / g  
+  = (2 * v₀² * sin(θ) * cos(θ)) / g  
+  = (v₀² * sin(2θ)) / g
+</code></pre>
+<hr/>
+<h2 id="family-of-solutions">Family of Solutions</h2>
+<p><strong>Parameters</strong>: v₀, θ, g</p>
+<p><strong>Variations</strong>:
+- v₀: Range scales with v₀²
+- θ: Range is maximized at θ = 45° (since sin(2θ) = 1)
+- g: Inverse relationship; higher g reduces range</p>
 <hr/>
 <h2 id="analysis-of-the-range">Analysis of the Range</h2>
-<h3 id="range-vs-angle-of-projection">Range vs. Angle of Projection</h3>
-<ul>
-<li>The range $ R = \frac{v_0^2 \sin 2\theta}{g} $ peaks at $ \theta = 45^\circ $.</li>
-<li>From the image (part a):</li>
-<li>$ v_0 = 50 \, \text{m/s} $, $ \theta = 45^\circ $, $ R = 255 \, \text{m} $.</li>
-<li>Verify: $ R = \frac{50^2 \sin 90^\circ}{9.8} = \frac{2500 \cdot 1}{9.8} \approx 255 \, \text{m} $, which matches.</li>
-<li>Other angles:</li>
-<li>$ \theta = 15^\circ $: $ R = 91.8 \, \text{m} $.</li>
-<li>$ \theta = 75^\circ $: $ R = 163 \, \text{m} $.</li>
-</ul>
-<h3 id="effect-of-initial-velocity">Effect of Initial Velocity</h3>
-<ul>
-<li>From part (b):</li>
-<li>$ v_0 = 30 \, \text{m/s} $, $ \theta = 45^\circ $, $ R = 91.8 \, \text{m} $.</li>
-<li>$ v_0 = 40 \, \text{m/s} $, $  \theta = 45^\circ $, $ R = 163 \, \text{m} $.</li>
-<li>$ v_0 = 50 \, \text{m/s} $, $ \theta = 45^\circ $, $ R = 255 \, \text{m} $.</li>
-<li>Range scales with $ v_0^2 $.</li>
-</ul>
-<h3 id="effect-of-gravitational-acceleration">Effect of Gravitational Acceleration</h3>
-<ul>
-<li>If $ g $ increases, range decreases (e.g., on a planet with higher gravity).</li>
-</ul>
+<h2 id="range-vs-angle-of-projection">Range vs. Angle of Projection</h2>
+<p>The range formula:<br/>
+R = (v₀² * sin(2θ)) / g</p>
+<p>Maximum range occurs at θ = 45°.</p>
+<p><strong>Example</strong>:<br/>
+v₀ = 50 m/s, θ = 45°<br/>
+R = (2500 * sin(90°)) / 9.8 ≈ 255 m ✅</p>
+<p><strong>Other Angles</strong>:<br/>
+- θ = 15° → R ≈ 91.8 m<br/>
+- θ = 75° → R ≈ 163 m</p>
+<h2 id="effect-of-initial-velocity">Effect of Initial Velocity</h2>
+<table>
+<thead>
+<tr>
+<th>v₀ (m/s)</th>
+<th>θ (°)</th>
+<th>Range (m)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>30</td>
+<td>45</td>
+<td>91.8</td>
+</tr>
+<tr>
+<td>40</td>
+<td>45</td>
+<td>163</td>
+</tr>
+<tr>
+<td>50</td>
+<td>45</td>
+<td>255</td>
+</tr>
+</tbody>
+</table>
+<p>Range increases with square of v₀.</p>
+<h2 id="effect-of-gravitational-acceleration">Effect of Gravitational Acceleration</h2>
+<p>If g increases, range decreases<br/>
+(e.g., on a planet with stronger gravity).</p>
 <hr/>
-<h2 id="practical-applications">Practical Applications</h2>
+<h1 id="practical-applications">Practical Applications</h1>
 <ul>
-<li><strong>Sports</strong>: Optimizing the launch angle in sports like golf or javelin throw.</li>
-<li><strong>Engineering</strong>: Designing artillery or launch systems.</li>
-<li><strong>Astrophysics</strong>: Modeling satellite launches, though air resistance and orbital mechanics are needed.</li>
-<li><strong>Limitations</strong>:</li>
-<li>Air resistance reduces range and alters the trajectory.</li>
-<li>Uneven terrain or wind affects the path.</li>
+<li><strong>Sports</strong>: Optimizing the launch angle in golf, javelin, etc.</li>
+<li><strong>Engineering</strong>: Designing projectile systems and launchers.</li>
+<li><strong>Astrophysics</strong>: Modeling satellite launches </li>
 </ul>
+<p><strong>Limitations</strong>:
+- Air resistance reduces range and alters trajectory
+- Uneven terrain or wind affects the projectile's path</p>
 <hr/>
 <h2 id="implementation-projectile-motion-simulation">Implementation: Projectile Motion Simulation</h2>
 <h3 id="plot-1-trajectories-for-different-angles-15-45-75-at-50-ms">Plot 1: Trajectories for Different Angles (15°, 45°, 75°) at 50 m/s</h3>
