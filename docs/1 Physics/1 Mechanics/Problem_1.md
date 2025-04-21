@@ -10,45 +10,65 @@ Projectile motion can be described using Newton’s second law. Assuming no air 
 ### Horizontal Motion (x-direction)
 
 - No acceleration in the x-direction:  
-  d²x/dt² = 0
+$$\frac{d^2x}{dt^2} = 0$$
 
-- Initial velocity in x-direction:  
-  v₀ₓ = v₀ * cos(θ)
+Initial velocity in x-direction:  
+$$v_{0x} = v_0 \cos(\theta)$$
 
-- Integrate:  
-  dx/dt = v₀ * cos(θ)  
-  x(t) = (v₀ * cos(θ)) * t
-
-### Vertical Motion (y-direction)
-
-- Acceleration due to gravity g = 9.8 m/s² downward:  
-  d²y/dt² = -g
-
-- Initial velocity in y-direction:  
-  v₀ᵧ = v₀ * sin(θ)
-
-- Integrate:  
-  dy/dt = v₀ * sin(θ) - g * t  
-  y(t) = (v₀ * sin(θ)) * t - (1/2) * g * t²
-
-### Range Calculation
-
-The projectile hits the ground when y(t) = 0:
-
-    (v₀ * sin(θ)) * t - (1/2) * g * t² = 0  
-    t * (v₀ * sin(θ) - (1/2) * g * t) = 0
-
-Solutions:  
-- t = 0 (start)  
-- t = (2 * v₀ * sin(θ)) / g (time of flight)
-
-Substitute t into x(t):
-
-    R = (v₀ * cos(θ)) * (2 * v₀ * sin(θ)) / g  
-      = (2 * v₀² * sin(θ) * cos(θ)) / g  
-      = (v₀² * sin(2θ)) / g
+Integrate:  
+$$\frac{dx}{dt} = v_0 \cos(\theta)$$  
+$$x(t) = v_0 \cos(\theta) \cdot t$$
 
 ---
+
+## Vertical Motion (y-direction)
+
+Acceleration due to gravity \( g = 9.8 \, \text{m/s}^2 \) downward:  
+$$\frac{d^2y}{dt^2} = -g$$
+
+Initial velocity in y-direction:  
+$$v_{0y} = v_0 \sin(\theta)$$
+
+Integrate:  
+$$\frac{dy}{dt} = v_0 \sin(\theta) - g t$$  
+$$y(t) = v_0 \sin(\theta) \cdot t - \frac{1}{2} g t^2$$
+
+---
+
+## Range Calculation
+
+The projectile hits the ground when \( y(t) = 0 \):
+
+$$
+v_0 \sin(\theta) \cdot t - \frac{1}{2} g t^2 = 0
+$$
+
+Factor:  
+$$
+t \left(v_0 \sin(\theta) - \frac{1}{2} g t\right) = 0
+$$
+
+Solutions:  
+- \( t = 0 \) (start)  
+- \( t = \frac{2 v_0 \sin(\theta)}{g} \) (time of flight)
+
+Substitute into \( x(t) \) to get the **Range**:
+
+$$
+R = v_0 \cos(\theta) \cdot \frac{2 v_0 \sin(\theta)}{g}
+$$
+
+Simplify:
+
+$$
+R = \frac{2 v_0^2 \sin(\theta) \cos(\theta)}{g}
+$$
+
+Using the identity \( \sin(2\theta) = 2 \sin(\theta) \cos(\theta) \):
+
+$$
+R = \frac{v_0^2 \sin(2\theta)}{g}
+$$
 
 ## Analysis of the Range
 
