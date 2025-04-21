@@ -121,6 +121,8 @@ This code plots $T^2$ vs $r^3$ on a log-log scale for two ranges:
 - Small orbits (e.g., satellites around Earth).
 - Large orbits (e.g., planets around the Sun).
 
+![alt text](image-8.png)
+
 ### Python Code for Animation of Circular Orbit
 
 ```python
