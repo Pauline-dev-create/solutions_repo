@@ -88,7 +88,7 @@ For simplicity, standard $v_3$ for Earth is approximately **16.6 km/s**.
 - **Jupiter**: $M = 1.898 \times 10^{27} \, \text{kg}$, $R = 6.991 \times 10^7 \, \text{m}$
 - **Sun**: $M_{\text{sun}} = 1.989 \times 10^{30} \, \text{kg}$
 
----
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -151,6 +151,7 @@ ax.set_title('Cosmic Velocities for Different Celestial Bodies')
 ax.legend()
 ax.grid(True)
 plt.show()
+```
 
 ![alt text](image-5.png)
 
