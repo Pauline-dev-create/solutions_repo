@@ -124,15 +124,19 @@ ax3.set_aspect('equal')
 plt.tight_layout()
 plt.show()
 
-## Calculate Larmor radius and drift velocity
-v_perp = np.sqrt(v0_1[0]**2 + v0_1[1]**2)
-r_larmor = m * v_perp / (abs(q) * B_z)
-v_drift = E_x / B_z
-
-print(f"Larmor Radius (Scenario 1): {r_larmor:.2e} m")
-print(f"Drift Velocity (Scenario 3): {v_drift:.2e} m/s")
-
 ![alt text](image.png)
+
+Charged particle motion under the Lorentz Force, covering:
+
+Circular motion (uniform magnetic field),
+
+Helical motion (velocity with component along 
+𝐵B),
+
+E×B drift (crossed fields).
+
+
+![alt text](image-1.png)
 
 [Visuals in colab](https://colab.research.google.com/drive/1wAqPN3cKLa-XC7hSP1EzEbI3Ms_BOJNe?usp=sharing)
 
