@@ -102,8 +102,6 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#scenario-3-2d-plot-xy-plane-drift-motion">Scenario 3: 2D Plot (xy-plane, drift motion)</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#calculate-larmor-radius-and-drift-velocity">Calculate Larmor radius and drift velocity</a>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="#results-and-visualizations">Results and Visualizations</a>
 <ul>
 <li class="toctree-l4"><a class="reference internal" href="#key-phenomena">Key Phenomena</a>
@@ -345,13 +343,13 @@ ax3.legend()
 ax3.set_aspect('equal')</p>
 <p>plt.tight_layout()
 plt.show()</p>
-<h2 id="calculate-larmor-radius-and-drift-velocity">Calculate Larmor radius and drift velocity</h2>
-<p>v_perp = np.sqrt(v0_1[0]<strong>2 + v0_1[1]</strong>2)
-r_larmor = m * v_perp / (abs(q) * B_z)
-v_drift = E_x / B_z</p>
-<p>print(f"Larmor Radius (Scenario 1): {r_larmor:.2e} m")
-print(f"Drift Velocity (Scenario 3): {v_drift:.2e} m/s")</p>
 <p><img alt="alt text" src="../image.png"/></p>
+<p>Charged particle motion under the Lorentz Force, covering:</p>
+<p>Circular motion (uniform magnetic field),</p>
+<p>Helical motion (velocity with component along 
+𝐵B),</p>
+<p>E×B drift (crossed fields).</p>
+<p><img alt="alt text" src="image-1.png"/></p>
 <p><a href="https://colab.research.google.com/drive/1wAqPN3cKLa-XC7hSP1EzEbI3Ms_BOJNe?usp=sharing">Visuals in colab</a></p>
 <h2 id="results-and-visualizations">Results and Visualizations</h2>
 <p>The script above simulates three scenarios:
