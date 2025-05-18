@@ -91,6 +91,18 @@ plt.show()
 
 ![alt text](image.png)
 
+![alt text](image-2.png)
+
+![alt text](image-3.png)
+
+![alt text](image-5.png)
+
+![alt text](image-6.png)
+
+![alt text](image-7.png)
+
+![alt text](image-8.png)
+
 [Visuals in google colab](https://colab.research.google.com/drive/16j1U8vgwDN_99xQtginwrxq5wN2O1-q3?usp=sharing)
 
 ## Observations
