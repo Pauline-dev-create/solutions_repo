@@ -38,6 +38,12 @@ Simulation
 We simulate $N$ needle drops, randomly assigning center $x$ (uniform on $[0, d]$) and angle $\theta$ (uniform on $[0, \pi]$), counting crossings when $l \sin\theta > |x \mod d - d/2|$.
 
 
+![alt text](image-5.png)
+
+
+![alt text](image-6.png)
+
+
 Tables
 
 Method
