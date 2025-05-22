@@ -86,6 +86,14 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 2</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#estimating-pi-using-monte-carlo-methods">Estimating Pi using Monte Carlo Methods</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#theoretical-foundation">Theoretical Foundation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#simulation">Simulation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#theorem">Theorem.</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -172,6 +180,45 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-2">Problem 2</h1>
+<h2 id="estimating-pi-using-monte-carlo-methods">Estimating Pi using Monte Carlo Methods</h2>
+<p>Motivation</p>
+<p>Monte Carlo simulations leverage randomness to estimate values, with estimating π being a classic example using geometric probability. This approach connects probability, geometry, and computation, offering insights into convergence and efficiency applicable in physics, finance, and computer science.</p>
+<p>Part 1: Estimating π Using a Circle</p>
+<h2 id="theoretical-foundation">Theoretical Foundation</h2>
+<p>The circle-based Monte Carlo method estimates π by generating random points within a square that bounds a unit circle (radius <span class="arithmatex">\(r = 1\)</span>). The area of the unit circle is <span class="arithmatex">\(\pi r^2 = \pi\)</span>, and the area of the square is <span class="arithmatex">\(2r \times 2r = 4\)</span>. The ratio of points inside the circle to the total points approximates the ratio of their areas:<span class="arithmatex">\(<span class="arithmatex">\(\frac{\text{Number of points inside circle}}{\text{Total number of points}} \approx \frac{\pi}{4}\)</span>\)</span>Thus, the estimate for π is:<span class="arithmatex">\(<span class="arithmatex">\(\pi \approx 4 \cdot \frac{\text{Number of points inside circle}}{\text{Total number of points}}\)</span>\)</span></p>
+<h2 id="simulation">Simulation</h2>
+<p>We generate random points <span class="arithmatex">\((x, y)\)</span> uniformly in the square <span class="arithmatex">\([-1, 1] \times [-1, 1]\)</span> and count those satisfying <span class="arithmatex">\(x^2 + y^2 \leq 1\)</span> (inside the unit circle).</p>
+<p>Visualization
+A scatter plot distinguishes points inside (e.g., blue) and outside (e.g., red) the circle.</p>
+<p>Analysis
+Accuracy improves with more points, as the estimate converges to π. The error decreases as <span class="arithmatex">\(O(1/\sqrt{N})\)</span>, where <span class="arithmatex">\(N\)</span> is the number of points, due to the Central Limit </p>
+<h2 id="theorem">Theorem.</h2>
+<p>Part 2: Estimating π Using Buffon’s Needle</p>
+<p>Theoretical Foundation</p>
+<p>Buffon’s Needle problem involves dropping a needle of length <span class="arithmatex">\(l\)</span> onto a plane with parallel lines spaced <span class="arithmatex">\(d\)</span> apart (<span class="arithmatex">\(l \leq d\)</span>). The probability a needle crosses a line depends on its orientation. Consider the needle’s center at <span class="arithmatex">\((x, 0)\)</span> and its angle <span class="arithmatex">\(\theta\)</span> (0 to <span class="arithmatex">\(\pi\)</span>) with the horizontal. The needle crosses a line if its vertical span exceeds the distance to the nearest line.
+The vertical span is <span class="arithmatex">\(l \sin\theta\)</span>. The needle crosses if <span class="arithmatex">\(l \sin\theta &gt; d - (d \mod x)\)</span>, but for simplicity with <span class="arithmatex">\(l \leq d\)</span> and uniform dropping, the probability is derived as follows:</p>
+<p>The distance from the center to the nearest line is uniform on <span class="arithmatex">\([0, d/2]\)</span>.
+The crossing condition is <span class="arithmatex">\(l \sin\theta &gt; \text{distance to line}\)</span>.
+Averaging over <span class="arithmatex">\(\theta\)</span> (uniform on <span class="arithmatex">\([0, \pi]\)</span>) and the center position, the probability of crossing is <span class="arithmatex">\(\frac{2l}{\pi d}\)</span>.</p>
+<p>Thus, the estimate for π is:<span class="arithmatex">\(<span class="arithmatex">\(\pi \approx \frac{2l \cdot N}{\text{Number of crossings} \cdot d}\)</span>\)</span>where <span class="arithmatex">\(N\)</span> is the number of throws.
+Simulation
+We simulate <span class="arithmatex">\(N\)</span> needle drops, randomly assigning center <span class="arithmatex">\(x\)</span> (uniform on <span class="arithmatex">\([0, d]\)</span>) and angle <span class="arithmatex">\(\theta\)</span> (uniform on <span class="arithmatex">\([0, \pi]\)</span>), counting crossings when <span class="arithmatex">\(l \sin\theta &gt; |x \mod d - d/2|\)</span>.</p>
+<p>Tables</p>
+<p>Method
+N=100
+N=1000
+N=10000</p>
+<p>Circle
+3.12
+3.136
+3.142</p>
+<p>Buffon’s Needle
+3.20
+3.152
+3.145</p>
+<p><a href="https://colab.research.google.com/drive/17PvYgn1M-0IpgUkv6WNnWXnjiqqveDy0?usp=sharing">Visuals</a> </p>
+<p>Conclusion
+Both methods estimate π effectively, with the circle method offering better consistency and Buffon’s Needle providing a geometric insight. Increasing <span class="arithmatex">\(N\)</span> improves accuracy, with computational cost scaling linearly.</p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
