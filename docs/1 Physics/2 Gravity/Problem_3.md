@@ -72,28 +72,88 @@ plt.show()
 ```
 ![alt text](image-3.png)
 
-## Python Code for Animation
-```python
-import matplotlib.animation as animation
-fig, ax = plt.subplots()
-ax.set_xlim(min(x), max(x))
-ax.set_ylim(min(y), max(y))
-ax.set_xlabel("x position (m)")
-ax.set_ylabel("y position (m)")
-ax.set_title("Animated Payload Trajectory")
-trajectory, = ax.plot([], [], 'r-', label='Trajectory')
-payload, = ax.plot([], [], 'go', markersize=8, label='Payload')
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import odeint
 
-def update(frame):
-    trajectory.set_data(x[:frame], y[:frame])
-    payload.set_data(x[frame], y[frame])
-    return trajectory, payload
+## Constants
+G = 6.6743e-11  # Gravitational constant (m^3 kg^-1 s^-2)
+M = 5.972e24    # Mass of Earth (kg)
+R = 6.371e6     # Radius of Earth (m)
+r0 = R + 400e3  # Initial radius (m, 400 km altitude)
 
-ani = animation.FuncAnimation(fig, update, frames=len(x), interval=20, repeat=False)
-plt.legend()
+## Escape velocity at r0
+v_esc = np.sqrt(2 * G * M / r0) / 1000  # km/s
+print(f"Escape Velocity at 400 km: {v_esc:.2f} km/s")
+
+## Differential equations
+def gravity_motion(state, t, G, M):
+    x, vx, y, vy = state
+    r = np.sqrt(x**2 + y**2)
+    ax = -G * M * x / r**3
+    ay = -G * M * y / r**3
+    return [vx, ax, vy, ay]
+
+## Time array
+t = np.linspace(0, 10000, 1000)  # 10,000 seconds
+
+## Initial conditions: Start at (r0, 0) with different tangential velocities
+scenarios = [
+    ("Trajectory 1 (Elliptical)", 7.5e3, 'b'),  # Below escape, circular orbit speed
+    ("Trajectory 2 (Elliptical)", 8.0e3, 'r'),  # Slightly eccentric orbit
+    ("Trajectory 3 (Parabolic)", 10.9e3, 'g'),  # Near escape velocity
+    ("Trajectory 4 (Hyperbolic)", 12.0e3, 'm')  # Above escape velocity
+]
+
+## Simulate trajectories
+trajectories = []
+for _, v, _ in scenarios:
+    state0 = [r0, 0, 0, v]  # (x, vx, y, vy)
+    solution = odeint(gravity_motion, state0, t, args=(G, M))
+    trajectories.append(solution)
+
+## Plotting (similar to the provided image)
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
+
+# Plot Earth as a filled circle
+earth = plt.Circle((0, 0), R, color='blue', label='Earth')
+for ax in [ax1, ax2]:
+    ax.add_patch(plt.Circle((0, 0), R, color='blue', label='Earth'))
+    ax.plot(0, 0, 'yo', label='Center of Earth')  # Center point
+    ax.set_xlabel('x (m)')
+    ax.set_ylabel('y (m)')
+    ax.grid(True)
+    ax.set_aspect('equal')
+
+## Plot trajectories (Case 1: Zoomed out)
+ax1.set_title('Trajectories in a Gravitational Field (Zoomed Out)')
+for i, (label, _, color) in enumerate(scenarios):
+    x, y = trajectories[i][:, 0], trajectories[i][:, 2]
+    ax1.plot(x, y, color=color, label=label)
+
+ax1.legend()
+
+## Plot trajectories (Case 2: Zoomed in)
+ax2.set_title('Trajectories in a Gravitational Field (Zoomed In)')
+for i, (label, _, color) in enumerate(scenarios):
+    x, y = trajectories[i][:, 0], trajectories[i][:, 2]
+    ax2.plot(x, y, color=color, label=label)
+
+## Adjust limits for zoomed-in view
+zoom_factor = 1.5 * R
+ax2.set_xlim(-zoom_factor, zoom_factor)
+ax2.set_ylim(-zoom_factor, zoom_factor)
+ax2.legend()
+
+plt.tight_layout()
 plt.show()
-```
-![alt text](image-4.png)
+
+![alt text](image-7.png)
+
+![alt text](image-12.png)
+
+![alt text](image-13.png)
+
 
 ## Real-World Applications
 1. **Satellite Deployment:** Ensuring a stable orbit for communication and research satellites.
