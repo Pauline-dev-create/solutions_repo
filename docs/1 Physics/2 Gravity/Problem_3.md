@@ -70,8 +70,10 @@ plt.grid()
 plt.axis('equal')
 plt.show()
 ```
+
 ![alt text](image-3.png)
 
+```python 
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.integrate import odeint
@@ -146,13 +148,16 @@ ax2.set_ylim(-zoom_factor, zoom_factor)
 ax2.legend()
 
 plt.tight_layout()
-plt.show()
+plt.show() 
+```
+
+![alt text](image-13.png)
 
 ![alt text](image-7.png)
 
 ![alt text](image-12.png)
 
-![alt text](image-13.png)
+
 
 
 ## Real-World Applications
