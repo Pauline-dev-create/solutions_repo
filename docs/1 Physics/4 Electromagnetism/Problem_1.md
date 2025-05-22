@@ -166,12 +166,6 @@ The script above simulates three scenarios:
   - Increasing $ E $: Greater drift or acceleration.
   - Higher$ v_0 $: Larger helix radius or faster drift.
 
-## Suggestions for Extension
-- **Non-Uniform Fields**: Add  $ \mathbf{B} = B_0 + kx $ for magnetic mirrors.
-- **Multiple Particles**: Simulate interactions in plasmas.
-- **Runge-Kutta Method**: Replace Euler for higher accuracy.
-
----
 
 ## Conclusion
 These simulations illustrate the Lorentz force’s role in controlling charged particle motion, bridging theory to applications like accelerators and plasma confinement.
