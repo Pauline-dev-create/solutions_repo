@@ -4,17 +4,17 @@
 
 ## **Fundamentals of Waves**
 - **Amplitude (A)**: The maximum displacement from equilibrium.
-- **Wavelength ($$ \lambda $$)**: The distance between successive crests.
-- **Wave number ($$ k $$)**: $$ k = \frac{2\pi}{\lambda} $$
+- **Wavelength $$ \lambda $$** The distance between successive crests.
+- **Wave number $$ k $$**$$ k = \frac{2\pi}{\lambda} $$
 - **Frequency (f)**: The number of oscillations per unit time.
-- **Angular frequency ($$ \omega $$)**: $$ \omega = 2\pi f $$
-- **Phase ($$ \phi $$)**: Describes the wave's shift at a point.
+- **Angular frequency $$ \omega $$** $$ \omega = 2\pi f $$
+- **Phase $$ \phi $$** Describes the wave's shift at a point.
 
-A single disturbance from a point source is modeled as:
+A single disturbance from a point source is modeled as
 
 $$ u_i(x, y, t) = A \cos(k r_i - \omega t + \phi) $$
 
-where $$ r_i = \sqrt{(x - x_i)^2 + (y - y_i)^2} $$ is the distance from the $$ i $$-th source to point $$ (x, y) $$.
+where $$ r_i = \sqrt{(x - x_i)^2 + (y - y_i)^2} $$ is the distance from the $$ i $$-th source to point $$ (x, y) $$
 
 The total displacement at point $$ (x, y) $$ is:
 
@@ -172,22 +172,22 @@ The 5 vertices of a regular pentagon centered at the origin, with radius 3 units
 
 We compute:
 
- $ r_i = \sqrt{x_i^2 + y_i^2} $
+ $$ r_i = \sqrt{x_i^2 + y_i^2} $$
 
 Since all points are exactly 3 units from the center, we have:
 
-$r_1 = r_2 = r_3 = r_4 = r_5 = 3$
+$$r_1 = r_2 = r_3 = r_4 = r_5 = 3$$
 ---
 
 ## Wave Contribution from Each Source
 
 Using:
 
-$
-u_i = \cos(k r_i - \omega t + \phi) = \cos(6.2832 \cdot 3 - 0 + 0) = \cos(18.8496)$
+$$
+u_i = \cos(k r_i - \omega t + \phi) = \cos(6.2832 \cdot 3 - 0 + 0) = \cos(18.8496)$$
 
-$
-\cos(18.8496) \approx \cos(6\pi) = 1.0 $
+$$
+\cos(18.8496) \approx \cos(6\pi) = 1.0 $$
 
 So each of the **five wave contributions is 1.0** at that moment.
 
@@ -195,9 +195,9 @@ So each of the **five wave contributions is 1.0** at that moment.
 
 ###  Final Total Displacement at (0, 0), \( t = 0 \):
 
-$
+$$
 U(0, 0, 0) = \sum_{i=1}^{5} u_i = 5 \cdot 1.0 = \boxed{5.0}
-$
+$$
 
 ---
 
