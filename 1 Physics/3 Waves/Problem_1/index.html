@@ -90,7 +90,7 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#distance-to-0-0-from-each-vertex">Distance to (0, 0) from Each Vertex:</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#r_1-r_2-r_3-r_4-r_5-3">\(r_1 = r_2 = r_3 = r_4 = r_5 = 3\)</a>
+<li class="toctree-l3"><a class="reference internal" href="#r_1-r_2-r_3-r_4-r_5-3">\(\(r_1 = r_2 = r_3 = r_4 = r_5 = 3\)\)</a>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#wave-contribution-from-each-source">Wave Contribution from Each Source</a>
 <ul>
@@ -210,15 +210,15 @@
 <h2 id="fundamentals-of-waves"><strong>Fundamentals of Waves</strong></h2>
 <ul>
 <li><strong>Amplitude (A)</strong>: The maximum displacement from equilibrium.</li>
-<li><strong>Wavelength ($$ \lambda $$)</strong>: The distance between successive crests.</li>
-<li><strong>Wave number ($$ k $$)</strong>: $$ k = \frac{2\pi}{\lambda} $$</li>
+<li><strong>Wavelength $$ \lambda $$</strong> The distance between successive crests.</li>
+<li>**Wave number $$ k <span class="arithmatex">\(<span class="arithmatex">\(**\)</span>\)</span> k = \frac{2\pi}{\lambda} $$</li>
 <li><strong>Frequency (f)</strong>: The number of oscillations per unit time.</li>
-<li><strong>Angular frequency ($$ \omega $$)</strong>: $$ \omega = 2\pi f $$</li>
-<li><strong>Phase ($$ \phi $$)</strong>: Describes the wave's shift at a point.</li>
+<li><strong>Angular frequency $$ \omega $$</strong> $$ \omega = 2\pi f $$</li>
+<li><strong>Phase $$ \phi $$</strong> Describes the wave's shift at a point.</li>
 </ul>
-<p>A single disturbance from a point source is modeled as:</p>
+<p>A single disturbance from a point source is modeled as</p>
 <div class="arithmatex">\[ u_i(x, y, t) = A \cos(k r_i - \omega t + \phi) \]</div>
-<p>where $$ r_i = \sqrt{(x - x_i)^2 + (y - y_i)^2} $$ is the distance from the $$ i $$-th source to point $$ (x, y) $$.</p>
+<p>where $$ r_i = \sqrt{(x - x_i)^2 + (y - y_i)^2} $$ is the distance from the $$ i $$-th source to point $$ (x, y) $$</p>
 <p>The total displacement at point $$ (x, y) $$ is:</p>
 <div class="arithmatex">\[ U(x, y, t) = \sum_{i=1}^{N} A \cos(k r_i - \omega t + \phi) \]</div>
 <hr/>
@@ -377,21 +377,21 @@ plt.show()
 <hr/>
 <h2 id="distance-to-0-0-from-each-vertex">Distance to (0, 0) from Each Vertex:</h2>
 <p>We compute:</p>
-<p>$ r_i = \sqrt{x_i^2 + y_i^2} $</p>
+<p>$$ r_i = \sqrt{x_i^2 + y_i^2} $$</p>
 <p>Since all points are exactly 3 units from the center, we have:</p>
-<h2 id="r_1-r_2-r_3-r_4-r_5-3"><span class="arithmatex">\(r_1 = r_2 = r_3 = r_4 = r_5 = 3\)</span></h2>
+<h2 id="r_1-r_2-r_3-r_4-r_5-3"><span class="arithmatex">\(<span class="arithmatex">\(r_1 = r_2 = r_3 = r_4 = r_5 = 3\)</span>\)</span></h2>
 <h2 id="wave-contribution-from-each-source">Wave Contribution from Each Source</h2>
 <p>Using:</p>
-<p>$
-u_i = \cos(k r_i - \omega t + \phi) = \cos(6.2832 \cdot 3 - 0 + 0) = \cos(18.8496)$</p>
-<p>$
-\cos(18.8496) \approx \cos(6\pi) = 1.0 $</p>
+<div class="arithmatex">\[
+u_i = \cos(k r_i - \omega t + \phi) = \cos(6.2832 \cdot 3 - 0 + 0) = \cos(18.8496)\]</div>
+<div class="arithmatex">\[
+\cos(18.8496) \approx \cos(6\pi) = 1.0 \]</div>
 <p>So each of the <strong>five wave contributions is 1.0</strong> at that moment.</p>
 <hr/>
 <h3 id="final-total-displacement-at-0-0-t-0">Final Total Displacement at (0, 0), <span class="arithmatex">\( t = 0 \)</span>:</h3>
-<p>$
+<div class="arithmatex">\[
 U(0, 0, 0) = \sum_{i=1}^{5} u_i = 5 \cdot 1.0 = \boxed{5.0}
-$</p>
+\]</div>
 <hr/>
 <h3 id="summary-table">Summary Table</h3>
 <table>
