@@ -287,7 +287,45 @@ plt.show()
 <p><img alt="alt text" src="../image-6.png"/></p>
 <p><img alt="alt text" src="../image-7.png"/></p>
 <p><img alt="alt text" src="../image-8.png"/></p>
-<p><img alt="alt text" src="image-9.png"/></p>
+<p>import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import animation
+from IPython.display import Image, display</p>
+<p>Set up the grid
+grid_size = 100
+x = np.linspace(-5, 5, grid_size)
+y = np.linspace(-5, 5, grid_size)
+X, Y = np.meshgrid(x, y)</p>
+<p>Wave parameters
+wavelength = 1.0
+k = 2 * np.pi / wavelength  # Wave number
+omega = 2 * np.pi  # Angular frequency for time evolution</p>
+<p>Initialize the figure and axis
+fig, ax = plt.subplots(figsize=(6, 6))
+ax.set_xlabel('X')
+ax.set_ylabel('Y')
+ax.set_title('Wave Propagation Animation')</p>
+<p>Initial wave field (at t=0)
+r = np.sqrt(X<strong>2 + Y</strong>2)
+Z = np.sin(k * r) / (r + 1e-10)  # Avoid division by zero at the center
+im = ax.imshow(Z, cmap='RdBu', extent=[-5, 5, -5, 5], vmin=-0.5, vmax=0.5)
+plt.colorbar(im, ax=ax, label='Amplitude')</p>
+<p>Animation update function
+def update(frame):
+    t = frame * 0.05  # Time step
+    Z = np.sin(k * r - omega * t) / (r + 1e-10)  # Time-evolving wave
+    im.set_array(Z)
+    return [im]</p>
+<p>Create the animation
+frames = 100  # Number of frames in the GIF
+ani = animation.FuncAnimation(fig, update, frames=frames, interval=50, blit=True)</p>
+<p>Save the animation as a GIF
+gif_path = 'wave_propagation.gif'
+ani.save(gif_path, writer='pillow')</p>
+<p>Display the GIF in Colab
+plt.close(fig)  # Close the figure to avoid static display
+display(Image(filename=gif_path))</p>
+<p><img alt="alt text" src="../image-9.png"/></p>
 <p><a href="https://colab.research.google.com/drive/16j1U8vgwDN_99xQtginwrxq5wN2O1-q3?usp=sharing">Visuals in google colab</a></p>
 <h2 id="observations">Observations</h2>
 <ul>
