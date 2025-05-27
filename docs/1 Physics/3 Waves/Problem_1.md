@@ -89,7 +89,6 @@ plt.axis('equal')
 plt.show()
 ```
 
-![alt text](image.png)
 
 ![alt text](image-2.png)
 
@@ -102,6 +101,8 @@ plt.show()
 ![alt text](image-7.png)
 
 ![alt text](image-8.png)
+
+![alt text](image-9.png)
 
 [Visuals in google colab](https://colab.research.google.com/drive/16j1U8vgwDN_99xQtginwrxq5wN2O1-q3?usp=sharing)
 
