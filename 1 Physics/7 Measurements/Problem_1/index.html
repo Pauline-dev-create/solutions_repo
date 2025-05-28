@@ -92,6 +92,32 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#problem-1-measuring-earths-gravitational-acceleration-with-a-pendulum">Problem 1: Measuring Earth's Gravitational Acceleration with a Pendulum</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#motivation">Motivation:</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#task">Task:</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#procedure">Procedure:</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#calculations">Calculations</a>
+<ul>
+<li class="toctree-l4"><a class="reference internal" href="#1-mean-and-standard-deviation">1. Mean and Standard Deviation</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#2-period-of-one-oscillation">2. Period of One Oscillation</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#3-gravitational-acceleration">3. Gravitational Acceleration</a>
+</li>
+<li class="toctree-l4"><a class="reference internal" href="#4-propagation-of-uncertainty">4. Propagation of Uncertainty</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#final-results">Final Results</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#analysis">🗣️ Analysis</a>
+</li>
 </ul>
 </li>
 </ul>
@@ -172,6 +198,102 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
+<h2 id="problem-1-measuring-earths-gravitational-acceleration-with-a-pendulum">Problem 1: Measuring Earth's Gravitational Acceleration with a Pendulum</h2>
+<h3 id="motivation">Motivation:</h3>
+<p>The acceleration $ g $ due to gravity is a fundamental constant that influences a wide range of physical phenomena. Measuring $ g $ accurately is crucial for understanding gravitational interactions, designing structures, and conducting experiments in various fields. One classic method for determining $ g $ is through the oscillations of a simple pendulum, where the period of oscillation depends on the local gravitational field.</p>
+<h3 id="task">Task:</h3>
+<p>Measure the acceleration $ g $ due to gravity using a pendulum and in detail analyze the uncertainties in the measurements.</p>
+<p>This exercise emphasizes rigorous measurement practices, uncertainty analysis, and their role in experimental physics.</p>
+<h3 id="procedure">Procedure:</h3>
+<h4 id="1-materials">1. Materials:</h4>
+<ul>
+<li>A string (1 or 1.5 meters long).</li>
+<li>A small weight (e.g., bag of coins, bag of sugar, key chain) mounted on the string.</li>
+<li>Stopwatch (or smartphone timer).</li>
+<li>Ruler or measuring tape.</li>
+</ul>
+<h2 id="calculations">Calculations</h2>
+<h3 id="1-mean-and-standard-deviation">1. Mean and Standard Deviation</h3>
+<ul>
+<li>Calculate the <strong>mean time</strong> $$ \overline{T_{10}} $$ and <strong>standard deviation</strong> $$ \sigma_{T_{10}} $$</li>
+</ul>
+<div class="arithmatex">\[
+\overline{T_{10}} = \frac{1}{n} \sum_{i=1}^{n} T_{10}^{(i)} \qquad
+\sigma_{T_{10}} = \sqrt{\frac{1}{n-1} \sum_{i=1}^{n} \left( T_{10}^{(i)} - \overline{T_{10}} \right)^2}
+\]</div>
+<ul>
+<li>Compute the <strong>uncertainty in the mean</strong>:</li>
+</ul>
+<div class="arithmatex">\[
+\Delta T_{10} = \frac{\sigma_{T_{10}}}{\sqrt{n}}
+\]</div>
+<hr/>
+<h3 id="2-period-of-one-oscillation">2. Period of One Oscillation</h3>
+<div class="arithmatex">\[
+T = \frac{\overline{T_{10}}}{10} \qquad
+\Delta T = \frac{\Delta T_{10}}{10}
+\]</div>
+<hr/>
+<h3 id="3-gravitational-acceleration">3. Gravitational Acceleration</h3>
+<div class="arithmatex">\[
+g = \frac{4\pi^2 L}{T^2}
+\]</div>
+<hr/>
+<h3 id="4-propagation-of-uncertainty">4. Propagation of Uncertainty</h3>
+<div class="arithmatex">\[
+\frac{\Delta g}{g} = \sqrt{ \left( \frac{\Delta L}{L} \right)^2 + \left( 2 \cdot \frac{\Delta T}{T} \right)^2 }
+\]</div>
+<div class="arithmatex">\[
+\Delta g = g \cdot \sqrt{ \left( \frac{\Delta L}{L} \right)^2 + \left( 2 \cdot \frac{\Delta T}{T} \right)^2 }
+\]</div>
+<hr/>
+<h2 id="final-results">Final Results</h2>
+<ul>
+<li>
+<div class="arithmatex">\[ L = 1.00 \pm 0.01 \ \text{m} \]</div>
+</li>
+<li>
+<div class="arithmatex">\[ \overline{T_{10}} = 9.90 \pm 0.10 \ \text{s} \]</div>
+</li>
+<li>
+<div class="arithmatex">\[ T = 0.990 \pm 0.010 \ \text{s} \]</div>
+</li>
+<li>
+<div class="arithmatex">\[ g = 9.98 \pm 0.25 \ \text{m/s}^2 \]</div>
+</li>
+</ul>
+<hr/>
+<h2 id="analysis">🗣️ Analysis</h2>
+<ol>
+<li><strong>Comparison</strong> with the standard value of gravity:</li>
+</ol>
+<div class="arithmatex">\[
+g_{\text{standard}} = 9.81 \ \text{m/s}^2
+\]</div>
+<ol>
+<li><strong>Sources of Uncertainty</strong>:</li>
+<li>Human reaction time in starting/stopping the timer</li>
+<li>Measurement error in the length of the pendulum</li>
+<li>
+<p>Small-angle approximation</p>
+</li>
+<li>
+<p><strong>Experimental Limitations</strong>:</p>
+</li>
+<li>Air resistance and friction at the pivot point</li>
+<li>Limited resolution of stopwatch and ruler</li>
+</ol>
+<hr/>
+<ul>
+<li>Tabulated raw data 10 trials of $$ T_{10} $$</li>
+<li>Calculated:</li>
+<li>Mean $$ T_{10} $$</li>
+<li>Standard deviation $$ \sigma_{T_{10}} $$</li>
+<li>Period $$ T $$</li>
+<li>Gravitational acceleration $$ g $$</li>
+<li>Uncertainty $$ \Delta g $$</li>
+</ul>
+<p><img alt="alt text" src="../image.png"/></p>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
