@@ -76,7 +76,7 @@ $$
 
 ---
 
-## 🗣️ Analysis
+##  Analysis
 
 1. **Comparison** with the standard value of gravity:
 
@@ -102,5 +102,51 @@ $$
   - Period $$ T $$
   - Gravitational acceleration $$ g $$
   - Uncertainty $$ \Delta g $$
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+## Example data (replace with your measured values)
+L = 1.0  # Length in meters
+Delta_L = 0.01  # Uncertainty in length (m)
+T_10_measurements = [9.8, 9.9, 10.0, 9.7, 10.1, 9.6, 10.2, 9.8, 10.0, 9.9]  # Time for 10 oscillations (s)
+n = len(T_10_measurements)
+
+## Calculate mean and standard deviation
+T_10_mean = np.mean(T_10_measurements)
+T_10_std = np.std(T_10_measurements)
+Delta_T_10 = T_10_std / np.sqrt(n)
+
+## Period and its uncertainty
+T = T_10_mean / 10
+Delta_T = Delta_T_10 / 10
+
+## Gravity and its uncertainty
+g = 4 * np.pi**2 * L / T**2
+Delta_g = g * np.sqrt((Delta_L / L)**2 + (2 * Delta_T / T)**2)
+
+## Tabulated data
+print("Tabulated Data:")
+print(f"L = {L} ± {Delta_L} m")
+print(f"T_10 measurements = {T_10_measurements} s")
+print(f"Mean T_10 = {T_10_mean:.2f} ± {Delta_T_10:.2f} s")
+print(f"Period T = {T:.2f} ± {Delta_T:.2f} s")
+print(f"g = {g:.2f} ± {Delta_g:.2f} m/s^2")
+
+ ## Visualization
+plt.figure(figsize=(10, 6))
+plt.errorbar(range(1, n+1), T_10_measurements, yerr=T_10_std/np.sqrt(n), fmt='o', capsize=5, label='T_10 Measurements')
+plt.axhline(y=T_10_mean, color='r', linestyle='--', label=f'Mean T_10 = {T_10_mean:.2f} s')
+plt.xlabel('Trial Number')
+plt.ylabel('Time for 10 Oscillations (s)')
+plt.title('Pendulum Oscillation Measurements')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+## Compare with standard value
+g_standard = 9.81
+print(f"\nComparison: Measured g = {g:.2f} ± {Delta_g:.2f} m/s^2 vs Standard g = {g_standard} m/s^2")
 
 ![alt text](image.png)
