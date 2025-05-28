@@ -116,7 +116,19 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#final-results">Final Results</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#analysis">🗣️ Analysis</a>
+<li class="toctree-l3"><a class="reference internal" href="#analysis">Analysis</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#example-data-replace-with-your-measured-values">Example data (replace with your measured values)</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#calculate-mean-and-standard-deviation">Calculate mean and standard deviation</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#period-and-its-uncertainty">Period and its uncertainty</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#gravity-and-its-uncertainty">Gravity and its uncertainty</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#tabulated-data">Tabulated data</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#compare-with-standard-value">Compare with standard value</a>
 </li>
 </ul>
 </li>
@@ -263,7 +275,7 @@ g = \frac{4\pi^2 L}{T^2}
 </li>
 </ul>
 <hr/>
-<h2 id="analysis">🗣️ Analysis</h2>
+<h2 id="analysis">Analysis</h2>
 <ol>
 <li><strong>Comparison</strong> with the standard value of gravity:</li>
 </ol>
@@ -293,6 +305,43 @@ g_{\text{standard}} = 9.81 \ \text{m/s}^2
 <li>Gravitational acceleration $$ g $$</li>
 <li>Uncertainty $$ \Delta g $$</li>
 </ul>
+<p>import numpy as np
+import matplotlib.pyplot as plt</p>
+<h2 id="example-data-replace-with-your-measured-values">Example data (replace with your measured values)</h2>
+<p>L = 1.0  # Length in meters
+Delta_L = 0.01  # Uncertainty in length (m)
+T_10_measurements = [9.8, 9.9, 10.0, 9.7, 10.1, 9.6, 10.2, 9.8, 10.0, 9.9]  # Time for 10 oscillations (s)
+n = len(T_10_measurements)</p>
+<h2 id="calculate-mean-and-standard-deviation">Calculate mean and standard deviation</h2>
+<p>T_10_mean = np.mean(T_10_measurements)
+T_10_std = np.std(T_10_measurements)
+Delta_T_10 = T_10_std / np.sqrt(n)</p>
+<h2 id="period-and-its-uncertainty">Period and its uncertainty</h2>
+<p>T = T_10_mean / 10
+Delta_T = Delta_T_10 / 10</p>
+<h2 id="gravity-and-its-uncertainty">Gravity and its uncertainty</h2>
+<p>g = 4 * np.pi<strong>2 * L / T</strong>2
+Delta_g = g * np.sqrt((Delta_L / L)<strong>2 + (2 * Delta_T / T)</strong>2)</p>
+<h2 id="tabulated-data">Tabulated data</h2>
+<p>print("Tabulated Data:")
+print(f"L = {L} ± {Delta_L} m")
+print(f"T_10 measurements = {T_10_measurements} s")
+print(f"Mean T_10 = {T_10_mean:.2f} ± {Delta_T_10:.2f} s")
+print(f"Period T = {T:.2f} ± {Delta_T:.2f} s")
+print(f"g = {g:.2f} ± {Delta_g:.2f} m/s^2")</p>
+<p>## Visualization
+plt.figure(figsize=(10, 6))
+plt.errorbar(range(1, n+1), T_10_measurements, yerr=T_10_std/np.sqrt(n), fmt='o', capsize=5, label='T_10 Measurements')
+plt.axhline(y=T_10_mean, color='r', linestyle='--', label=f'Mean T_10 = {T_10_mean:.2f} s')
+plt.xlabel('Trial Number')
+plt.ylabel('Time for 10 Oscillations (s)')
+plt.title('Pendulum Oscillation Measurements')
+plt.legend()
+plt.grid(True)
+plt.show()</p>
+<h2 id="compare-with-standard-value">Compare with standard value</h2>
+<p>g_standard = 9.81
+print(f"\nComparison: Measured g = {g:.2f} ± {Delta_g:.2f} m/s^2 vs Standard g = {g_standard} m/s^2")</p>
 <p><img alt="alt text" src="../image.png"/></p>
 </div>
 </div><footer>
