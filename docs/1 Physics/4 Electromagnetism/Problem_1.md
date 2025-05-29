@@ -4,41 +4,100 @@
 
 ## Fundamentals of the Lorentz Force
 
-- **Equation**: $ \mathbf{F} = q\mathbf{E} + q(\mathbf{v} \times \mathbf{B}) $
+## Lorentz Force and Charged Particle Motion
 
-  - $ q\mathbf{E} $: Force due to electric field (linear acceleration).
+$$
+\mathbf{F} = q\mathbf{E} + q(\mathbf{v} \times \mathbf{B})
+$$
 
-  - $ q(\mathbf{v} \times \mathbf{B}) $: Force due to magnetic field (perpendicular to velocity and field, causing circular/helix motion).
+- **Electric Force**:  
+  $$ q\mathbf{E} $$  
+  Causes **linear acceleration**.
 
-- **Motion**:
-  - Uniform $ \mathbf{B} : $ Circular or helical path (Larmor radius  $ r_L = \frac{mv_\perp}{|q|B} $).
-
-  - Uniform  $\mathbf{E} $: Linear acceleration.
-
-  - Crossed $ \mathbf{E} $ and $ \mathbf{B} $: Drift motion ($ v_d = \frac{E}{B} $).
-
-- **Numerical Solution**: Use Euler method to update position and velocity:
-
-  - $ \mathbf{a} = \frac{\mathbf{F}}{m} $
-  - $ \mathbf{v}_{n+1} = \mathbf{v}_n + \mathbf{a} \Delta t $
-  - $ \mathbf{r}_{n+1} = \mathbf{r}_n + \mathbf{v}_n \Delta t $
-
-## Applications
-
-1. **Particle Accelerators**: $ \mathbf{B} $ bends particle paths (e.g., cyclotrons), $ \mathbf{E} $ accelerates them.
-
-2. **Mass Spectrometers**: $ \mathbf{B} $ separates ions by mass-to-charge ratio via circular paths.
-
-3. **Plasma Confinement**: $ \mathbf{B} $ traps charged particles in fusion devices (e.g., tokamaks).
+- **Magnetic Force**:  
+  $$ q(\mathbf{v} \times \mathbf{B}) $$  
+  Acts **perpendicular** to both velocity and magnetic field, causing **circular or helical motion**.
 
 ---
 
-## Simulation Code
-1. Uniform magnetic field ($ \mathbf{B} = B\hat{z} $).
+## Motion Characteristics
 
-2. Combined electric and magnetic fields ($ \mathbf{E} = E\hat{x}, \mathbf{B} = B\hat{z} $).
+- **Uniform Magnetic Field** ($\mathbf{B}$):  
+  - Circular or helical path.
+  - **Larmor radius**:
+    $$
+    r_L = \frac{mv_\perp}{|q|B}
+    $$
 
-3. Crossed fields ($ \mathbf{E} = E\hat{y}, \mathbf{B} = B\hat{z} $).
+- **Uniform Electric Field** ($\mathbf{E}$):  
+  - Causes **linear acceleration** in the direction of $\mathbf{E}$.
+
+- **Crossed Electric and Magnetic Fields** ($\mathbf{E} \perp \mathbf{B}$):  
+  - Results in **drift velocity**:
+    $$
+    \mathbf{v}_d = \frac{\mathbf{E} \times \mathbf{B}}{B^2}
+    $$  
+    - For $\mathbf{E} = E\hat{y}$ and $\mathbf{B} = B\hat{z}$:
+      $$
+      \mathbf{v}_d = \frac{E}{B} \hat{x}
+      $$
+
+---
+
+## Numerical Solution (Euler Method)
+
+Use the Euler method to update particle position and velocity:
+
+- Acceleration:
+  $$
+  \mathbf{a} = \frac{\mathbf{F}}{m}
+  $$
+
+- Velocity Update:
+  $$
+  \mathbf{v}_{n+1} = \mathbf{v}_n + \mathbf{a} \Delta t
+  $$
+
+- Position Update:
+  $$
+  \mathbf{r}_{n+1} = \mathbf{r}_n + \mathbf{v}_n \Delta t
+  $$
+
+---
+
+## Applications
+
+- **Particle Accelerators**:  
+  - Magnetic fields bend paths (e.g., cyclotrons).  
+  - Electric fields accelerate particles.
+
+- **Mass Spectrometers**:  
+  - Magnetic fields separate ions by mass-to-charge ratio using circular paths.
+
+- **Plasma Confinement**:  
+  - Magnetic fields trap particles in fusion devices (e.g., **tokamaks**).
+
+---
+
+## Simulation Scenarios
+
+- **Uniform Magnetic Field**:
+  $$
+  \mathbf{B} = B\hat{z}
+  $$
+
+- **Combined Electric and Magnetic Fields**:
+  $$
+  \mathbf{E} = E\hat{x}, \quad \mathbf{B} = B\hat{z}
+  $$
+
+- **Crossed Fields**:
+  $$
+  \mathbf{E} = E\hat{y}, \quad \mathbf{B} = B\hat{z}
+  $$
+
+---
+
 
 import numpy as np
 import matplotlib.pyplot as plt
