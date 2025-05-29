@@ -4,7 +4,7 @@
 
 ## Fundamentals of the Lorentz Force
 
-## Lorentz Force and Charged Particle Motion
+# Lorentz Force and Charged Particle Motion
 
 $$
 \mathbf{F} = q\mathbf{E} + q(\mathbf{v} \times \mathbf{B})
@@ -199,31 +199,79 @@ E×B drift (crossed fields).
 
 [Visuals in colab](https://colab.research.google.com/drive/1wAqPN3cKLa-XC7hSP1EzEbI3Ms_BOJNe?usp=sharing)
 
-## Results and Visualizations
-The script above simulates three scenarios:
-1. **Uniform Magnetic Field**:
-   - $ \mathbf{B} = (0, 0, 0.1) $ T, $ \mathbf{v}_0 = (10^6, 0, 0) $ m/s.
-   - Result: Circular motion in the xy-plane (Larmor radius observed).
-2. **Combined E and B Fields**:
-   - $ \mathbf{E} = (10^5, 0, 0) $ V/m, $ \mathbf{B} = (0, 0, 0.1) $ T, $ \mathbf{v}_0 = (10^6, 0, 10^6) $ m/s.
-   - Result: Helical motion with linear acceleration along x.
-3. **Crossed E and B Fields**:
-   - $ \mathbf{E} = (0, 10^5, 0) $ V/m, $ \mathbf{B} = (0, 0, 0.1) $ T, $ \mathbf{v}_0 = (0, 0, 0) $ m/s.
-   - Result: Drift motion in x-direction ($ v_d = \frac{E}{B} $).
+#### Results and Visualizations
 
-### Key Phenomena
-- **Larmor Radius**: $ r_L = \frac{m v_\perp}{|q| B} $, visible in Scenario 1 as the radius of the circular path.
-- **Drift Velocity**: $ v_d = \frac{E}{B} $, observed in Scenario 3 as motion perpendicular to both fields.
+The script simulates the following three scenarios:
 
-## Discussion
-- **Cyclotrons**: Scenario 1 mimics cyclotron motion, where $ \mathbf{B} $ keeps particles in circular orbits, and frequency depends on $ q/m $.
-- **Magnetic Traps**: Scenario 2’s helical path relates to confinement in magnetic bottles, where $ \mathbf{B} $ traps particles, and $ \mathbf{E} $ adjusts their energy.
-- **Mass Spectrometers**: Scenario 3’s drift and curvature help separate particles by mass-to-charge ratio.
+### 1. **Uniform Magnetic Field**
+- Magnetic field:  
+  $$
+  \mathbf{B} = (0, 0, 0.1) \ \text{T}
+  $$
+- Initial velocity:  
+  $$
+  \mathbf{v}_0 = (10^6, 0, 0) \ \text{m/s}
+  $$
+- **Result**: Circular motion in the **xy-plane** due to Lorentz force.
+- **Observation**: Larmor radius is visible and consistent with theory.
 
-- **Parameter Effects**:
-  - Increasing $ B $: Smaller $ r_L $, tighter orbits.
-  - Increasing $ E $: Greater drift or acceleration.
-  - Higher$ v_0 $: Larger helix radius or faster drift.
+---
+
+### 2. **Combined Electric and Magnetic Fields**
+- Electric field:  
+  $$
+  \mathbf{E} = (10^5, 0, 0) \ \text{V/m}
+  $$
+- Magnetic field:  
+  $$
+  \mathbf{B} = (0, 0, 0.1) \ \text{T}
+  $$
+- Initial velocity:  
+  $$
+  \mathbf{v}_0 = (10^6, 0, 10^6) \ \text{m/s}
+  $$
+- **Result**: Helical motion with **linear acceleration** along the x-axis due to the electric field.
+
+---
+
+### 3. **Crossed Electric and Magnetic Fields**
+- Electric field:  
+  $$
+  \mathbf{E} = (0, 10^5, 0) \ \text{V/m}
+  $$
+- Magnetic field:  
+  $$
+  \mathbf{B} = (0, 0, 0.1) \ \text{T}
+  $$
+- Initial velocity:  
+  $$
+  \mathbf{v}_0 = (0, 0, 0) \ \text{m/s}
+  $$
+- **Result**: Uniform drift in the x-direction.
+- **Theoretical drift velocity**:
+  $$
+  \mathbf{v}_d = \frac{\mathbf{E} \times \mathbf{B}}{B^2} = \left(\frac{E}{B}, 0, 0\right) = (10^6, 0, 0) \ \text{m/s}
+  $$
+
+---
+
+## Key Phenomena
+
+- **Larmor Radius**:
+  $$
+  r_L = \frac{m v_\perp}{|q| B}
+  $$
+  - Observed in **Scenario 1** as the radius of the circular path in the xy-plane.
+
+- **Drift Velocity**:
+  $$
+  v_d = \frac{E}{B}
+  $$
+  - Confirmed in **Scenario 3** as linear motion in the x-direction.
+
+---
+.
+
 
 
 ## Conclusion
