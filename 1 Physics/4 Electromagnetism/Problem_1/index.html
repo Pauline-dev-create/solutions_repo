@@ -76,48 +76,6 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#fundamentals-of-the-lorentz-force">Fundamentals of the Lorentz Force</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#lorentz-force-and-charged-particle-motion">Lorentz Force and Charged Particle Motion</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#motion-characteristics">Motion Characteristics</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#numerical-solution-euler-method">Numerical Solution (Euler Method)</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#applications">Applications</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#simulation-scenarios">Simulation Scenarios</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#constants">Constants</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#lorentz-force-function">Lorentz force function</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#simulation-function">Simulation function</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#field-configurations">Field configurations</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#scenario-1-uniform-magnetic-field-b-along-z">Scenario 1: Uniform magnetic field (B along z)</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#scenario-2-combined-e-and-b-fields">Scenario 2: Combined E and B fields</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#scenario-3-crossed-e-and-b-fields">Scenario 3: Crossed E and B fields</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#visualization">Visualization</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#scenario-1-2d-plot-xy-plane-circular-motion">Scenario 1: 2D Plot (xy-plane, circular motion)</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#scenario-2-3d-plot-helical-motion-with-e-field">Scenario 2: 3D Plot (helical motion with E-field)</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#scenario-3-2d-plot-xy-plane-drift-motion">Scenario 3: 2D Plot (xy-plane, drift motion)</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#results-and-visualizations">Results and Visualizations</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#key-phenomena">Key Phenomena</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#discussion">Discussion</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
-</li>
 </ul>
 </li>
 </ul>
@@ -220,7 +178,7 @@
 <h1 id="problem-1">Problem 1</h1>
 <h2 id="simulating-the-effects-of-the-lorentz-force">Simulating the Effects of the Lorentz Force</h2>
 <h2 id="fundamentals-of-the-lorentz-force">Fundamentals of the Lorentz Force</h2>
-<h2 id="lorentz-force-and-charged-particle-motion">Lorentz Force and Charged Particle Motion</h2>
+<h1 id="lorentz-force-and-charged-particle-motion">Lorentz Force and Charged Particle Motion</h1>
 <div class="arithmatex">\[
 \mathbf{F} = q\mathbf{E} + q(\mathbf{v} \times \mathbf{B})
 \]</div>
@@ -411,36 +369,79 @@ plt.show()</p>
 <p>E×B drift (crossed fields).</p>
 <p><img alt="alt text" src="../image-1.png"/></p>
 <p><a href="https://colab.research.google.com/drive/1wAqPN3cKLa-XC7hSP1EzEbI3Ms_BOJNe?usp=sharing">Visuals in colab</a></p>
-<h2 id="results-and-visualizations">Results and Visualizations</h2>
-<p>The script above simulates three scenarios:
-1. <strong>Uniform Magnetic Field</strong>:
-   - $ \mathbf{B} = (0, 0, 0.1) $ T, $ \mathbf{v}_0 = (10^6, 0, 0) $ m/s.
-   - Result: Circular motion in the xy-plane (Larmor radius observed).
-2. <strong>Combined E and B Fields</strong>:
-   - $ \mathbf{E} = (10^5, 0, 0) $ V/m, $ \mathbf{B} = (0, 0, 0.1) $ T, $ \mathbf{v}_0 = (10^6, 0, 10^6) $ m/s.
-   - Result: Helical motion with linear acceleration along x.
-3. <strong>Crossed E and B Fields</strong>:
-   - $ \mathbf{E} = (0, 10^5, 0) $ V/m, $ \mathbf{B} = (0, 0, 0.1) $ T, $ \mathbf{v}_0 = (0, 0, 0) $ m/s.
-   - Result: Drift motion in x-direction ($ v_d = \frac{E}{B} $).</p>
-<h3 id="key-phenomena">Key Phenomena</h3>
+<h4 id="results-and-visualizations">Results and Visualizations</h4>
+<p>The script simulates the following three scenarios:</p>
+<h3 id="1-uniform-magnetic-field">1. <strong>Uniform Magnetic Field</strong></h3>
 <ul>
-<li><strong>Larmor Radius</strong>: $ r_L = \frac{m v_\perp}{|q| B} $, visible in Scenario 1 as the radius of the circular path.</li>
-<li><strong>Drift Velocity</strong>: $ v_d = \frac{E}{B} $, observed in Scenario 3 as motion perpendicular to both fields.</li>
+<li>Magnetic field:<br/>
+  $$
+  \mathbf{B} = (0, 0, 0.1) \ \text{T}
+  $$</li>
+<li>Initial velocity:<br/>
+  $$
+  \mathbf{v}_0 = (10^6, 0, 0) \ \text{m/s}
+  $$</li>
+<li><strong>Result</strong>: Circular motion in the <strong>xy-plane</strong> due to Lorentz force.</li>
+<li><strong>Observation</strong>: Larmor radius is visible and consistent with theory.</li>
 </ul>
-<h2 id="discussion">Discussion</h2>
+<hr/>
+<h3 id="2-combined-electric-and-magnetic-fields">2. <strong>Combined Electric and Magnetic Fields</strong></h3>
 <ul>
-<li><strong>Cyclotrons</strong>: Scenario 1 mimics cyclotron motion, where $ \mathbf{B} $ keeps particles in circular orbits, and frequency depends on $ q/m $.</li>
-<li><strong>Magnetic Traps</strong>: Scenario 2’s helical path relates to confinement in magnetic bottles, where $ \mathbf{B} $ traps particles, and $ \mathbf{E} $ adjusts their energy.</li>
+<li>Electric field:<br/>
+  $$
+  \mathbf{E} = (10^5, 0, 0) \ \text{V/m}
+  $$</li>
+<li>Magnetic field:<br/>
+  $$
+  \mathbf{B} = (0, 0, 0.1) \ \text{T}
+  $$</li>
+<li>Initial velocity:<br/>
+  $$
+  \mathbf{v}_0 = (10^6, 0, 10^6) \ \text{m/s}
+  $$</li>
+<li><strong>Result</strong>: Helical motion with <strong>linear acceleration</strong> along the x-axis due to the electric field.</li>
+</ul>
+<hr/>
+<h3 id="3-crossed-electric-and-magnetic-fields">3. <strong>Crossed Electric and Magnetic Fields</strong></h3>
+<ul>
+<li>Electric field:<br/>
+  $$
+  \mathbf{E} = (0, 10^5, 0) \ \text{V/m}
+  $$</li>
+<li>Magnetic field:<br/>
+  $$
+  \mathbf{B} = (0, 0, 0.1) \ \text{T}
+  $$</li>
+<li>Initial velocity:<br/>
+  $$
+  \mathbf{v}_0 = (0, 0, 0) \ \text{m/s}
+  $$</li>
+<li><strong>Result</strong>: Uniform drift in the x-direction.</li>
+<li><strong>Theoretical drift velocity</strong>:
+  $$
+  \mathbf{v}_d = \frac{\mathbf{E} \times \mathbf{B}}{B^2} = \left(\frac{E}{B}, 0, 0\right) = (10^6, 0, 0) \ \text{m/s}
+  $$</li>
+</ul>
+<hr/>
+<h2 id="key-phenomena">Key Phenomena</h2>
+<ul>
+<li><strong>Larmor Radius</strong>:
+  $$
+  r_L = \frac{m v_\perp}{|q| B}
+  $$</li>
 <li>
-<p><strong>Mass Spectrometers</strong>: Scenario 3’s drift and curvature help separate particles by mass-to-charge ratio.</p>
+<p>Observed in <strong>Scenario 1</strong> as the radius of the circular path in the xy-plane.</p>
 </li>
 <li>
-<p><strong>Parameter Effects</strong>:</p>
+<p><strong>Drift Velocity</strong>:
+  $$
+  v_d = \frac{E}{B}
+  $$</p>
 </li>
-<li>Increasing $ B $: Smaller $ r_L $, tighter orbits.</li>
-<li>Increasing $ E $: Greater drift or acceleration.</li>
-<li>Higher$ v_0 $: Larger helix radius or faster drift.</li>
+<li>Confirmed in <strong>Scenario 3</strong> as linear motion in the x-direction.</li>
 </ul>
+<hr/>
+<p>.</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>These simulations illustrate the Lorentz force’s role in controlling charged particle motion, bridging theory to applications like accelerators and plasma confinement.</p>
 </div>
