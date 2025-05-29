@@ -76,9 +76,15 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#fundamentals-of-the-lorentz-force">Fundamentals of the Lorentz Force</a>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#lorentz-force-and-charged-particle-motion">Lorentz Force and Charged Particle Motion</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#motion-characteristics">Motion Characteristics</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#numerical-solution-euler-method">Numerical Solution (Euler Method)</a>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#applications">Applications</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#simulation-code">Simulation Code</a>
+<li class="toctree-l3"><a class="reference internal" href="#simulation-scenarios">Simulation Scenarios</a>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#constants">Constants</a>
 </li>
@@ -214,62 +220,118 @@
 <h1 id="problem-1">Problem 1</h1>
 <h2 id="simulating-the-effects-of-the-lorentz-force">Simulating the Effects of the Lorentz Force</h2>
 <h2 id="fundamentals-of-the-lorentz-force">Fundamentals of the Lorentz Force</h2>
+<h2 id="lorentz-force-and-charged-particle-motion">Lorentz Force and Charged Particle Motion</h2>
+<div class="arithmatex">\[
+\mathbf{F} = q\mathbf{E} + q(\mathbf{v} \times \mathbf{B})
+\]</div>
 <ul>
 <li>
-<p><strong>Equation</strong>: $ \mathbf{F} = q\mathbf{E} + q(\mathbf{v} \times \mathbf{B}) $</p>
+<p><strong>Electric Force</strong>:<br/>
+  $$ q\mathbf{E} $$<br/>
+  Causes <strong>linear acceleration</strong>.</p>
 </li>
 <li>
-<p>$ q\mathbf{E} $: Force due to electric field (linear acceleration).</p>
+<p><strong>Magnetic Force</strong>:<br/>
+  $$ q(\mathbf{v} \times \mathbf{B}) $$<br/>
+  Acts <strong>perpendicular</strong> to both velocity and magnetic field, causing <strong>circular or helical motion</strong>.</p>
 </li>
-<li>
-<p>$ q(\mathbf{v} \times \mathbf{B}) $: Force due to magnetic field (perpendicular to velocity and field, causing circular/helix motion).</p>
-</li>
-<li>
-<p><strong>Motion</strong>:</p>
-</li>
-<li>
-<p>Uniform $ \mathbf{B} : $ Circular or helical path (Larmor radius  $ r_L = \frac{mv_\perp}{|q|B} $).</p>
-</li>
-<li>
-<p>Uniform  $\mathbf{E} $: Linear acceleration.</p>
-</li>
-<li>
-<p>Crossed $ \mathbf{E} $ and $ \mathbf{B} <span class="arithmatex">\(: Drift motion (\)</span> v_d = \frac{E}{B} $).</p>
-</li>
-<li>
-<p><strong>Numerical Solution</strong>: Use Euler method to update position and velocity:</p>
-</li>
-<li>
-<p>$ \mathbf{a} = \frac{\mathbf{F}}{m} $</p>
-</li>
-<li>$ \mathbf{v}_{n+1} = \mathbf{v}_n + \mathbf{a} \Delta t $</li>
-<li>$ \mathbf{r}_{n+1} = \mathbf{r}_n + \mathbf{v}_n \Delta t $</li>
 </ul>
-<h2 id="applications">Applications</h2>
-<ol>
-<li>
-<p><strong>Particle Accelerators</strong>: $ \mathbf{B} $ bends particle paths (e.g., cyclotrons), $ \mathbf{E} $ accelerates them.</p>
-</li>
-<li>
-<p><strong>Mass Spectrometers</strong>: $ \mathbf{B} $ separates ions by mass-to-charge ratio via circular paths.</p>
-</li>
-<li>
-<p><strong>Plasma Confinement</strong>: $ \mathbf{B} $ traps charged particles in fusion devices (e.g., tokamaks).</p>
-</li>
-</ol>
 <hr/>
-<h2 id="simulation-code">Simulation Code</h2>
-<ol>
+<h2 id="motion-characteristics">Motion Characteristics</h2>
+<ul>
+<li><strong>Uniform Magnetic Field</strong> (<span class="arithmatex">\(\mathbf{B}\)</span>):  </li>
+<li>Circular or helical path.</li>
 <li>
-<p>Uniform magnetic field ($ \mathbf{B} = B\hat{z} $).</p>
+<p><strong>Larmor radius</strong>:
+    $$
+    r_L = \frac{mv_\perp}{|q|B}
+    $$</p>
 </li>
 <li>
-<p>Combined electric and magnetic fields ($ \mathbf{E} = E\hat{x}, \mathbf{B} = B\hat{z} $).</p>
+<p><strong>Uniform Electric Field</strong> (<span class="arithmatex">\(\mathbf{E}\)</span>):  </p>
 </li>
 <li>
-<p>Crossed fields ($ \mathbf{E} = E\hat{y}, \mathbf{B} = B\hat{z} $).</p>
+<p>Causes <strong>linear acceleration</strong> in the direction of <span class="arithmatex">\(\mathbf{E}\)</span>.</p>
 </li>
-</ol>
+<li>
+<p><strong>Crossed Electric and Magnetic Fields</strong> (<span class="arithmatex">\(\mathbf{E} \perp \mathbf{B}\)</span>):  </p>
+</li>
+<li>Results in <strong>drift velocity</strong>:
+    $$
+    \mathbf{v}_d = \frac{\mathbf{E} \times \mathbf{B}}{B^2}
+    $$  <ul>
+<li>For <span class="arithmatex">\(\mathbf{E} = E\hat{y}\)</span> and <span class="arithmatex">\(\mathbf{B} = B\hat{z}\)</span>:
+  $$
+  \mathbf{v}_d = \frac{E}{B} \hat{x}
+  $$</li>
+</ul>
+</li>
+</ul>
+<hr/>
+<h2 id="numerical-solution-euler-method">Numerical Solution (Euler Method)</h2>
+<p>Use the Euler method to update particle position and velocity:</p>
+<ul>
+<li>
+<p>Acceleration:
+  $$
+  \mathbf{a} = \frac{\mathbf{F}}{m}
+  $$</p>
+</li>
+<li>
+<p>Velocity Update:
+  $$
+  \mathbf{v}_{n+1} = \mathbf{v}_n + \mathbf{a} \Delta t
+  $$</p>
+</li>
+<li>
+<p>Position Update:
+  $$
+  \mathbf{r}_{n+1} = \mathbf{r}_n + \mathbf{v}_n \Delta t
+  $$</p>
+</li>
+</ul>
+<hr/>
+<h2 id="applications">Applications</h2>
+<ul>
+<li><strong>Particle Accelerators</strong>:  </li>
+<li>Magnetic fields bend paths (e.g., cyclotrons).  </li>
+<li>
+<p>Electric fields accelerate particles.</p>
+</li>
+<li>
+<p><strong>Mass Spectrometers</strong>:  </p>
+</li>
+<li>
+<p>Magnetic fields separate ions by mass-to-charge ratio using circular paths.</p>
+</li>
+<li>
+<p><strong>Plasma Confinement</strong>:  </p>
+</li>
+<li>Magnetic fields trap particles in fusion devices (e.g., <strong>tokamaks</strong>).</li>
+</ul>
+<hr/>
+<h2 id="simulation-scenarios">Simulation Scenarios</h2>
+<ul>
+<li>
+<p><strong>Uniform Magnetic Field</strong>:
+  $$
+  \mathbf{B} = B\hat{z}
+  $$</p>
+</li>
+<li>
+<p><strong>Combined Electric and Magnetic Fields</strong>:
+  $$
+  \mathbf{E} = E\hat{x}, \quad \mathbf{B} = B\hat{z}
+  $$</p>
+</li>
+<li>
+<p><strong>Crossed Fields</strong>:
+  $$
+  \mathbf{E} = E\hat{y}, \quad \mathbf{B} = B\hat{z}
+  $$</p>
+</li>
+</ul>
+<hr/>
 <p>import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D</p>
