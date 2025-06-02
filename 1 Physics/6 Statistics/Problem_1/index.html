@@ -84,6 +84,12 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#discussion">Discussion</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#conclusion">Conclusion</a>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../Problem_2/">Problem 2</a>
@@ -173,7 +179,7 @@
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
 <p>Central Limit Theorem Simulation</p>
-<p>Overview</p>
+<h2 id="overview">Overview</h2>
 <p>This project demonstrates the Central Limit Theorem (CLT) by simulating sampling distributions of the sample mean for three population distributions: uniform, exponential, and binomial. We visualize how these distributions approach normality as the sample size increases.
 Definitions
 Central Limit Theorem (CLT)
@@ -202,15 +208,16 @@ Variance: <span class="arithmatex">\(\sigma^2 = np(1-p) = 16\)</span></p>
 <p>Sample sizes: <span class="arithmatex">\(n = 5, 10, 30, 50\)</span>
 Number of samples: 10,000
 Output: Each simulation generates histograms of sample means, compiled into a GIF showing the progression across sample sizes.</p>
-<p>Python Code
-import numpy as np
+<pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from PIL import Image
-import os</p>
-<p>Set random seed for reproducibility
-np.random.seed(42)</p>
-<p>Generate population distributions
+import os
+
+ Set random seed for reproducibility
+np.random.seed(42)
+
+ Generate population distributions
 def generate_populations(size=100000):
     uniform = np.random.uniform(0, 10, size)
     exponential = np.random.exponential(1, size)
@@ -219,12 +226,14 @@ def generate_populations(size=100000):
         (uniform, "Uniform", 5, np.sqrt(100/12)),
         (exponential, "Exponential", 1, 1),
         (binomial, "Binomial", 20, np.sqrt(16))
-    ]</p>
-<p>Simulate sampling distribution of sample means
+    ]
+
+ Simulate sampling distribution of sample means
 def simulate_sampling_distribution(population, sample_size, num_samples=10000):
     sample_means = [np.mean(np.random.choice(population, sample_size)) for _ in range(num_samples)]
-    return np.array(sample_means)</p>
-<p>Plot histogram with normal approximation
+    return np.array(sample_means)
+
+ Plot histogram with normal approximation
 def plot_sampling_distribution(means, dist_name, sample_size, mu, sigma, frame_dir, frame_num):
     plt.figure(figsize=(8, 6))
     sns.histplot(means, kde=True, stat="density", color="skyblue")
@@ -233,13 +242,14 @@ def plot_sampling_distribution(means, dist_name, sample_size, mu, sigma, frame_d
     plt.ylabel("Density")
     # Overlay theoretical normal distribution
     x = np.linspace(min(means), max(means), 100)
-    plt.plot(x, 1/(sigma/np.sqrt(sample_size) * np.sqrt(2<em>np.pi)) * 
-             np.exp(-(x-mu)</em><em>2 / (2</em>(sigma/np.sqrt(sample_size))**2)), 
+    plt.plot(x, 1/(sigma/np.sqrt(sample_size) * np.sqrt(2*np.pi)) * 
+             np.exp(-(x-mu)**2 / (2*(sigma/np.sqrt(sample_size))**2)), 
              'r-', label="Normal Approximation")
     plt.legend()
     plt.savefig(f"{frame_dir}/frame_{frame_num}.png")
-    plt.close()</p>
-<p>Create GIF for each distribution
+    plt.close()
+
+Create GIF for each distribution
 def create_gif(distributions, sample_sizes=[5, 10, 30, 50], num_samples=10000):
     for population, dist_name, mu, sigma in distributions:
         os.makedirs(dist_name, exist_ok=True)
@@ -251,25 +261,22 @@ def create_gif(distributions, sample_sizes=[5, 10, 30, 50], num_samples=10000):
         # Create GIF
         images = [Image.open(f"{dist_name}/frame_{i}.png") for i in range(len(sample_sizes))]
         images[0].save(f"{dist_name}.gif", save_all=True, append_images=images[1:], duration=1000, loop=0)
-        print(f"Generated {dist_name}.gif")</p>
+        print(f"Generated {dist_name}.gif")
+</code></pre>
 <p>Results
 The GIFs illustrate:</p>
 <p>Uniform: Nearly normal at <span class="arithmatex">\(n=5\)</span>, with variance <span class="arithmatex">\(\frac{8.333}{n}\)</span>.
 Exponential: Skewed at <span class="arithmatex">\(n=5\)</span>, approaches normality by <span class="arithmatex">\(n=30\)</span>, centered at <span class="arithmatex">\(\mu=1\)</span>.
 Binomial: Near-normal even at <span class="arithmatex">\(n=5\)</span>, centered at <span class="arithmatex">\(\mu=20\)</span>, with variance <span class="arithmatex">\(\frac{16}{n}\)</span>.</p>
-<p>Discussion</p>
+<h2 id="discussion">Discussion</h2>
 <p>Shape: Skewed distributions (exponential) need larger <span class="arithmatex">\(n\)</span> for normality than symmetric ones (uniform).
 Sample Size: Larger <span class="arithmatex">\(n\)</span> reduces variance, tightening the distribution around <span class="arithmatex">\(\mu\)</span>.
-Variance: Higher population variance (uniform) widens the sampling distribution.
-Applications:
-Estimation: CLT supports confidence intervals for means.
-Quality Control: Monitors product consistency via sample means.
-Finance: Models aggregated returns as normal.</p>
-<p>Conclusion
-The simulations confirm the CLT: sample means converge to a normal distribution as <span class="arithmatex">\(n\)</span> increases. The GIFs visually demonstrate this for different distributions, highlighting the theorem’s importance in statistics.</p>
-<p><img alt="alt text" src="../image.png"/></p>
-<p><img alt="alt text" src="../image-1.png"/></p>
-<p><img alt="alt text" src="../image-2.png"/></p>
+Variance: Higher population variance (uniform) widens the sampling distribution.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>The simulations confirm the CLT: sample means converge to a normal distribution as <span class="arithmatex">\(n\)</span> increases. The GIFs visually demonstrate this for different distributions, highlighting the theorem’s importance in statistics.</p>
+<p><img alt="alt text" src="../download%20%282%29.gif"/></p>
+<p><img alt="alt text" src="../download%20%283%29.gif"/></p>
+<p><img alt="alt text" src="../download%20%284%29.gif"/></p>
 <p><a href="https://colab.research.google.com/drive/19M_GMccfizY8NbukPr0cmWdc9L4OszP7?usp=sharing">Visuals in google colab</a></p>
 </div>
 </div><footer>
