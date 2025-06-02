@@ -205,9 +205,11 @@ plt.ylabel("Frequency")
 plt.grid(True, linestyle='--', alpha=0.5)
 plt.tight_layout()
 plt.show()
+
 ```
 
 ![alt text](image-1.png)
+
 
 ```import numpy as np
 import matplotlib.pyplot as plt
@@ -293,6 +295,7 @@ display(Image(filename=gif_filename))
 
 # Close the figure to prevent static image from showing below
 plt.close(fig)
+
 ```
 
 ![alt text](<download (1).gif>)
