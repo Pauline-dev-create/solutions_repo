@@ -2,7 +2,7 @@
 
 Central Limit Theorem Simulation
 
-Overview
+## Overview
 
 This project demonstrates the Central Limit Theorem (CLT) by simulating sampling distributions of the sample mean for three population distributions: uniform, exponential, and binomial. We visualize how these distributions approach normality as the sample size increases.
 Definitions
@@ -40,7 +40,7 @@ Sample sizes: $n = 5, 10, 30, 50$
 Number of samples: 10,000
 Output: Each simulation generates histograms of sample means, compiled into a GIF showing the progression across sample sizes.
 
-Python Code
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -95,7 +95,7 @@ def create_gif(distributions, sample_sizes=[5, 10, 30, 50], num_samples=10000):
         images = [Image.open(f"{dist_name}/frame_{i}.png") for i in range(len(sample_sizes))]
         images[0].save(f"{dist_name}.gif", save_all=True, append_images=images[1:], duration=1000, loop=0)
         print(f"Generated {dist_name}.gif")
-
+```
 
 Results
 The GIFs illustrate:
@@ -104,27 +104,20 @@ Uniform: Nearly normal at $n=5$, with variance $\frac{8.333}{n}$.
 Exponential: Skewed at $n=5$, approaches normality by $n=30$, centered at $\mu=1$.
 Binomial: Near-normal even at $n=5$, centered at $\mu=20$, with variance $\frac{16}{n}$.
 
-Discussion
+## Discussion
 
 Shape: Skewed distributions (exponential) need larger $n$ for normality than symmetric ones (uniform).
 Sample Size: Larger $n$ reduces variance, tightening the distribution around $\mu$.
 Variance: Higher population variance (uniform) widens the sampling distribution.
-Applications:
-Estimation: CLT supports confidence intervals for means.
-Quality Control: Monitors product consistency via sample means.
-Finance: Models aggregated returns as normal.
 
 
-
-Conclusion
+## Conclusion
 The simulations confirm the CLT: sample means converge to a normal distribution as $n$ increases. The GIFs visually demonstrate this for different distributions, highlighting the theorem’s importance in statistics.
 
+![alt text](<download (2).gif>)
 
+![alt text](<download (3).gif>)
 
-![alt text](image.png)
-
-![alt text](image-1.png)
-
-![alt text](image-2.png)
+![alt text](<download (4).gif>)
 
 [Visuals in google colab](https://colab.research.google.com/drive/19M_GMccfizY8NbukPr0cmWdc9L4OszP7?usp=sharing)
