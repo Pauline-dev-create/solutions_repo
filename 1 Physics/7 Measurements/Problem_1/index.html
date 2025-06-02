@@ -118,16 +118,6 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#analysis">Analysis</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#example-data-replace-with-your-measured-values">Example data (replace with your measured values)</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#calculate-mean-and-standard-deviation">Calculate mean and standard deviation</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#period-and-its-uncertainty">Period and its uncertainty</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#gravity-and-its-uncertainty">Gravity and its uncertainty</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#tabulated-data">Tabulated data</a>
-</li>
 </ul>
 </li>
 </ul>
@@ -303,31 +293,38 @@ g_{\text{standard}} = 9.81 \ \text{m/s}^2
 <li>Gravitational acceleration $$ g $$</li>
 <li>Uncertainty $$ \Delta g $$</li>
 </ul>
-<p>```import numpy as np
-import matplotlib.pyplot as plt</p>
-<h2 id="example-data-replace-with-your-measured-values">Example data (replace with your measured values)</h2>
-<p>L = 1.0  # Length in meters
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+## Example data (replace with your measured values)
+L = 1.0  # Length in meters
 Delta_L = 0.01  # Uncertainty in length (m)
 T_10_measurements = [9.8, 9.9, 10.0, 9.7, 10.1, 9.6, 10.2, 9.8, 10.0, 9.9]  # Time for 10 oscillations (s)
-n = len(T_10_measurements)</p>
-<h2 id="calculate-mean-and-standard-deviation">Calculate mean and standard deviation</h2>
-<p>T_10_mean = np.mean(T_10_measurements)
+n = len(T_10_measurements)
+
+## Calculate mean and standard deviation
+T_10_mean = np.mean(T_10_measurements)
 T_10_std = np.std(T_10_measurements)
-Delta_T_10 = T_10_std / np.sqrt(n)</p>
-<h2 id="period-and-its-uncertainty">Period and its uncertainty</h2>
-<p>T = T_10_mean / 10
-Delta_T = Delta_T_10 / 10</p>
-<h2 id="gravity-and-its-uncertainty">Gravity and its uncertainty</h2>
-<p>g = 4 * np.pi<strong>2 * L / T</strong>2
-Delta_g = g * np.sqrt((Delta_L / L)<strong>2 + (2 * Delta_T / T)</strong>2)</p>
-<h2 id="tabulated-data">Tabulated data</h2>
-<p>print("Tabulated Data:")
+Delta_T_10 = T_10_std / np.sqrt(n)
+
+## Period and its uncertainty
+T = T_10_mean / 10
+Delta_T = Delta_T_10 / 10
+
+## Gravity and its uncertainty
+g = 4 * np.pi**2 * L / T**2
+Delta_g = g * np.sqrt((Delta_L / L)**2 + (2 * Delta_T / T)**2)
+
+## Tabulated data
+print("Tabulated Data:")
 print(f"L = {L} ± {Delta_L} m")
 print(f"T_10 measurements = {T_10_measurements} s")
 print(f"Mean T_10 = {T_10_mean:.2f} ± {Delta_T_10:.2f} s")
 print(f"Period T = {T:.2f} ± {Delta_T:.2f} s")
-print(f"g = {g:.2f} ± {Delta_g:.2f} m/s^2")</p>
-<p>plt.figure(figsize=(10, 6))
+print(f"g = {g:.2f} ± {Delta_g:.2f} m/s^2")
+
+
+plt.figure(figsize=(10, 6))
 plt.errorbar(range(1, n+1), T_10_measurements, yerr=T_10_std/np.sqrt(n), fmt='o', capsize=5, label='T_10 Measurements')
 plt.axhline(y=T_10_mean, color='r', linestyle='--', label=f'Mean T_10 = {T_10_mean:.2f} s')
 plt.xlabel('Trial Number')
@@ -335,12 +332,10 @@ plt.ylabel('Time for 10 Oscillations (s)')
 plt.title('Pendulum Oscillation Measurements')
 plt.legend()
 plt.grid(True)
-plt.show() </p>
-<pre><code>
-![alt text](image.png)
-
-
-```import numpy as np
+plt.show() 
+</code></pre>
+<p><img alt="alt text" src="../image.png"/></p>
+<pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 
 # Raw data: times for 10 oscillations (in seconds)
@@ -396,52 +391,61 @@ plt.ylabel("Frequency")
 plt.grid(True, linestyle='--', alpha=0.5)
 plt.tight_layout()
 plt.show()
-
 </code></pre>
 <p><img alt="alt text" src="../image-1.png"/></p>
-<p>```import numpy as np
+<pre><code class="language-python">import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-from IPython.display import Image, display</p>
-<h1 id="ensure-pillow-is-installed-to-save-gif-animations">Ensure Pillow is installed to save GIF animations</h1>
-<p>!pip install Pillow</p>
-<h1 id="pendulum-parameters">Pendulum parameters</h1>
-<p>L = 1.000          # pendulum length (m)
+from IPython.display import Image, display
+# Ensure Pillow is installed to save GIF animations
+!pip install Pillow
+
+
+# Pendulum parameters
+L = 1.000          # pendulum length (m)
 g_val = 9.80665    # standard gravitational acceleration (m/s^2)
 theta0 = np.deg2rad(10)  # initial displacement angle (radians)
-omega0 = 0.0       # initial angular velocity (rad/s)</p>
-<h1 id="derived-parameter-angular-frequency-for-small-angles">Derived parameter: angular frequency for small angles</h1>
-<p>omega = np.sqrt(g_val / L)</p>
-<h1 id="time-array-for-one-period-of-animation">Time array for one period of animation</h1>
-<h1 id="adjusted-t_max-to-cover-slightly-more-than-a-full-period-for-smooth-looping">Adjusted t_max to cover slightly more than a full period for smooth looping</h1>
-<p>t_max = 2 * np.pi / omega * 1.1 # seconds (cover slightly more than one full period)
+omega0 = 0.0       # initial angular velocity (rad/s)
+
+# Derived parameter: angular frequency for small angles
+omega = np.sqrt(g_val / L)
+
+# Time array for one period of animation
+# Adjusted t_max to cover slightly more than a full period for smooth looping
+t_max = 2 * np.pi / omega * 1.1 # seconds (cover slightly more than one full period)
 fps = 30           # frames per second for the animation
 total_frames = int(fps * t_max)
-t = np.linspace(0, t_max, total_frames)</p>
-<h1 id="angular-displacement-as-a-function-of-time-smallangle-approximation">Angular displacement as a function of time (small‐angle approximation)</h1>
-<p>theta_t = theta0 * np.cos(omega * t)</p>
-<h1 id="convert-angular-displacement-to-cartesian-coordinates-for-animation">Convert angular displacement to Cartesian coordinates for animation</h1>
-<p>x = L * np.sin(theta_t)
-y = -L * np.cos(theta_t)</p>
-<h1 id="set-up-the-figure-and-axes">Set up the figure and axes</h1>
-<p>fig, ax = plt.subplots(figsize=(5, 5))</p>
-<h1 id="adjust-limits-to-accommodate-the-full-swing-including-the-initial-position">Adjust limits to accommodate the full swing including the initial position</h1>
-<p>ax.set_xlim(-L * np.sin(theta0) * 1.2, L * np.sin(theta0) * 1.2)
+t = np.linspace(0, t_max, total_frames)
+
+# Angular displacement as a function of time (small‐angle approximation)
+theta_t = theta0 * np.cos(omega * t)
+
+# Convert angular displacement to Cartesian coordinates for animation
+x = L * np.sin(theta_t)
+y = -L * np.cos(theta_t)
+
+# Set up the figure and axes
+fig, ax = plt.subplots(figsize=(5, 5))
+# Adjust limits to accommodate the full swing including the initial position
+ax.set_xlim(-L * np.sin(theta0) * 1.2, L * np.sin(theta0) * 1.2)
 ax.set_ylim(-L * 1.1, 0.2 * L)
 ax.set_aspect('equal')
-ax.axis('off')  # Hide the axes for a cleaner look</p>
-<h1 id="initialize-the-pendulum-rod-line-and-bob-marker">Initialize the pendulum rod (line) and bob (marker)</h1>
-<p>line, = ax.plot([], [], lw=2, color='blue')       # rod
-bob, = ax.plot([], [], 'o', markersize=12, color='red')  # bob</p>
-<p>def init():
+ax.axis('off')  # Hide the axes for a cleaner look
+
+# Initialize the pendulum rod (line) and bob (marker)
+line, = ax.plot([], [], lw=2, color='blue')       # rod
+bob, = ax.plot([], [], 'o', markersize=12, color='red')  # bob
+
+def init():
     """
     Initialize the background of each frame.
     Called once by FuncAnimation.
     """
     line.set_data([], [])
     bob.set_data([], [])
-    return line, bob</p>
-<p>def animate(i):
+    return line, bob
+
+def animate(i):
     """
     Animation function: updates the rod and bob to frame index i.
     """
@@ -451,9 +455,10 @@ bob, = ax.plot([], [], 'o', markersize=12, color='red')  # bob</p>
     line.set_data(rod_x, rod_y)
     # Fix: Pass the bob coordinates as lists to set_data
     bob.set_data([x[i]], [y[i]])
-    return line, bob</p>
-<h1 id="create-the-animation-object">Create the animation object</h1>
-<p>ani = animation.FuncAnimation(
+    return line, bob
+
+# Create the animation object
+ani = animation.FuncAnimation(
     fig,             # the figure object
     animate,         # animation function
     frames=total_frames,
@@ -461,15 +466,18 @@ bob, = ax.plot([], [], 'o', markersize=12, color='red')  # bob</p>
     blit=True,
     interval=1000/fps,  # time between frames in ms
     repeat=True
-)</p>
-<h1 id="save-the-animation-as-a-gif-using-the-pillow-writer">Save the animation as a GIF using the "pillow" writer</h1>
-<p>gif_filename = 'pendulum_animation.gif'
-ani.save(gif_filename, writer='pillow', fps=fps)</p>
-<h1 id="display-the-gif-inline-in-colab">Display the GIF inline in Colab</h1>
-<p>display(Image(filename=gif_filename))</p>
-<h1 id="close-the-figure-to-prevent-static-image-from-showing-below">Close the figure to prevent static image from showing below</h1>
-<p>plt.close(fig)</p>
-<p>```</p>
+)
+
+# Save the animation as a GIF using the "pillow" writer
+gif_filename = 'pendulum_animation.gif'
+ani.save(gif_filename, writer='pillow', fps=fps)
+
+# Display the GIF inline in Colab
+display(Image(filename=gif_filename))
+
+# Close the figure to prevent static image from showing below
+plt.close(fig)
+</code></pre>
 <p><img alt="alt text" src="../download%20%281%29.gif"/></p>
 <p><a href="https://colab.research.google.com/drive/1OS7mAnOC1OWj43-0i-wc_SNWGQgyzmHR?usp=sharing">  1Visualization</a></p>
 </div>
