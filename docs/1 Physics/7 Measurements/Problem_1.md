@@ -103,8 +103,8 @@ $$
   - Gravitational acceleration $$ g $$
   - Uncertainty $$ \Delta g $$
 
-
-```import numpy as np
+```python
+import numpy as np
 import matplotlib.pyplot as plt
 
 ## Example data (replace with your measured values)
@@ -148,8 +148,8 @@ plt.show()
 
 ![alt text](image.png)
 
-
-```import numpy as np
+```python
+import numpy as np
 import matplotlib.pyplot as plt
 
 # Raw data: times for 10 oscillations (in seconds)
@@ -205,13 +205,12 @@ plt.ylabel("Frequency")
 plt.grid(True, linestyle='--', alpha=0.5)
 plt.tight_layout()
 plt.show()
-
 ```
 
 ![alt text](image-1.png)
 
-
-```import numpy as np
+```python
+import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from IPython.display import Image, display
@@ -295,7 +294,6 @@ display(Image(filename=gif_filename))
 
 # Close the figure to prevent static image from showing below
 plt.close(fig)
-
 ```
 
 ![alt text](<download (1).gif>)
