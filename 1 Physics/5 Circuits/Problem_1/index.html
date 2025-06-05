@@ -78,49 +78,15 @@
 <ul class="current">
 <li class="toctree-l2 current"><a class="reference internal current" href="#">Problem 1</a>
 <ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="#calculating-equivalent-resistance-using-graph-theory-a-physics-report">Calculating Equivalent Resistance Using Graph Theory: A Physics Report</a>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="#fundamentals-of-circuits">Fundamentals of Circuits</a>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#algorithm-description">Algorithm Description</a>
+<li class="toctree-l3"><a class="reference internal" href="#laws-of-series-and-parallel-resistance">Laws of Series and Parallel Resistance</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#parallel-combination">Parallel Combination</a>
 <ul>
 <li class="toctree-l4"><a class="reference internal" href="#pseudocode">Pseudocode</a>
 </li>
-<li class="toctree-l4"><a class="reference internal" href="#example-circuits">Example Circuits</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#how-it-handles-nested-combinations">How It Handles Nested Combinations</a>
-</li>
 </ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a>
-<ul>
-<li class="toctree-l4"><a class="reference internal" href="#example-1-simple-series">Example 1: Simple Series</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#example-2-simple-parallel">Example 2: Simple Parallel</a>
-</li>
-<li class="toctree-l4"><a class="reference internal" href="#example-3-nested-configuration">Example 3: Nested Configuration</a>
-</li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#function-to-calculate-parallel-resistance">Function to calculate parallel resistance</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#function-to-draw-graph">Function to draw graph</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#example-1-series">Example 1: Series</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#reduce-series">Reduce series</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#example-2-parallel">Example 2: Parallel</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#reduce-parallel">Reduce parallel</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#example-3-nested-series-with-parallel">Example 3: Nested (Series with Parallel)</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#step-1-reduce-parallel">Step 1: Reduce parallel</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#step-2-reduce-series">Step 2: Reduce series</a>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#print-results">Print results</a>
 </li>
 </ul>
 </li>
@@ -216,19 +182,55 @@
 <div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
 <div class="section" itemprop="articleBody">
 <h1 id="problem-1">Problem 1</h1>
-<h2 id="calculating-equivalent-resistance-using-graph-theory-a-physics-report">Calculating Equivalent Resistance Using Graph Theory: A Physics Report</h2>
 <h2 id="fundamentals-of-circuits">Fundamentals of Circuits</h2>
 <p>In a circuit:
 <strong>Ohm’s Law</strong>: $ V = IR $ (Voltage = Current × Resistance).
-- <strong>Series Connection</strong>: Resistors are connected end-to-end, and the equivalent resistance is the sum of individual resistances: $$ R_{eq} = R_1 + R_2 + \cdots + R_n $$.
+- <strong>Series Connection</strong>: Resistors are connected end-to-end, and the equivalent resistance is the sum of individual resistances: $$ R_{eq} = R_1 + R_2 + \cdots + R_n $$
 - <strong>Parallel Connection</strong>: Resistors share the same two nodes, and the equivalent resistance is given by: $$ \frac{1}{R_{eq}} = \frac{1}{R_1} + \frac{1}{R_2} + \cdots + \frac{1}{R_n} $$, or equivalently, $$ R_{eq} = \frac{R_1 \cdot R_2}{R_1 + R_2} $$ for two resistors.
 - <strong>Nodes and Edges</strong>: Junctions (nodes) connect resistors (edges), forming a network that can be simplified step-by-step.</p>
-<h2 id="algorithm-description">Algorithm Description</h2>
-<p>The algorithm for calculating equivalent resistance using graph theory involves:
-1. <strong>Graph Representation</strong>: Model the circuit as a graph with nodes (junctions) and edges (resistors with weights).
-2. <strong>Series Reduction</strong>: Identify and collapse linear chains of resistors into a single edge with resistance equal to their sum.
-3. <strong>Parallel Reduction</strong>: Identify multiple edges between the same pair of nodes and replace them with a single edge whose resistance satisfies the parallel formula.
-4. <strong>Iteration</strong>: Repeat steps 2 and 3 until the graph reduces to a single edge between the start and end nodes, yielding the equivalent resistance.</p>
+<h2 id="laws-of-series-and-parallel-resistance">Laws of Series and Parallel Resistance</h2>
+<p>If two resistors <span class="arithmatex">\(R_1\)</span> and <span class="arithmatex">\(R_2\)</span> are connected end‐to‐end (in series) with no branching in between, their equivalent is simply
+$$
+    R_{\mathrm{series}} \;=\; R_{1} \;+\; R_{2}\,.
+$$
+Graph‐theoretically, this occurs precisely when there is a \emph{non‐terminal} node <span class="arithmatex">\(v\)</span> of degree <span class="arithmatex">\(2\)</span>. Let its two neighbors be <span class="arithmatex">\(u\)</span> and <span class="arithmatex">\(w\)</span>, and let the two edges be
+$$
+    (u !-! v) \text{ of weight } R_{uv}, 
+    \qquad
+    (v !-! w) \text{ of weight } R_{vw}.
+$$
+Since <span class="arithmatex">\(v\)</span> has no other connections, the combined resistance between <span class="arithmatex">\(u\)</span> and <span class="arithmatex">\(w\)</span> is
+$$
+    R_{\text{new}} \;=\; R_{uv} \;+\; R_{vw}\,.
+$$
+We then \emph{remove} node <span class="arithmatex">\(v\)</span> (and its two incident edges) from the graph and \emph{add} a single new edge <span class="arithmatex">\((u,w)\)</span> of weight <span class="arithmatex">\(R_{\text{new}}\)</span>. If an edge <span class="arithmatex">\((u,w)\)</span> already existed, then we have to combine that with <span class="arithmatex">\(R_{\text{new}}\)</span> in \emph{parallel} in a later step.</p>
+<h2 id="parallel-combination">Parallel Combination</h2>
+<p>Whenever two or more resistors connect exactly the same pair of vertices <span class="arithmatex">\(u\)</span> and <span class="arithmatex">\(v\)</span>, they are in parallel. Suppose between <span class="arithmatex">\(u\)</span> and <span class="arithmatex">\(v\)</span> there are <span class="arithmatex">\(k\ge2\)</span> edges with individual resistances
+$$
+    R_1,\,R_2,\,\dots,\,R_k.
+$$
+Their equivalent is given by
+$$
+    \frac{1}{R_{\mathrm{parallel}}}
+    \;=\;
+    \sum_{i=1}^{k} \frac{1}{R_i}
+    \quad
+    \Longrightarrow
+    \quad
+    R_{\mathrm{parallel}}
+    \;=\;
+    \Bigl(\sum_{i=1}^{k} \tfrac{1}{R_i}\Bigr)^{-1}.
+$$
+Algorithmically, we detect all pairs <span class="arithmatex">\((u,v)\)</span> for which <span class="arithmatex">\(G\)</span> has more than one edge. Let
+$$
+    {\,R_{u v}^{(1)},\, R_{u v}^{(2)},\,\dots,\,R_{u v}^{(k)}}
+$$
+be the resistances of those parallel edges. We remove all <span class="arithmatex">\(k\)</span> parallel edges and add a single edge <span class="arithmatex">\((u,v)\)</span> of weight
+$$
+    R_{\mathrm{new}} 
+    \;=\; 
+    \Bigl(\sum_{i=1}^k \tfrac{1}{R_{u v}^{(i)}}\Bigr)^{-1}.
+$$</p>
 <h3 id="pseudocode">Pseudocode</h3>
 <pre><code class="language-plaintext">Function CalculateEquivalentResistance(graph, start_node, end_node):
     While graph has more than one edge:
@@ -248,98 +250,166 @@
 
     Return graph[start_node][end_node]['weight']
 </code></pre>
-<h3 id="example-circuits">Example Circuits</h3>
-<ol>
-<li><strong>Simple Series</strong>: $$ R_1 = 2\Omega, R_2 = 3\Omega $$ → $$ R_{eq} = 5\Omega $$.</li>
-<li><strong>Simple Parallel</strong>: $$ R_1 = 4\Omega, R_2 = 4\Omega $$ → $$ R_{eq} = 2\Omega $$.</li>
-<li><strong>Nested Configuration</strong>: A series of $$ 2\Omega $$ and a parallel pair of $$ 3\Omega $$ and $$ 6\Omega $$.</li>
-</ol>
-<h3 id="how-it-handles-nested-combinations">How It Handles Nested Combinations</h3>
-<ul>
-<li>Iteratively simplifies: Series reductions collapse chains, parallel reductions merge multiple paths.</li>
-<li>Order doesn’t matter for $ R_{eq} $ (circuit laws ensure consistency).</li>
-<li>Nested cases (e.g., parallel inside series) are handled step-by-step.</li>
-</ul>
-<hr/>
-<h2 id="examples">Examples</h2>
-<h3 id="example-1-simple-series">Example 1: Simple Series</h3>
-<ul>
-<li>Circuit: $ R_1 = 2Ω $ and $ R_2 = 3Ω $ in series.</li>
-<li>$ R_{eq} = 2 + 3 = 5Ω $.</li>
-</ul>
-<h3 id="example-2-simple-parallel">Example 2: Simple Parallel</h3>
-<ul>
-<li>Circuit: $ R_1 = 4Ω $ and $ R_2 = 6Ω $ in parallel.</li>
-<li>$ R_{eq} = \frac{4 \cdot 6}{4 + 6} = 2.4Ω $.</li>
-</ul>
-<h3 id="example-3-nested-configuration">Example 3: Nested Configuration</h3>
-<ul>
-<li>Circuit: $ R_1 = 2Ω $ in series with parallel $ R_2 = 4Ω $, $ R_3 = 6Ω $.</li>
-<li>Parallel: $ R_{23} = \frac{4 \cdot 6}{4 + 6} = 2.4Ω $.</li>
-<li>Series: $ R_{eq} = 2 + 2.4 = 4.4Ω $.</li>
-</ul>
-<p>import networkx as nx
-import matplotlib.pyplot as plt</p>
-<h2 id="function-to-calculate-parallel-resistance">Function to calculate parallel resistance</h2>
-<p>def parallel_resistance(R_list):
-    return 1 / sum(1/R for R in R_list)</p>
-<h2 id="function-to-draw-graph">Function to draw graph</h2>
-<p>def draw_graph(G, title, pos=None):
-    if pos is None:
-        pos = nx.spring_layout(G)
+<p>```python
+import networkx as nx
+import matplotlib.pyplot as plt
+import imageio
+import os
+from IPython.display import Image, display</p>
+<p>def draw_circuit(G, filename, terminals=None):
+    pos = nx.spring_layout(G, seed=42)
     plt.figure(figsize=(6, 4))
-    nx.draw(G, pos, with_labels=True, node_color='lightblue', node_size=500, font_size=12)
-    edge_labels = nx.get_edge_attributes(G, 'weight')
-    nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels)
-    plt.title(title)
-    plt.show()</p>
-<h2 id="example-1-series">Example 1: Series</h2>
-<p>G1 = nx.Graph()
-G1.add_edge('A', 'B', weight=2)  # 2Ω
-G1.add_edge('B', 'C', weight=3)  # 3Ω
-draw_graph(G1, "Example 1: Series (Before)")</p>
-<h2 id="reduce-series">Reduce series</h2>
-<p>R_eq1 = 2 + 3
-G1_simplified = nx.Graph()
-G1_simplified.add_edge('A', 'C', weight=R_eq1)
-draw_graph(G1_simplified, f"Example 1: Series (After, R_eq = {R_eq1}Ω)")</p>
-<h2 id="example-2-parallel">Example 2: Parallel</h2>
-<p>G2 = nx.Graph()
-G2.add_edge('A', 'B', weight=4)  # 4Ω
-G2.add_edge('A', 'B', weight=6)  # 6Ω (parallel)
-draw_graph(G2, "Example 2: Parallel (Before)")</p>
-<h2 id="reduce-parallel">Reduce parallel</h2>
-<p>R_eq2 = parallel_resistance([4, 6])
-G2_simplified = nx.Graph()
-G2_simplified.add_edge('A', 'B', weight=R_eq2)
-draw_graph(G2_simplified, f"Example 2: Parallel (After, R_eq = {R_eq2:.1f}Ω)")</p>
-<h2 id="example-3-nested-series-with-parallel">Example 3: Nested (Series with Parallel)</h2>
-<p>G3 = nx.Graph()
-G3.add_edge('A', 'B', weight=2)  # 2Ω in series
-G3.add_edge('B', 'C', weight=4)  # 4Ω parallel
-G3.add_edge('B', 'C', weight=6)  # 6Ω parallel
-draw_graph(G3, "Example 3: Nested (Before)")</p>
-<h2 id="step-1-reduce-parallel">Step 1: Reduce parallel</h2>
-<p>R_parallel = parallel_resistance([4, 6])
-G3_intermediate = nx.Graph()
-G3_intermediate.add_edge('A', 'B', weight=2)
-G3_intermediate.add_edge('B', 'C', weight=R_parallel)
-draw_graph(G3_intermediate, f"Example 3: After Parallel (R_parallel = {R_parallel:.1f}Ω)")</p>
-<h2 id="step-2-reduce-series">Step 2: Reduce series</h2>
-<p>R_eq3 = 2 + R_parallel
-G3_simplified = nx.Graph()
-G3_simplified.add_edge('A', 'C', weight=R_eq3)
-draw_graph(G3_simplified, f"Example 3: Nested (After, R_eq = {R_eq3:.1f}Ω)")</p>
-<h2 id="print-results">Print results</h2>
-<p>print(f"Example 1 (Series): R_eq = {R_eq1}Ω")
-print(f"Example 2 (Parallel): R_eq = {R_eq2:.1f}Ω")
-print(f"Example 3 (Nested): R_eq = {R_eq3:.1f}Ω")</p>
-<p><img alt="alt text" src="../image.png"/></p>
-<p><img alt="alt text" src="../image-1.png"/></p>
-<p><img alt="alt text" src="../image-2.png"/></p>
-<p><img alt="alt text" src="../image-3.png"/></p>
-<p><img alt="alt text" src="../image-4.png"/></p>
-<p><img alt="alt text" src="../image-5.png"/></p>
+    plt.axis('off')
+    node_colors = []
+    for n in G.nodes():
+        if terminals and n == terminals[0]:
+            node_colors.append("lightgreen")
+        elif terminals and n == terminals[1]:
+            node_colors.append("lightcoral")
+        else:
+            node_colors.append("skyblue")
+    nx.draw_networkx_nodes(G, pos, node_size=500, node_color=node_colors, edgecolors="k")
+    nx.draw_networkx_labels(G, pos, font_size=10, font_color="black")
+    all_edges = G.edges(keys=True, data=True)
+    nx.draw_networkx_edges(
+        G,
+        pos,
+        edgelist=[(u, v) for (u, v, k, _) in all_edges],
+        connectionstyle="arc3, rad=0.15",
+        width=2,
+    )
+    unique_pairs = {}
+    for (u, v, k, data) in all_edges:
+        pair = tuple(sorted((u, v)))
+        if pair not in unique_pairs:
+            unique_pairs[pair] = [data["resistance"]]
+        else:
+            unique_pairs[pair].append(data["resistance"])
+    edge_labels = {}
+    for pair, resistances in unique_pairs.items():
+        u, v = pair
+        if len(resistances) == 1:
+            label = f"{resistances[0]:.2f}Ω"
+        else:
+            label = "[" + ", ".join(f"{r:.2f}" for r in resistances) + "]"
+        edge_labels[(u, v)] = label
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_size=8)
+    plt.tight_layout()
+    plt.savefig(filename, dpi=150)
+    plt.close()
+    display(Image(filename))</p>
+<p>def collapse_series(G, terminals, step_index):
+    steps_done = 0
+    changed = True
+    while changed:
+        changed = False
+        for v in list(G.nodes()):
+            if v == terminals[0] or v == terminals[1]:
+                continue
+            incident_edges = list(G.edges(v, keys=True))
+            if len(incident_edges) == 2:
+                nbrs = [
+                    incident_edges[0][0] if incident_edges[0][0] != v else incident_edges[0][1],
+                    incident_edges[1][0] if incident_edges[1][0] != v else incident_edges[1][1],
+                ]
+                if nbrs[0] == nbrs[1]:
+                    continue
+                u = nbrs[0]
+                w = nbrs[1]
+                key1 = incident_edges[0][2]
+                key2 = incident_edges[1][2]
+                R1 = G.get_edge_data(u, v)[key1]["resistance"]
+                R2 = G.get_edge_data(v, w)[key2]["resistance"]
+                R_new = R1 + R2
+                G.remove_node(v)
+                G.add_edge(u, w, resistance=R_new)
+                steps_done += 1
+                changed = True
+                png_name = f"step_{step_index + steps_done:02d}<em>series</em>{u}_{w}.png"
+                draw_circuit(G, png_name, terminals)
+                print(f"[Series Step {step_index + steps_done:02d}] Removed '{v}', {R1:.2f}Ω+{R2:.2f}Ω→{R_new:.2f}Ω")
+                break
+    return steps_done</p>
+<p>def collapse_parallel(G, step_index):
+    steps_done = 0
+    changed = True
+    while changed:
+        changed = False
+        seen_pairs = set()
+        for (u, v, key) in list(G.edges(keys=True)):
+            pair = tuple(sorted((u, v)))
+            if pair in seen_pairs:
+                continue
+            data_dict = G.get_edge_data(u, v)
+            if len(data_dict) &gt; 1:
+                resistances = [d["resistance"] for d in data_dict.values()]
+                inv_sum = sum(1.0 / r for r in resistances)
+                R_par = 1.0 / inv_sum
+                for k in list(data_dict.keys()):
+                    G.remove_edge(u, v, k)
+                G.add_edge(u, v, resistance=R_par)
+                steps_done += 1
+                changed = True
+                seen_pairs.add(pair)
+                png_name = f"step_{step_index + steps_done:02d}<em>parallel</em>{u}_{v}.png"
+                draw_circuit(G, png_name, None)
+                print(f"[Parallel Step {step_index + steps_done:02d}] Collapsed '{u}-{v}' {resistances}→{R_par:.2f}Ω")
+                break
+    return steps_done</p>
+<p>def compute_equivalent_resistance(G, terminals):
+    T1, T2 = terminals
+    if T1 not in G.nodes() or T2 not in G.nodes():
+        raise ValueError("Terminals must be in the graph.")
+    if not nx.is_connected(G):
+        raise ValueError("Graph is not connected.")
+    step_index = 0
+    initial_png = f"step_{step_index:02d}<em>initial.png"
+    draw_circuit(G, initial_png, terminals)
+    print(f"[Init Step {step_index:02d}]")
+    something_changed = True
+    while something_changed:
+        something_changed = False
+        n_series = collapse_series(G, terminals, step_index)
+        if n_series &gt; 0:
+            step_index += n_series
+            something_changed = True
+            continue
+        n_parallel = collapse_parallel(G, step_index)
+        if n_parallel &gt; 0:
+            step_index += n_parallel
+            something_changed = True
+            continue
+    data = list(G.get_edge_data(T1, T2).values())
+    if len(data) != 1:
+        raise RuntimeError("Expected exactly one edge between terminals.")
+    R_eq = data[0]["resistance"]
+    final_png = f"step</em>{step_index+1:02d}<em>final.png"
+    draw_circuit(G, final_png, terminals)
+    print(f"[Final Step {step_index+1:02d}] R_eq={R_eq:.2f}Ω")
+    png_files = sorted(f for f in os.listdir('.') if f.startswith("step</em>") and f.endswith(".png"))
+    images = [imageio.imread(fname) for fname in png_files]
+    gif_name = "reduction_process.gif"
+    imageio.mimsave(gif_name, images, duration=0.75)
+    display(Image(gif_name))
+    print(f"GIF saved as '{gif_name}'")
+    return R_eq</p>
+<p>if <strong>name</strong> == "<strong>main</strong>":
+    edges_list = [
+        ("A", "X", 100.0),
+        ("X", "B", 200.0),
+        ("A", "B", 400.0),
+        ("A", "Y", 150.0),
+        ("Y", "B", 300.0),
+        ("X", "Y", 50.0),
+    ]
+    G = nx.MultiGraph()
+    for (u, v, r) in edges_list:
+        G.add_edge(u, v, resistance=r)
+    terminals = ("A", "B")
+    R_equivalent = compute_equivalent_resistance(G, terminals)
+    print(f"Final Equivalent Resistance: {R_equivalent:.2f} Ω")</p>
+<pre><code>```
+</code></pre>
 </div>
 </div><footer>
 <div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
